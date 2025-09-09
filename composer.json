@@ -4,6 +4,8 @@
     "keywords": [
         "inerba",
         "laravel",
+        "filamentphp",
+        "seo",
         "filament-flexy-seo"
     ],
     "homepage": "https://github.com/inerba/filament-flexy-seo",
@@ -20,21 +22,15 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "filament/filament": "^3.0",
+        "php": "^8.2",
+        "filament/filament": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
-        "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^7.9",
-        "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^8.0",
-        "pestphp/pest": "^2.1",
-        "pestphp/pest-plugin-arch": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0"
+        "laravel/pint": "^1.14",
+        "pestphp/pest": "^4.0",
+        "orchestra/testbench": "^10.0",
+        "phpstan/phpstan": "^2.1"
     },
     "autoload": {
         "psr-4": {
@@ -67,7 +63,8 @@
                 "Inerba\\Seo\\SeoServiceProvider"
             ],
             "aliases": {
-                "Seo": "Inerba\\Seo\\Facades\\Seo"
+                "SeoFields": "Inerba\\Seo\\Facades\\SeoFields",
+                "SocialFields": "Inerba\\Seo\\Facades\\SocialFields"
             }
         }
     },
