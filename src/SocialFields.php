@@ -34,13 +34,13 @@ class SocialFields
             Flex::make([
                 Grid::make()
                     ->schema([
-                        Forms\Components\TextInput::make($prefix.'.og_title')
+                        Forms\Components\TextInput::make($prefix . '.og_title')
                             ->hint(fn ($state): HtmlString => FieldsHelper::remainingText($state, config('flexy-seo.og-title-max-length', 60)))
                             ->live()
                             ->label(__('flexy-seo::flexy-seo.social.title'))
                             ->helperText(__('flexy-seo::flexy-seo.social.title_helper'))
                             ->columnSpanFull(),
-                        Forms\Components\Textarea::make($prefix.'.og_description')
+                        Forms\Components\Textarea::make($prefix . '.og_description')
                             ->hint(fn ($state): HtmlString => FieldsHelper::remainingText($state, config('flexy-seo.og-description-max-length', 200)))
                             ->live()
                             ->label(__('flexy-seo::flexy-seo.social.description'))
@@ -65,7 +65,7 @@ class SocialFields
                             ->image()
                             ->collection('og_image'),
                     ] : [
-                        Forms\Components\FileUpload::make($prefix.'.og_image')
+                        Forms\Components\FileUpload::make($prefix . '.og_image')
                             ->label(__('flexy-seo::flexy-seo.social.image'))
                             ->helperText(__('flexy-seo::flexy-seo.social.image_helper'))
                             ->directory($directory)
@@ -79,7 +79,8 @@ class SocialFields
                             ->openable()
                             ->image()
                             ->columnSpanFull(),
-                    ]),
+                    ]
+                ),
             ])->from('md'),
         ];
 

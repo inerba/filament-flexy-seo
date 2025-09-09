@@ -29,19 +29,19 @@ class SeoFields
     public static function make($prefix): array
     {
         $fields = [
-            Forms\Components\TextInput::make($prefix.'.tag_title')
+            Forms\Components\TextInput::make($prefix . '.tag_title')
                 ->hint(fn ($state): HtmlString => FieldsHelper::remainingText($state, config('flexy-seo.tag-title-max-length', 60)))
                 ->live(false, 500)
                 ->label(__('flexy-seo::flexy-seo.seo.tag-title'))
                 ->helperText(__('flexy-seo::flexy-seo.seo.tag-title-helper'))
                 ->columnSpanFull(),
-            Forms\Components\TextInput::make($prefix.'.meta_description')
+            Forms\Components\TextInput::make($prefix . '.meta_description')
                 ->hint(fn ($state): HtmlString => FieldsHelper::remainingText($state, config('flexy-seo.meta-description-max-length', 160)))
                 ->live(false, 500)
                 ->label(__('flexy-seo::flexy-seo.seo.meta-description'))
                 ->helperText(__('flexy-seo::flexy-seo.seo.meta-description-helper'))
                 ->columnSpanFull(),
-            Forms\Components\Select::make($prefix.'.robots')
+            Forms\Components\Select::make($prefix . '.robots')
                 ->label(__('flexy-seo::flexy-seo.seo.robots'))
                 ->options([
                     'index, follow' => __('flexy-seo::flexy-seo.seo.robots_option_index_follow'),
