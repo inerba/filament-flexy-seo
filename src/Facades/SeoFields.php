@@ -5,12 +5,12 @@ namespace Inerba\Seo\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Inerba\Seo\Seo
+ * @see \Inerba\Seo\SeoFields
  */
-class Seo extends Facade
+class SeoFields extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Inerba\Seo\Seo::class;
+        return \Inerba\Seo\SeoFields::class;
     }
 }
