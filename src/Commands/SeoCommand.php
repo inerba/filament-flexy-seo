@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Inerba\Seo\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class SeoCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-flexy-seo';
 
     public $description = 'My command';
 
