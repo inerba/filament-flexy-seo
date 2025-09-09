@@ -9,18 +9,18 @@ use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
+use Inerba\Seo\Commands\SeoCommand;
+use Inerba\Seo\Testing\TestsSeo;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Inerba\Seo\Commands\SeoCommand;
-use Inerba\Seo\Testing\TestsSeo;
 
 class SeoServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-flexy-seo';
+    public static string $name = 'flexy-seo';
 
-    public static string $viewNamespace = 'filament-flexy-seo';
+    public static string $viewNamespace = 'flexy-seo';
 
     public function configurePackage(Package $package): void
     {
@@ -34,8 +34,8 @@ class SeoServiceProvider extends PackageServiceProvider
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
-                    ->publishMigrations()
-                    ->askToRunMigrations()
+                    // ->publishMigrations()
+                    // ->askToRunMigrations()
                     ->askToStarRepoOnGitHub('inerba/filament-flexy-seo');
             });
 
@@ -78,7 +78,7 @@ class SeoServiceProvider extends PackageServiceProvider
 
         // Handle Stubs
         if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
+            foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
                 $this->publishes([
                     $file->getRealPath() => base_path("stubs/filament-flexy-seo/{$file->getFilename()}"),
                 ], 'filament-flexy-seo-stubs');
@@ -100,9 +100,9 @@ class SeoServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('filament-flexy-seo', __DIR__ . '/../resources/dist/components/filament-flexy-seo.js'),
-            Css::make('filament-flexy-seo-styles', __DIR__ . '/../resources/dist/filament-flexy-seo.css'),
-            Js::make('filament-flexy-seo-scripts', __DIR__ . '/../resources/dist/filament-flexy-seo.js'),
+            // // AlpineComponent::make('filament-flexy-seo', __DIR__ . '/../resources/dist/components/filament-flexy-seo.js'),
+            // Css::make('filament-flexy-seo-styles', __DIR__ . '/../resources/dist/filament-flexy-seo.css'),
+            // Js::make('filament-flexy-seo-scripts', __DIR__ . '/../resources/dist/filament-flexy-seo.js'),
         ];
     }
 
