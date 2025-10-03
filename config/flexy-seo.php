@@ -1,8 +1,8 @@
 <?php
 
 return [
-    // Show or hide the SEO suggestions section in Filament forms
-    'show-suggestions' => true,
+    // Show or hide the SEO suggestions section in Filament forms, not compatible with some translation packages
+    'show-suggestions' => false,
 
     // Maximum length counter for the SEO title tag
     'tag-title-max-length' => 60,

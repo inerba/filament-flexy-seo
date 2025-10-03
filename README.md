@@ -45,9 +45,40 @@ return [
 
 ## Usage
 
+I campi si possono usare sia nelle Resource di FilamentPHP che nei Form di Livewire.
+
+
+Nelle Form possiamo mettere i campi in questo modo:
+
 ```php
-$seo = new Inerba\Seo();
-echo $seo->echoPhrase('Hello, Inerba!');
+use Inerba\FilamentFlexySeo\Forms\Fields\Meta;
+
+Meta::make('meta')
+    ->label('SEO Meta Tags')
+    ->description('Add SEO meta tags for this resource')
+    ->required(),
+```
+
+
+Nelle resource bisogna prima preparare un campo json che ospiterà i dati
+
+Nel nostro model:
+
+```php
+class Book extends Model
+{
+    protected $fillable = [
+        // other fields
+        'meta',
+    ];
+
+    protected $casts = [
+        // other casts
+        'meta' => 'array',
+    ];
+
+    // other model methods
+}
 ```
 
 ## Testing

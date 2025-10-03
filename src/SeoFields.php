@@ -26,7 +26,7 @@ class SeoFields
      *
      * @return array<int, \Filament\Forms\Components\TextInput|\Filament\Forms\Components\Select|\Filament\Schemas\Components\Section> Indexed array of Filament form and schema components.
      */
-    public static function make($prefix): array
+    public static function make($prefix, $translatable = false): array
     {
         $fields = [
             Forms\Components\TextInput::make($prefix.'.tag_title')
@@ -53,7 +53,7 @@ class SeoFields
                 ->helperText(__('flexy-seo::flexy-seo.seo.robots_helper')),
         ];
 
-        // Add suggestions section if enabled in config
+        // Add suggestions section if enabled in config, not compatible with some translation packages
         if ((bool) config('flexy-seo.show-suggestions')) {
             $fields[] = Section::make(__('flexy-seo::flexy-seo.seo.section_title'))
                 ->icon('heroicon-o-information-circle')
