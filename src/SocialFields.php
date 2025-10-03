@@ -4,6 +4,7 @@ namespace Inerba\Seo;
 
 use Filament\Forms;
 use Filament\Schemas\Components\Flex;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
 use Illuminate\Support\HtmlString;
