@@ -10,7 +10,7 @@ if (! function_exists('rich_content_excerpt')) {
      * @param  bool  $preserveWords  Whether to preserve whole words when truncating.
      * @return string The generated excerpt.
      */
-    function rich_content_excerpt(array|string $content, $limit = 300, ?string $end = '...', bool $preserveWords = false): string
+    function rich_content_excerpt(array | string $content, $limit = 300, ?string $end = '...', bool $preserveWords = false): string
     {
         $contentText = \Filament\Forms\Components\RichEditor\RichContentRenderer::make($content)->toText();
 
