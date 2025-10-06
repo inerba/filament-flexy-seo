@@ -1,12 +1,7 @@
 <div class="flex items-center space-x-3">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="size-10">
-        <path class="fill-primary-400 dark:fill-primary-600"
-            d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"
-            opacity=".5" />
-        <path class="fill-primary-600 dark:fill-primary-400"
-            d="M16.379 5.353a.75.75 0 0 0-1.026.268L12 11.346 8.647 5.62a.75.75 0 0 0-1.294.758l3.778 6.45-1.111 1.899a2.657 2.657 0 0 0-2.145-1.078c-1.42 0-2.625 1.113-2.625 2.55 0 1.437 1.204 2.55 2.625 2.55.992 0 1.88-.543 2.324-1.36L12 14.314l1.802 3.076a2.645 2.645 0 0 0 2.323 1.36c1.42 0 2.625-1.113 2.625-2.55 0-1.437-1.204-2.55-2.625-2.55-.873 0-1.664.42-2.144 1.078l-1.112-1.898 3.778-6.45a.75.75 0 0 0-.268-1.027Z" />
-    </svg>
-    <div class="text-xl font-bold">Tailor
-        <span class="text-primary-400 dark:text-primary-600">CMS</span>
+    <div
+        class="text-primary-500 whitespace-nowrap text-center font-['Courier_New'] text-xl font-bold leading-none tracking-wider md:text-3xl md:tracking-widest">
+        CLUSTER-A
     </div>
 </div>
+

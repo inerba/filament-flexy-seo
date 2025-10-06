@@ -1,47 +1,45 @@
-<div class="bg-black p-8 text-white lg:p-12">
-    <div class="container mx-auto">
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-            <div class="col-span-2">
-                <x-logo />
-
-                <div class="mt-4 flex flex-wrap gap-4">
-                    @foreach (db_config('website.social_profiles', []) as $social)
-                        <a href="{{ $social['url'] }}" target="_blank" rel="noopener noreferrer"
-                            class="flex size-6 items-center gap-2 text-neutral-500 transition-colors duration-300 hover:text-white lg:size-8">
-                            {!! $social['svg'] !!}
-                            <span class="sr-only">{{ $social['title'] }}</span>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-            <div>
-                <h3 class="mb-2 text-xl uppercase">Categorie</h3>
-                <ul>
-                    <li><a href="#" class="hover:underline">Link 1</a></li>
-                    <li><a href="#" class="hover:underline">Link 2</a></li>
-                    <li><a href="#" class="hover:underline">Link 3</a></li>
-                    <li><a href="#" class="hover:underline">Link 4</a></li>
-                    <li><a href="#" class="hover:underline">Link 5</a></li>
-                    <li><a href="#" class="hover:underline">Link 6</a></li>
-                    <li><a href="#" class="hover:underline">Link 7</a></li>
-                    <li><a href="#" class="hover:underline">Tutte le categorie...</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="mb-2 text-xl uppercase">{{ __('Informazioni') }}</h3>
-                {{-- <ul>
-                    <li><a href="#" class="hover:underline">Detective Salute</a></li>
-                    <li><a href="#" class="hover:underline">Termini e Condizioni</a></li>
-                    <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:underline">Cookies</a></li>
-                </ul> --}}
-                <livewire:cms.menu slug="footer-menu" />
-            </div>
+<div class="text-gray-600 bg-stone-100">
+    <div class="flex flex-col gap-24 py-24 mx-auto max-w-7xl lg:flex-row">
+        <div class="flex items-center justify-center w-1/4">
+            <img src="/images/logo.png" alt="">
         </div>
-        <div class="mt-12 border-t-2 border-dashed pt-4 text-center text-xs uppercase text-neutral-500 lg:text-sm">
-            <p>
-                &copy; {{ date('Y') }} @db_config('website.footer_copyright.' . app()->getLocale())
-            </p>
+        <div class="flex flex-col w-3/4 lg:flex-row">
+            <div class="w-1/3">
+                <h3 class="mb-4 text-xl font-semibold text-black uppercase font-display">Cluster - A</h3>
+                <p>
+                    Via Gian Battista Vico, 16/A<br>
+                    20123 Milano
+                </p>
+                <p>
+                    P.IVA IT08968860158
+                </p>
+                <p>
+                    Cap. Soc. € 46.000,00
+                </p>
+                <p class="mt-3">
+                    info@cluster-a.it
+                </p>
+            </div>
+            <div class="w-1/3">
+                <h3 class="mb-4 text-xl font-semibold text-black uppercase font-display">Sitemap</h3>
+                <livewire:cms.menu slug="main-menu" variant="-footer" />
+            </div>
+            <div class="w-1/3">
+                <h3 class="mb-4 text-xl font-semibold text-black uppercase font-display">Cluster - A</h3>
+                <p>
+                    Via Gian Battista Vico, 16/A<br>
+                    20123 Milano
+                </p>
+                <p>
+                    P.IVA IT08968860158
+                </p>
+                <p>
+                    Cap. Soc. € 46.000,00
+                </p>
+                <p class="mt-3">
+                    info@cluster-a.it
+                </p>
+            </div>
         </div>
     </div>
 </div>
