@@ -1,0 +1,242 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+@import '../../../../vendor/pboivin/filament-peek/resources/css/plugin.css';
+@import '../../../../vendor/solution-forest/filament-tree/resources/css/jquery.nestable.css';
+@import '../../../../vendor/solution-forest/filament-tree/resources/css/button.css';
+@import '../../../../vendor/solution-forest/filament-tree/resources/css/custom-nestable-item.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+@source '../../../../vendor/awcodes/matinee/resources/**/*.blade.php';
+@source '../../../../vendor/solution-forest/filament-tree/resources/**/*.blade.php';
+@source '../../../../vendor/awcodes/overlook/resources/**/*.blade.php';
+@source '../../../../vendor/awcodes/filament-quick-create/resources/**/*.blade.php';
+@source '../../../../vendor/awcodes/shout/resources/**/*.blade.php';
+
+.fi-body {
+    @apply bg-white dark:bg-gray-800;
+}
+
+.fi-simple-main-ctn {
+    @apply bg-gray-100 dark:bg-gray-900;
+}
+
+.fi-simple-main {
+    @apply relative rounded-2xl border border-gray-300 bg-gray-50 p-6 shadow-none ring-0 before:absolute before:inset-1 before:rounded-[calc(var(--radius-2xl)-var(--spacing))] before:border before:border-gray-300 before:bg-white dark:border-gray-700 dark:bg-gray-800 dark:before:border-gray-700 dark:before:bg-gray-800;
+}
+
+.fi-simple-page-content {
+    @apply relative z-10;
+}
+
+/* .fi-main-ctn {
+    @apply bg-gray-100 dark:bg-gray-900 h-[calc(100vh-4rem)] border-t border-s border-gray-300 dark:border-gray-700 overflow-y-auto sm:rounded-ss-4xl;
+} */
+.fi-main-ctn {
+    @apply overflow-y-auto border-s border-t border-gray-300 bg-gray-100 sm:rounded-ss-4xl dark:border-gray-700 dark:bg-gray-900;
+}
+
+.fi-body.fi-body-has-top-navigation .fi-main-ctn {
+    @apply rounded-ss-none;
+}
+
+.fi-body.fi-body-has-sidebar-fully-collapsible-on-desktop .fi-main-ctn:not(.fi-main-ctn-sidebar-open) {
+    @apply rounded-ss-none;
+}
+.fi-tenant-menu-trigger {
+    @apply rounded-full px-4;
+}
+
+.fi-topbar {
+    @apply bg-white shadow-none ring-0 dark:bg-gray-800;
+}
+
+.fi-topbar-item .fi-topbar-item-btn {
+    @apply rounded-full px-4;
+}
+
+.fi-topbar-item.fi-active .fi-topbar-item-btn {
+    @apply bg-primary-600 dark:bg-primary-500 rounded-full shadow-sm transition-all duration-300;
+}
+
+.fi-topbar-item.fi-active .fi-topbar-item-label,
+.fi-topbar-item.fi-active .fi-topbar-item-icon {
+    @apply text-primary-50;
+}
+.fi-topbar-item .fi-topbar-item-btn .fi-badge {
+    @apply bg-primary-600 dark:bg-primary-500 rounded-full text-white;
+}
+
+.fi-topbar-item.fi-active .fi-topbar-item-btn .fi-badge {
+    @apply bg-primary-50 text-primary-900;
+}
+
+.fi-topbar-item.fi-active .fi-topbar-group-toggle-icon {
+    @apply text-primary-50;
+}
+
+.fi-topbar-nav-groups .fi-dropdown .fi-badge {
+    @apply bg-primary-600 dark:bg-primary-500 rounded-full text-white;
+}
+
+.fi-sidebar-open .fi-sidebar-item .fi-sidebar-item-btn {
+    @apply rounded-full px-4;
+}
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn {
+    @apply bg-primary-600 dark:bg-primary-500 rounded-full shadow-sm transition-all duration-300;
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-grouped-border-part {
+    @apply bg-gray-50 transition-all duration-300 dark:bg-gray-800;
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon {
+    @apply text-primary-50;
+}
+
+.fi-sidebar-item > .fi-sidebar-item-btn {
+    @apply hover:rounded-full hover:bg-gray-100 hover:transition-all hover:duration-300 dark:hover:bg-gray-700;
+}
+
+.fi-sidebar-item:hover .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar-item:hover .fi-sidebar-item-btn .fi-sidebar-item-icon {
+    @apply text-gray-800 transition-all duration-300 dark:text-gray-200;
+}
+
+.fi-sidebar-item:hover.fi-active .fi-sidebar-item-btn {
+    @apply bg-primary-500 dark:bg-primary-600;
+}
+
+.fi-sidebar-item:hover.fi-active .fi-sidebar-item-grouped-border-part {
+    @apply bg-gray-50 transition-all duration-300 dark:bg-gray-800;
+}
+
+.fi-sidebar-item:hover.fi-active .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar-item:hover.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon {
+    @apply text-gray-50 transition duration-200;
+}
+
+.fi-sidebar-item .fi-sidebar-item-badge-ctn .fi-badge {
+    @apply bg-primary-600 dark:bg-primary-500 rounded-full text-white;
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-badge-ctn .fi-badge {
+    @apply bg-primary-50 text-primary-900;
+}
+.fi-dropdown-panel {
+    @apply rounded-2xl dark:bg-gray-800;
+}
+.fi-global-search-results-ctn {
+    @apply rounded-lg border-0;
+}
+
+.fi-global-search-result-group-header {
+    @apply bg-gray-100 p-4 dark:bg-gray-700;
+}
+
+.fi-global-search-result-group-results {
+    @apply bg-white dark:bg-gray-800;
+}
+.fi-modal-window {
+    @apply rounded-2xl;
+}
+.fi-no-database .fi-no-notification-unread-ctn::before {
+    @apply inset-1 -z-10 h-[calc(100%-0.5rem)] w-[calc(100%-0.5rem)] rounded-[calc(var(--radius-2xl)-var(--spacing))] border border-gray-300 bg-white dark:bg-gray-800;
+}
+
+.fi-no-database .fi-no-notification-unread-ctn {
+    @apply relative z-0 mx-3 my-1.5 rounded-2xl border border-gray-300 bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:before:border-gray-700 dark:before:bg-gray-800;
+}
+.fi-section {
+    @apply rounded-[calc(var(--radius-2xl)-var(--spacing))] border border-gray-300 bg-white p-1 shadow-none ring-0 dark:border-gray-700 dark:bg-gray-800;
+}
+
+.fi-ta-ctn {
+    @apply rounded-[calc(var(--radius-2xl)-var(--spacing))] border border-gray-300 bg-white shadow-none ring-0 dark:border-gray-700 dark:bg-gray-800;
+}
+
+.fi-ta-ctn .fi-ta-header-toolbar {
+    @apply border-0;
+}
+
+.fi-dropdown .fi-icon-btn-badge-ctn {
+    @apply dark:bg-gray-800;
+}
+.fi-wi-stats-overview-stat,
+.fi-wi-table {
+    @apply rounded-2xl shadow-none ring-0 dark:bg-gray-800;
+}
+
+.fi-wi-widget.fi-wi-table {
+    @apply border-0 p-0;
+}
+.fi-input-wrp {
+    @apply shadow-none;
+}
+
+/* .fi-sc-tabs {
+    @apply border border-gray-300 dark:border-gray-700 dark:bg-gray-800;
+} */
+.fi-sc-tabs.fi-contained {
+    @apply dark:bg-gray-800;
+}
+
+/* Srollbars */
+:root {
+    --sb-size: 8px;
+    --sb-radius: 999px;
+    --sb-track: transparent;
+    --sb-thumb: var(--secondary-500, var(--primary-500, #3b82f6));
+    --sb-thumb-hover: var(--secondary-600, var(--primary-600, #2563eb));
+}
+
+/* Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--sb-thumb) transparent !important;
+    scrollbar-gutter: stable both-edges;
+}
+
+/* WebKit (page + inner scrollers) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    width: var(--sb-size) !important;
+    height: var(--sb-size) !important;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+    background: var(--sb-track) !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+    background-color: var(--sb-thumb) !important;
+    border-radius: var(--sb-radius) !important;
+    border: 2px solid transparent !important; /* pill effect */
+    background-clip: content-box !important;
+    min-height: 24px !important;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--sb-thumb-hover) !important;
+}
+
+/* Keep inner areas thin in Firefox */
+.fi-sidebar .overflow-y-auto,
+.fi-main,
+.fi-modal-window .fi-modal-content,
+.fi-table .fi-table-container,
+.fi-section-content {
+    scrollbar-width: thin !important;
+}
+
+/* [class^='fi-'],
+[class*=' fi-'] {
+    font-size: 1rem !important;
+} */

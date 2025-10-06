@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Traits;
+
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+trait DefaultMediaConversions
+{
+    /**
+     * Register the media collections.
+     * https://spatie.be/docs/laravel-medialibrary/v11/converting-images/defining-conversions
+     *
+     * @throws InvalidManipulation
+     */
+    public function registerCustomMediaCollections(?Media $media = null): void
+    {
+        $format = config('cms.media.format', 'jpg');
+
+        if (config('cms.media.conversions.xl', false)) {
+            $this->addMediaConversion('xl')
+                ->format($format)
+                ->width(config('cms.media.conversions.xl', 1920));
+        }
+
+        if (config('cms.media.conversions.lg', false)) {
+            $this->addMediaConversion('lg')
+                ->format($format)
+                ->width(config('cms.media.conversions.lg', 1280));
+        }
+
+        if (config('cms.media.conversions.md', false)) {
+            $this->addMediaConversion('md')
+                ->format($format)
+                ->width(config('cms.media.conversions.md', 400));
+        }
+
+        if (config('cms.media.conversions.sm', false)) {
+            $this->addMediaConversion('sm')
+                ->format($format)
+                ->width(config('cms.media.conversions.sm', 200));
+        }
+
+        if (config('cms.media.conversions.xs', false)) {
+            $this->addMediaConversion('xs')
+                ->format($format)
+                ->width(config('cms.media.conversions.xs', 100));
+        }
+
+        $this->addMediaConversion('thumbnail')
+            ->fit(Fit::Crop, 720, 488)
+            ->format('jpg');
+
+        $this->addMediaConversion('square')
+            ->fit(Fit::Crop, 600, 600)
+            ->format('jpg');
+
+        // Questa conversione è usata per le immagini nelle tabelle del backoffice
+        $this->addMediaConversion('icon')
+            ->fit(Fit::Crop, 90, 90)
+            ->format('jpg');
+    }
+
+    /**
+     * @throws InvalidManipulation
+     */
+    public function registerMediaCollections(?Media $media = null): void
+    {
+        $this->registerCustomMediaCollections($media);
+        parent::registerMediaCollections($media);
+    }
+}
