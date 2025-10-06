@@ -16,8 +16,8 @@ class MenuForm
             ->components([
                 TextInput::make('title')
                     ->live(debounce: 500)
-                    ->afterStateUpdated(function ($state, callable $set, $component) {
-                        if ($component === 'edit') {
+                    ->afterStateUpdated(function ($state, callable $set, callable $get, $context) {
+                        if ($get('lock_slug')) {
                             return;
                         }
 

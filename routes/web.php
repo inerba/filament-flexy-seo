@@ -16,6 +16,12 @@ Route::group([
     'middleware' => $middleware,
 ], function () {
 
+    // Rotte dei libri
+    Route::prefix('titolo')->group(function () {
+        // Route::get('/', Controllers\BookController::class)->name('books.index');
+        Route::get('/{book:slug}', [Controllers\BookController::class, 'show'])->name('books.show');
+    });
+
     // Rotte del Cms
     Route::group([
         'middleware' => ['web'],

@@ -48,14 +48,14 @@ class AdminPanelProvider extends PanelProvider
             // ->sidebarFullyCollapsibleOnDesktop(true)
             // ->sidebarCollapsibleOnDesktop(true)
             ->sidebarWidth('280px')
-            // ->colors([
-            //     'primary' => Color::all()[db_config('website.filament_colors.primary', 'amber')],
-            //     'success' => Color::all()[db_config('website.filament_colors.success', 'green')],
-            //     'warning' => Color::all()[db_config('website.filament_colors.warning', 'amber')],
-            //     'danger' => Color::all()[db_config('website.filament_colors.danger', 'red')],
-            //     'info' => Color::all()[db_config('website.filament_colors.info', 'blue')],
-            //     'gray' => Color::all()[db_config('website.filament_colors.gray', 'zinc')],
-            // ])
+            ->colors([
+                'primary' => Color::all()[db_config('website.filament_colors.primary', 'amber')],
+                'success' => Color::all()[db_config('website.filament_colors.success', 'green')],
+                'warning' => Color::all()[db_config('website.filament_colors.warning', 'amber')],
+                'danger' => Color::all()[db_config('website.filament_colors.danger', 'red')],
+                'info' => Color::all()[db_config('website.filament_colors.info', 'blue')],
+                'gray' => Color::all()[db_config('website.filament_colors.gray', 'zinc')],
+            ])
             // ->font('IBM Plex Sans', provider: BunnyFontProvider::class)
             ->font('Inter', provider: BunnyFontProvider::class)
             ->viteTheme('resources/css/filament/admin/theme.css')
