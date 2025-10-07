@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -8,9 +8,40 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
+    /* display: ['"Cabin"', ...defaultTheme.fontFamily.sans],
+                body: ["PT Serif", ...defaultTheme.fontFamily.serif],
+                serif: ["PT Serif", ...defaultTheme.fontFamily.serif],
+                logo: ["Courier New", ...defaultTheme.fontFamily.sans], */
+
+    --font-display: 'Cabin', sans-serif;
+    --font-sans: 'Cabin', sans-serif;
+    --font-serif: 'PT Serif', serif;
+    --font-body: 'PT Serif', serif;
+    --font-logo: 'Courier New', monospace;
+
+    --color-primary-50: #fef5ee;
+    --color-primary-100: #fce9d8;
+    --color-primary-200: #f9ceaf;
+    --color-primary-300: #f5ab7c;
+    --color-primary-400: #ef7f48;
+    --color-primary-500: #ec652e;
+    --color-primary-600: #dc451a;
+    --color-primary-700: #b73317;
+    --color-primary-800: #922a1a;
+    --color-primary-900: #762518;
+    --color-primary-950: #3f100b;
+
+    --color-secondary-50: #e7f2fe;
+    --color-secondary-100: #c0dafd;
+    --color-secondary-200: #8eb1fb;
+    --color-secondary-300: #5c89f8;
+    --color-secondary-400: #2a61f5;
+    --color-secondary-500: #1355d9;
+    --color-secondary-600: #0f44b0;
+    --color-secondary-700: #0b3388;
+    --color-secondary-800: #072260;
+    --color-secondary-900: #031138;
+    --color-secondary-950: #000615;
 }
 
 /**
@@ -25,3 +56,66 @@
 
 /* Theme toggle */
 @custom-variant dark (&:where(.dark, .dark *));
+
+body {
+    @apply font-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-serif font-bold;
+}
+
+.text-logo {
+    @apply font-logo font-bold tracking-wider text-primary-500;
+}
+
+/* Menu principale */
+.main-menu a {
+    @apply relative font-display text-base font-medium uppercase;
+
+    &::after {
+        @apply absolute bottom-0 left-0 w-0 bg-primary-500 transition-all duration-500 ease-in-out content-[''];
+    }
+
+    &.active,
+    &:hover {
+        &::after {
+            @apply left-1/2 h-1 w-1/2 -translate-x-1/2 transform;
+        }
+    }
+}
+
+/* Slider home page */
+
+.splide__pagination {
+    @apply !bottom-2 lg:!bottom-3;
+
+    li button {
+        @apply !bg-white lg:!m-1 lg:!size-4;
+
+        &.is-active {
+            @apply !bg-primary-500;
+        }
+    }
+}
+
+.splide__arrow {
+    @apply !bg-transparent transition-all duration-100 ease-in-out md:!size-12;
+
+    &.splide__arrow--next {
+        @apply md:hover:!-mr-1;
+    }
+
+    &.splide__arrow--prev {
+        @apply md:hover:!-ml-1;
+    }
+
+    svg {
+        @apply !fill-primary-500 md:!size-full;
+    }
+}

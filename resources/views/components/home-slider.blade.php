@@ -19,14 +19,15 @@
 
             @foreach ($slides as $slide)
                 <li class="splide__slide {{ $aspect_class }} flex flex-col items-center justify-center overflow-hidden">
-                    @if ($slide['url'])
+                    @if (optional($slide['url']))
                         <a href="{{ $slide['url'] }}">
                     @endif
                     <picture>
                         <source media="(min-width: 768px)" srcset="/storage/{{ $slide['image_desktop'] }}">
-                        <img loading="lazy" class="w-full" src="/storage/{{ $slide['image_mobile'] }}" alt="{{ $title }}">
+                        <img loading="lazy" class="w-full" src="/storage/{{ $slide['image_mobile'] }}"
+                            alt="{{ $title }}">
                     </picture>
-                    @if ($slide['url'])
+                    @if (optional($slide['url']))
                         </a>
                     @endif
                 </li>
@@ -35,3 +36,4 @@
         </ul>
     </div>
 </section>
+

@@ -5,11 +5,13 @@
     'og_description' => '',
     'image' => '',
     'url' => '',
-    'type' => config('postare-kit.og.type', 'article'),
+    'type' => config('cms.og.type', 'article'),
     'published_time' => null,
     'modified_time' => null,
-    'fb_app_id' => config('postare-kit.og.fb_app_id', null),
+    'fb_app_id' => config('cms.og.fb_app_id', null),
 ])
+
+@dump($title)
 
 @php
     $og_title = $og_title ?: $title;
