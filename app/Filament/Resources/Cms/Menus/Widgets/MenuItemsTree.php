@@ -45,6 +45,7 @@ class MenuItemsTree extends Tree
 
     protected function getFormSchema(): array
     {
+        $is_multilingual = count(get_supported_locales()) > 1;
 
         return [
             Hidden::make('menu_id')
@@ -62,7 +63,7 @@ class MenuItemsTree extends Tree
                 ->label('Etichetta')
                 ->live(true)
                 ->required()
-                ->translatableTabs(),
+                ->translatableTabs()->extraAttributes(fn () => $is_multilingual ? [] : ['class' => 'hide-tabs']),
 
             // Link
             Grid::make()

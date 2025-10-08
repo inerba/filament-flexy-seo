@@ -131,23 +131,26 @@ class Page extends Model implements HasMedia
      */
     public function getViewName(): string
     {
-        $defaultView = 'cms.pages.page';
-
-        // Check if a custom view exists
-        $customView = 'cms.pages.'.$this->slug;
-
-        if (view()->exists($customView)) {
-            return $customView;
+        if ($this->hasCustomView()) {
+            return $this->customView();
         }
 
-        return $defaultView;
+        return $this->defaultView();
     }
 
     public function hasCustomView(): bool
     {
-        $customView = 'cms.pages.'.$this->slug;
+        return view()->exists($this->customView());
+    }
 
-        return view()->exists($customView);
+    protected function customView(): string
+    {
+        return 'pages.'.$this->slug;
+    }
+
+    protected function defaultView(): string
+    {
+        return 'cms.pages.page';
     }
 
     /**
@@ -166,5 +169,15 @@ class Page extends Model implements HasMedia
         $slugs[] = $page->slug;
 
         return $slugs;
+    }
+
+    /**
+     * Get the visit tracker for the page.
+     *
+     * @return mixed
+     */
+    public function vzt()
+    {
+        return visits($this);
     }
 }

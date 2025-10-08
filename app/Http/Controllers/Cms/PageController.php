@@ -21,6 +21,9 @@ class PageController extends Controller
 
         $viewName = $page->getViewName();
 
+        // Registra la visita alla pagina https://github.com/awssat/laravel-visits/blob/master/docs/6_retrieve-visits-and-stats.md
+        $page->vzt()->increment();
+
         // Restituisci la vista con la pagina trovata
         return view($viewName, ['page' => $page]);
     }

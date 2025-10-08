@@ -26,7 +26,7 @@ trait CommonFieldsTrait
                             '_parent' => 'Genitore',
                             '_top' => 'Inizio',
                         ]),
-                    CheckboxList::make('rel')
+                    CheckboxList::make('extras.rel')
                         ->columnSpan(1)
                         ->columns(3)
                         ->options([

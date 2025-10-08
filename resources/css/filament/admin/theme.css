@@ -254,4 +254,8 @@ body::-webkit-scrollbar-thumb:hover,
         margin-top: 0 !important;
         padding: 0 !important;
     }
+
+    &.fi-sc-tabs.fi-contained:where(.dark, .dark *) {
+        background-color: transparent !important;
+    }
 }
