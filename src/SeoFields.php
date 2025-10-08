@@ -26,7 +26,7 @@ class SeoFields
      *
      * @return array<int, \Filament\Forms\Components\TextInput|\Filament\Forms\Components\Select|\Filament\Schemas\Components\Section> Indexed array of Filament form and schema components.
      */
-    public static function make($prefix, $translatable = false): array
+    public static function make($prefix): array
     {
         $fields = [
             Forms\Components\TextInput::make($prefix . '.tag_title')
@@ -35,7 +35,7 @@ class SeoFields
                 ->label(__('flexy-seo::flexy-seo.seo.tag-title'))
                 ->helperText(__('flexy-seo::flexy-seo.seo.tag-title-helper'))
                 ->columnSpanFull(),
-            Forms\Components\TextInput::make($prefix . '.meta_description')
+            Forms\Components\Textarea::make($prefix . '.meta_description')
                 ->hint(fn ($state): HtmlString => FieldsHelper::remainingText($state, config('flexy-seo.meta-description-max-length', 160)))
                 ->live(false, 500)
                 ->label(__('flexy-seo::flexy-seo.seo.meta-description'))
@@ -43,6 +43,7 @@ class SeoFields
                 ->columnSpanFull(),
             Forms\Components\Select::make($prefix . '.robots')
                 ->label(__('flexy-seo::flexy-seo.seo.robots'))
+                ->searchable()
                 ->options([
                     'index, follow' => __('flexy-seo::flexy-seo.seo.robots_option_index_follow'),
                     'no index, follow' => __('flexy-seo::flexy-seo.seo.robots_option_noindex_follow'),
