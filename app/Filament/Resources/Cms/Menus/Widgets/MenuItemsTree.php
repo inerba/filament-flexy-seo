@@ -25,6 +25,8 @@ use ToneGabes\Filament\Icons\Enums\Phosphor;
 
 class MenuItemsTree extends Tree
 {
+    use \App\Traits\CmsUtils;
+
     protected static string $model = Menuitem::class;
 
     protected static int $maxDepth = 2;
@@ -45,8 +47,6 @@ class MenuItemsTree extends Tree
 
     protected function getFormSchema(): array
     {
-        $is_multilingual = count(get_supported_locales()) > 1;
-
         return [
             Hidden::make('menu_id')
                 // @phpstan-ignore property.notFound
@@ -63,7 +63,7 @@ class MenuItemsTree extends Tree
                 ->label('Etichetta')
                 ->live(true)
                 ->required()
-                ->translatableTabs()->extraAttributes(fn () => $is_multilingual ? [] : ['class' => 'hide-tabs']),
+                ->translatableTabs()->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs']),
 
             // Link
             Grid::make()

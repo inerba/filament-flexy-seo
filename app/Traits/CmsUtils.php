@@ -12,7 +12,7 @@ trait CmsUtils
             return [];
         }
 
-        $class = 'App\\Filament\\Resources\\Cms\\Pages\\CustomPages\\' . Str::studly(str_replace(['-', '_'], ' ', $record->slug));
+        $class = 'App\\Filament\\Resources\\Cms\\Pages\\CustomPages\\'.Str::studly(str_replace(['-', '_'], ' ', $record->slug));
 
         if (class_exists($class) && method_exists($class, 'fields')) {
             return $class::fields();

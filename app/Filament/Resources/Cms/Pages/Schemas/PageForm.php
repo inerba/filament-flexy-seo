@@ -22,7 +22,7 @@ use Inerba\Seo\Facades\SocialFields;
 use Inerba\Seo\SeoFields;
 
 class PageForm
-{  
+{
     use \App\Traits\CmsUtils;
 
     public static function configure(Schema $schema): Schema
@@ -45,10 +45,10 @@ class PageForm
                                     ->contained(false)
                                     ->columnSpan(2),
                             ]),
-                        Tabs\Tab::make("Campi extra")
+                        Tabs\Tab::make('Campi extra')
                             ->visible(fn ($record) => $record && ! empty(self::getCustomFields($record)))
                             ->schema(fn ($record) => self::getCustomFields($record)),
-                            
+
                         Tabs\Tab::make(__('pages.resources.page.form.tab_seo'))->schema([
                             TranslatableTabs::make('seo_fields')
                                 ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])

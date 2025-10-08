@@ -255,7 +255,7 @@ body::-webkit-scrollbar-thumb:hover,
         padding: 0 !important;
     }
 
-    &.fi-sc-tabs.fi-contained:where(.dark, .dark *) {
+    &.fi-sc-tabs.fi-contained {
         background-color: transparent !important;
     }
 }

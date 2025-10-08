@@ -25,30 +25,51 @@ class ArticleSeeder extends Seeder
             [
                 'name' => ['it' => 'MAKEUP'],
                 'slug' => 'makeup',
+                'extras' => [
+                    'post_per_page' => 12,
+                ],
             ],
             [
                 'name' => ['it' => 'FITNESS'],
                 'slug' => 'fitness',
+                'extras' => [
+                    'post_per_page' => 12,
+                ],
             ],
             [
                 'name' => ['it' => 'WELLNESS'],
                 'slug' => 'wellness',
+                'extras' => [
+                    'post_per_page' => 12,
+                ],
             ],
             [
                 'name' => ['it' => 'NUTRIZIONE'],
                 'slug' => 'nutrizione',
+                'extras' => [
+                    'post_per_page' => 12,
+                ],
             ],
             [
                 'name' => ['it' => 'HAIRCARE'],
                 'slug' => 'haircare',
+                'extras' => [
+                    'post_per_page' => 12,
+                ],
             ],
             [
                 'name' => ['it' => 'MODA'],
                 'slug' => 'moda',
+                'extras' => [
+                    'post_per_page' => 12,
+                ],
             ],
             [
                 'name' => ['it' => 'CHI SIAMO'],
                 'slug' => 'chi-siamo',
+                'extras' => [
+                    'post_per_page' => 12,
+                ],
             ],
         ];
 

@@ -31,6 +31,9 @@ class CategoryFactory extends Factory
 
             // Generate a unique slug based on the name in the default locale
             'slug' => fake()->unique()->slug(),
+            'extras' => [
+                'post_per_page' => 12,
+            ],
         ];
     }
 }

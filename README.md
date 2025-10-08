@@ -37,6 +37,84 @@ Note:
 - La generazione dei permalink usa la route nominata `cms.page` con lo slug completo (ad esempio `parent/child`) generata dal modello (`$page->permalink` / `$page->relativePermalink`). Assicurati che la route esista nelle tue `routes/web.php`.
 - Se non vedi cambiamenti nella UI dopo aver aggiunto una view, potrebbe essere necessario ricostruire gli assets (`npm run dev` / `npm run build`) o svuotare eventuali cache delle view (`php artisan view:clear`).
 
+## Campi extra (Custom fields)
+
+Il CMS supporta campi extra specifici per singole pagine tramite una convenzione a livello di classe Filament. Questo sistema permette di estendere il form della pagina (nella tab "Campi extra") senza toccare il form generale.
+
+Come funziona
+
+- Per creare campi extra per una pagina con slug ad esempio "chi-siamo", crea la classe:
+
+  `App\Filament\Resources\Cms\Pages\CustomPages\ChiSiamo`
+
+  con un metodo statico `fields()` che ritorna un array di componenti Filament (es. `TextInput`, `Select`, ecc).
+
+- Il trait `App\Traits\CmsUtils` cerca automaticamente la classe corretta usando lo slug della pagina (trasformato in StudlyCase) e, se esiste e define `fields()`, la tab "Campi extra" mostrerà quei campi nel form di Filament.
+
+Esempio minimo (già presente nel progetto)
+
+```php
+// App\Filament\Resources\Cms\Pages\CustomPages\ChiSiamo.php
+class ChiSiamo
+{
+    public static function fields(): array
+    {
+        return [
+            TextInput::make('extras.test')->label('Testo extra')->required(),
+        ];
+    }
+}
+```
+
+Come vengono salvati i valori
+
+- I campi dovrebbero usare come nome il prefisso `extras.` (es. `extras.test`) in modo che i valori vengano salvati dentro la colonna JSON `extras` del modello Page.
+- Alcuni valori predefiniti usati dal form:
+  - `featured_images` (Spatie Media collection) => collezione media 'featured_images'
+  - `extras.show_featured_image` (bool) => mostra l'immagine nella testata
+  - `extras.content_settings.dropcap` (bool) => impostazione del drop cap per il contenuto
+
+Accesso ai valori in Blade
+
+- Per leggere un valore semplice dagli extras:
+
+  ```blade
+  {{ $page->extras['test'] ?? null }}
+  ```
+
+- Per controllare il dropcap:
+
+  ```blade
+  @if(data_get($page->extras, 'content_settings.dropcap'))
+      {{-- applica stile per drop cap --}}
+  @endif
+  ```
+
+- Per la media:
+
+  ```blade
+  @if($page->hasFeaturedImages())
+      <img src="{{ $page->getFirstMediaUrl('featured_images') }}" alt="{{ $page->title }}">
+  @endif
+  ```
+
+Comportamento della tab "Campi extra" nel form di Filament
+
+- La tab è visibile solo quando esiste un record (edit) e quando `CmsUtils::getCustomFields($record)` ritorna un array non vuoto.
+- Le classi custom devono restituire componenti Filament validi; i nomi degli input determinano dove vengono salvati i dati (usare `extras.` per il JSON extras).
+
+Multilingua
+
+- Se la pagina è multilingua, i campi translatabili (es. label o campi che usano `translatableTabs` nel form) devono essere dichiarati coerentemente. Il form usa una utilità `isMultilingual()` per mostrare o nascondere le tab di traduzione.
+- Se tecnicamente i tuoi campi devono essere tradotti, salva struttura e valore in modo coerente (ad es. array per lingua dentro extras o utilizzare campi translatable separati).
+
+Note operative
+
+- Se non vedi i campi nel pannello di amministrazione:
+  - Verifica slug e nome della classe (StudlyCase).
+  - Svuota cache config/view se necessario (`php artisan view:clear`).
+- Se aggiungi nuove view o assets, potresti dover ricostruire gli asset (`npm run dev` / `npm run build`) come indicato altrove nel README.
+
 # installazione
 
 Clona il repository (con depth=1 per velocizzare).
