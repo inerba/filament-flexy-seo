@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Cms\Articles\Pages;
 
 use App\Filament\Resources\Cms\Articles\ArticleResource;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Pboivin\FilamentPeek\Pages\Actions\PreviewAction;
@@ -21,6 +22,12 @@ class EditArticle extends EditRecord
             PreviewAction::make()
                 ->label('Anteprima')
                 ->icon(Phosphor::EyeDuotone),
+            Action::make('salva')
+                ->label('Salva')
+                ->icon(Phosphor::FloppyDiskDuotone)
+                ->action('save')
+                ->color('primary')
+                ->button(),
             DeleteAction::make(),
         ];
     }

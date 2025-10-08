@@ -117,6 +117,7 @@ return [
                 'content' => 'Contenuto',
                 'tag_title' => 'Tag Title',
                 'featured_images' => 'Immagini in evidenza',
+                'advanced_settings' => 'Impostazioni avanzate',
                 'meta_description' => 'Meta Description',
                 'generate_seo' => 'Genera SEO con AI',
                 'slug_help' => 'Attenzione: se modifichi lo slug, il permalink cambierà.',

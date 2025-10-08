@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Cms\Pages\Pages;
 
 use App\Filament\Resources\Cms\Pages\PageResource;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Pboivin\FilamentPeek\Pages\Actions\PreviewAction;
 use Pboivin\FilamentPeek\Pages\Concerns\HasPreviewModal;
@@ -24,6 +25,12 @@ class CreatePage extends CreateRecord
             PreviewAction::make()
                 ->label('Anteprima')
                 ->icon(Phosphor::EyeDuotone),
+            Action::make('salva')
+                ->label('Salva')
+                ->icon(Phosphor::FloppyDiskDuotone)
+                ->action('create')
+                ->color('primary')
+                ->button(),
         ];
     }
 

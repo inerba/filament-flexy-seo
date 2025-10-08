@@ -11,8 +11,6 @@
     'fb_app_id' => config('cms.og.fb_app_id', null),
 ])
 
-@dump($title)
-
 @php
     $og_title = $og_title ?: $title;
     $og_description = $og_description ?: $description;

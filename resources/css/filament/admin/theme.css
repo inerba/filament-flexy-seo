@@ -55,7 +55,7 @@
 }
 
 .fi-topbar-item.fi-active .fi-topbar-item-btn {
-    @apply bg-primary-600 dark:bg-primary-500 rounded-full shadow-sm transition-all duration-300;
+    @apply rounded-full bg-primary-600 shadow-sm transition-all duration-300 dark:bg-primary-500;
 }
 
 .fi-topbar-item.fi-active .fi-topbar-item-label,
@@ -63,7 +63,7 @@
     @apply text-primary-50;
 }
 .fi-topbar-item .fi-topbar-item-btn .fi-badge {
-    @apply bg-primary-600 dark:bg-primary-500 rounded-full text-white;
+    @apply rounded-full bg-primary-600 text-white dark:bg-primary-500;
 }
 
 .fi-topbar-item.fi-active .fi-topbar-item-btn .fi-badge {
@@ -75,14 +75,14 @@
 }
 
 .fi-topbar-nav-groups .fi-dropdown .fi-badge {
-    @apply bg-primary-600 dark:bg-primary-500 rounded-full text-white;
+    @apply rounded-full bg-primary-600 text-white dark:bg-primary-500;
 }
 
 .fi-sidebar-open .fi-sidebar-item .fi-sidebar-item-btn {
     @apply rounded-full px-4;
 }
 .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
-    @apply bg-primary-600 dark:bg-primary-500 rounded-full shadow-sm transition-all duration-300;
+    @apply rounded-full bg-primary-600 shadow-sm transition-all duration-300 dark:bg-primary-500;
 }
 
 .fi-sidebar-item.fi-active .fi-sidebar-item-grouped-border-part {
@@ -117,7 +117,7 @@
 }
 
 .fi-sidebar-item .fi-sidebar-item-badge-ctn .fi-badge {
-    @apply bg-primary-600 dark:bg-primary-500 rounded-full text-white;
+    @apply rounded-full bg-primary-600 text-white dark:bg-primary-500;
 }
 
 .fi-sidebar-item.fi-active .fi-sidebar-item-badge-ctn .fi-badge {
@@ -240,3 +240,18 @@ body::-webkit-scrollbar-thumb:hover,
 [class*=' fi-'] {
     font-size: 1rem !important;
 } */
+
+/* HACKS */
+/* Hide Rich Content Tabs */
+.hide-tabs {
+    --tw-ring-shadow: none !important;
+    box-shadow: none !important;
+
+    nav.fi-tabs {
+        display: none !important;
+    }
+    .fi-active {
+        margin-top: 0 !important;
+        padding: 0 !important;
+    }
+}
