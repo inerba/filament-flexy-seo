@@ -7,8 +7,6 @@ use Filament\Schemas\Schema;
 
 class TagForm
 {
-    use \App\Traits\CmsUtils;
-
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -17,7 +15,7 @@ class TagForm
                     ->label('Nome del tag')
                     ->required()
                     ->translatableTabs()
-                    ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                     ->columnSpanFull(),
             ]);
     }

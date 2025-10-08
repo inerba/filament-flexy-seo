@@ -14,6 +14,7 @@ class GenreForm
                 TextInput::make('name')
                     ->required()
                     ->translatableTabs()
+                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                     ->columnSpanFull(),
             ]);
     }

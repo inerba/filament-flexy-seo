@@ -11,8 +11,6 @@ use Illuminate\Support\Str;
 
 class CategoryForm
 {
-    use \App\Traits\CmsUtils;
-
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -28,7 +26,7 @@ class CategoryForm
                         }
                     })
                     ->translatableTabs()
-                    ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs']),
+                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs']),
 
                 Hidden::make('lock_slug')
                     ->live(false, 500)
@@ -88,7 +86,7 @@ class CategoryForm
                 Textarea::make('extras.description')
                     ->label('Descrizione')
                     ->translatableTabs()
-                    ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                     ->columnSpanFull(),
 
                 TextInput::make('extras.post_per_page')

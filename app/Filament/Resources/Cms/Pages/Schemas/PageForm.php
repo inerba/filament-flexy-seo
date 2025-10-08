@@ -23,8 +23,6 @@ use Inerba\Seo\SeoFields;
 
 class PageForm
 {
-    use \App\Traits\CmsUtils;
-
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -41,7 +39,7 @@ class PageForm
                                     ->hiddenLabel()
                                     ->customBlocks(PageBlocks::blocks())
                                     ->translatableTabs()
-                                    ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                     ->contained(false)
                                     ->columnSpan(2),
                             ]),
@@ -51,12 +49,12 @@ class PageForm
 
                         Tabs\Tab::make(__('pages.resources.page.form.tab_seo'))->schema([
                             TranslatableTabs::make('seo_fields')
-                                ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                                ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                 ->schema(SeoFields::make('meta')),
                         ]),
                         Tabs\Tab::make(__('pages.resources.page.form.tab_social'))->schema([
                             TranslatableTabs::make('social_fields')
-                                ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                                ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                 ->schema(SocialFields::make('meta')),
                         ]),
                         Tabs\Tab::make(__('pages.resources.page.form.advanced_settings'))->schema([
@@ -100,7 +98,7 @@ class PageForm
                                         }
                                     })
                                     ->translatableTabs()
-                                    ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs']),
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs']),
 
                                 Hidden::make('lock_slug')
                                     ->live(false, 500)
@@ -148,7 +146,7 @@ class PageForm
                                     ->label(__('pages.resources.page.form.lead'))
                                     ->autosize()
                                     ->translatableTabs()
-                                    ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                     ->columnSpanFull(),
                             ]),
 
@@ -183,5 +181,20 @@ class PageForm
                             ]),
                     ])->columnSpan(1),
             ]);
+    }
+
+    protected static function getCustomFields($record): array
+    {
+        if (! $record) {
+            return [];
+        }
+
+        $class = 'App\\Filament\\Resources\\Cms\\Pages\\CustomPages\\'.Str::studly(str_replace(['-', '_'], ' ', $record->slug));
+
+        if (class_exists($class) && method_exists($class, 'fields')) {
+            return $class::fields();
+        }
+
+        return [];
     }
 }

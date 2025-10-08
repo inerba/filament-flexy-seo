@@ -25,8 +25,6 @@ use Inerba\Seo\SocialFields;
 
 class ArticleForm
 {
-    use \App\Traits\CmsUtils;
-
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -39,7 +37,7 @@ class ArticleForm
                             ->columns(2)
                             ->schema([
                                 TranslatableTabs::make('seo_fields')
-                                    ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                     ->contained(false)
                                     ->columnSpanFull()
                                     ->schema([
@@ -72,12 +70,12 @@ class ArticleForm
 
                         Tabs\Tab::make(__('pages.resources.page.form.tab_seo'))->schema([
                             TranslatableTabs::make('seo_fields')
-                                ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                                ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                 ->schema([...SeoFields::make('meta')]),
                         ]),
                         Tabs\Tab::make(__('pages.resources.page.form.tab_social'))->schema([
                             TranslatableTabs::make('social_fields')
-                                ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs'])
+                                ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                 ->schema([...SocialFields::make('meta')]),
                         ]),
                         Tabs\Tab::make(__('pages.resources.page.form.advanced_settings'))->schema([
@@ -104,7 +102,7 @@ class ArticleForm
                                         }
                                     })
                                     ->translatableTabs()
-                                    ->extraAttributes(fn () => self::isMultilingual() ? [] : ['class' => 'hide-tabs']),
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs']),
 
                                 Hidden::make('lock_slug')
                                     ->live(false, 500)

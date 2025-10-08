@@ -85,14 +85,16 @@ class HomePageSettings extends AbstractPageSettings
                     ->tabs([
                         Tabs\Tab::make('Testo')
                             ->schema([
-                                TranslatableTabs::make('section')->schema([
-                                    TextInput::make('section_1.title')
-                                        ->label('Titolo sezione')
-                                        ->columnSpanFull(),
-                                    RichContent::make('section_1.content')
-                                        ->label(null)
-                                        ->columnSpanFull(),
-                                ]),
+                                TranslatableTabs::make('section')
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
+                                    ->schema([
+                                        TextInput::make('section_1.title')
+                                            ->label('Titolo sezione')
+                                            ->columnSpanFull(),
+                                        RichContent::make('section_1.content')
+                                            ->label(null)
+                                            ->columnSpanFull(),
+                                    ]),
                             ]),
                         Tabs\Tab::make('Slider')
                             ->schema([
@@ -122,10 +124,14 @@ class HomePageSettings extends AbstractPageSettings
                                     ->columns(2),
                             ]),
                         Tabs\Tab::make('SEO')->schema([
-                            TranslatableTabs::make('seo_fields')->schema(SeoFields::make('meta')),
+                            TranslatableTabs::make('seo_fields')
+                                ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
+                                ->schema(SeoFields::make('meta')),
                         ]),
                         Tabs\Tab::make('Social')->schema([
-                            TranslatableTabs::make('social_fields')->schema(SocialFields::make('meta')),
+                            TranslatableTabs::make('social_fields')
+                                ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
+                                ->schema(SocialFields::make('meta')),
                         ]),
                     ]),
             ])

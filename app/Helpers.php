@@ -271,3 +271,11 @@ if (! function_exists('localize_url')) {
         return LaravelLocalization::localizeURL($url);
     }
 }
+
+if (! function_exists('is_multilingual')) {
+
+    function is_multilingual(): bool
+    {
+        return count(get_supported_locales()) > 1;
+    }
+}

@@ -41,6 +41,7 @@ class BookForm
                                         $set('slug', Str::slug($state));
                                     })
                                     ->translatableTabs()
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                     ->columnSpanFull(),
 
                                 Forms\Components\Hidden::make('lock_slug')
@@ -74,18 +75,24 @@ class BookForm
                                     ->label('Descrizione')
                                     ->required()
                                     ->translatableTabs()
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                     ->columnSpanFull(),
                                 Forms\Components\Textarea::make('short_description')
                                     ->label('Descrizione breve')
                                     ->required()
                                     ->translatableTabs()
+                                    ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                     ->columnSpanFull(),
                             ]),
                         Tabs\Tab::make(__('pages.resources.page.form.tab_seo'))->schema([
-                            TranslatableTabs::make('seo_fields')->schema(SeoFields::make('meta')),
+                            TranslatableTabs::make('seo_fields')
+                                ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
+                                ->schema(SeoFields::make('meta')),
                         ]),
                         Tabs\Tab::make(__('pages.resources.page.form.tab_social'))->schema([
-                            TranslatableTabs::make('social_fields')->schema(SocialFields::make('meta')),
+                            TranslatableTabs::make('social_fields')
+                                ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
+                                ->schema(SocialFields::make('meta')),
                         ]),
                     ])->columnSpan(2),
                 Section::make()
