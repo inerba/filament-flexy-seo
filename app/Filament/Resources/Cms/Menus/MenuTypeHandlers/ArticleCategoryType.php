@@ -2,11 +2,9 @@
 
 namespace App\Filament\Resources\Cms\Menus\MenuTypeHandlers;
 
-use App\Filament\Resources\Cms\Categories\CategoryResource;
 use App\Filament\Resources\Cms\Menus\Traits\CommonFieldsTrait;
 use App\Models\Cms\Category;
 use Awcodes\Shout\Components\Shout;
-use Filament\Actions\Action;
 use Filament\Forms\Components;
 
 class ArticleCategoryType implements MenuTypeInterface
@@ -56,18 +54,9 @@ class ArticleCategoryType implements MenuTypeInterface
                 ->columnSpanFull(),
 
             Shout::make('so-important')
-                ->color('info')
+                ->color('warning')
                 ->content('Puoi gestire la configurazione della lista di articoli direttamente dalla pagina di modifica della categoria.')
-                ->columnSpanFull()
-                ->icon('heroicon-o-information-circle')->actions([
-                    Action::make('modifica_categoria')
-                        ->size('xs')
-                        ->color('primary')
-                        ->icon('heroicon-o-pencil')
-                        ->iconPosition('after')
-                        ->label('Modifica categoria')
-                        ->url(fn (callable $get) => $get('model_id') ? CategoryResource::getUrl('edit', ['record' => $get('model_id')]) : null, true),
-                ]),
+                ->columnSpanFull(),
 
             // Includi sempre i campi comuni per i link
             ...self::commonLinkFields(),

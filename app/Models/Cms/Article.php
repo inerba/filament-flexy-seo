@@ -4,7 +4,9 @@ namespace App\Models\Cms;
 
 use App\Models\Cms\Scopes\OwnedByUser;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -111,6 +113,33 @@ class Article extends Model implements HasMedia
         $this->addMediaConversion('icon')
             ->fit(Fit::Crop, 90, 90)
             ->format('jpg');
+    }
+
+    /**
+     * Scope a query to only include published articles.
+     */
+    #[Scope]
+    protected function published(Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->whereNotNull('published_at')->where('published_at', '<=', now());
+    }
+
+    /**
+     * Scope scheduled articles.
+     */
+    #[Scope]
+    protected function scheduled(Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->where('published_at', '>', now());
+    }
+
+    /**
+     * Scope drafts articles.
+     */
+    #[Scope]
+    protected function drafts(Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->whereNull('published_at');
     }
 
     /**

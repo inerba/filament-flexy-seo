@@ -57,6 +57,8 @@
 /* Theme toggle */
 @custom-variant dark (&:where(.dark, .dark *));
 
+@import './utility/dropcap.css';
+
 body {
     @apply font-body;
 }
@@ -71,15 +73,15 @@ h6 {
 }
 
 .text-logo {
-    @apply font-logo font-bold tracking-wider text-primary-500;
+    @apply font-logo text-primary-500 font-bold tracking-wider;
 }
 
 /* Menu principale */
 .main-menu a {
-    @apply relative font-display text-base font-medium uppercase;
+    @apply font-display relative text-base font-medium uppercase;
 
     &::after {
-        @apply absolute bottom-0 left-0 w-0 bg-primary-500 transition-all duration-500 ease-in-out content-[''];
+        @apply bg-primary-500 absolute bottom-0 left-0 w-0 transition-all duration-500 ease-in-out content-[''];
     }
 
     &.active,
@@ -118,4 +120,9 @@ h6 {
     svg {
         @apply !fill-primary-500 md:!size-full;
     }
+}
+
+/* Margine verticale predefinito */
+.vertical-margin {
+    @apply my-6 md:my-12;
 }

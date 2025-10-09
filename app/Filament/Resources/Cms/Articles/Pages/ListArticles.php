@@ -31,18 +31,18 @@ class ListArticles extends ListRecords
             'published' => Tab::make('Pubblicati')
                 ->badgeColor('success')
                 ->icon(Phosphor::SealCheckDuotone)
-                ->badge(Article::query()->where('published_at', '<', now())->count() ?: null)
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('published_at', '<', now())),
+                // ->badge(Article::query()->published()->count() ?: null)
+                ->modifyQueryUsing(fn (Builder $query) => $query->published()),
             'scheduled' => Tab::make('Programmati')
                 ->badgeColor('warning')
                 ->icon(Phosphor::ClockDuotone)
-                ->badge(Article::query()->where('published_at', '>', now())->count() ?: null)
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('published_at', '>', now())),
+                ->badge(Article::query()->scheduled()->count() ?: null)
+                ->modifyQueryUsing(fn (Builder $query) => $query->scheduled()),
             'draft' => Tab::make('Bozze')
                 ->badgeColor('gray')
                 ->icon(Phosphor::FileDashedDuotone)
-                ->badge(Article::query()->whereNull('published_at')->count() ?: null)
-                ->modifyQueryUsing(fn (Builder $query) => $query->whereNull('published_at')),
+                ->badge(Article::query()->drafts()->count() ?: null)
+                ->modifyQueryUsing(fn (Builder $query) => $query->drafts()),
         ];
     }
 }

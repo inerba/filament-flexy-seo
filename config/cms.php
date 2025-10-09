@@ -16,8 +16,13 @@ return [
         'web',
     ],
 
-    // Prefix for blog articles
-    'articles_route_prefix' => 'blog',
+    // Prefix for articles index
+    'articles_route_prefix' => 'news',
+
+    // Blog settings
+    'articles_blog_settings' => [
+        'articles_per_page' => 6,
+    ],
 
     'media' => [
         'disk' => 'public',

@@ -20,15 +20,15 @@ class ArticleListController extends Controller
         // }
 
         // Ottieni le impostazioni del blog
-        $article_per_page = db_config('blogconfig.articles_per_page', 5);
+        $article_per_page = config('cms.articles_blog_settings.articles_per_page', 6);
 
         $articles = Article::query()
-            ->where('published_at', '<=', now())
             ->with([
                 'category',
                 'media',
             ])
-            ->orderByDesc('created_at')
+            ->published()
+            ->orderByDesc('published_at')
             ->simplePaginate($article_per_page);
 
         return view('cms.articles.index', [

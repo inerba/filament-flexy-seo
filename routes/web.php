@@ -4,10 +4,8 @@ use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-$multipleLocales = count(get_supported_locales()) > 1;
-
-$middleware = $multipleLocales ? ['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'localeCookieRedirect'] : ['web'];
-$prefix = $multipleLocales ? LaravelLocalization::setLocale() : '';
+$middleware = is_multilingual() ? ['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'localeCookieRedirect'] : ['web'];
+$prefix = is_multilingual() ? LaravelLocalization::setLocale() : '';
 
 // Tutte le rotte localizzate vanno qui
 // Aggiungiamo i middleware di redirect/localization per permettere il redirect automatico
