@@ -4,5 +4,7 @@
     "Genres": "Generi",
     "Year": "Anno",
     "Pages": "Pagine",
-    "Cover Price": "Prezzo di copertina"
+    "Cover Price": "Prezzo di copertina",
+    "ISBN": "ISBN",
+    "Publisher": "Editore"
 }

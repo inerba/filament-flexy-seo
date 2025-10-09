@@ -11,16 +11,27 @@ use App\Models\Product;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use ToneGabes\Filament\Icons\Enums\Phosphor;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Phosphor::ShoppingCartDuotone;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?string $modelLabel = 'Prodotto';
+
+    protected static ?string $pluralModelLabel = 'Prodotti';
+
+    protected static ?int $navigationSort = 1;
+
+    public static function getNavigationGroup(): string
+    {
+        return 'Prodotti';
+    }
 
     public static function form(Schema $schema): Schema
     {

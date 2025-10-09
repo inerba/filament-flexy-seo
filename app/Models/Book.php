@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Number;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -33,7 +32,6 @@ class Book extends Model implements HasMedia
     protected $fillable = [
         'title',
         'slug',
-        'author_id',
         'year',
         'pages',
         'isbn',
@@ -41,7 +39,7 @@ class Book extends Model implements HasMedia
         'description',
         'publisher',
         'meta',
-        'price',
+        'product_id',
     ];
 
     /** @var array<string, string> */
@@ -81,32 +79,24 @@ class Book extends Model implements HasMedia
         return $this->belongsTo(Product::class);
     }
 
-    public function author(): BelongsTo
+    public function book_series(): BelongsTo
     {
-        return $this->belongsTo(BookAuthor::class);
+        return $this->belongsTo(BookSeries::class);
+    }
+
+    public function authors(): BelongsToMany
+    {
+        return $this->belongsToMany(BookAuthor::class, 'book_author', 'book_id', 'book_author_id');
     }
 
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class, 'book_genre');
-    }
-
-    public function getFormattedPriceAttribute(): string
-    {
-        return Number::currency($this->price, 'EUR', 'it_IT');
-    }
-
-    protected function price(): Attribute
-    {
-        return Attribute::make(
-            set: fn ($value) => $value * 100,
-            get: fn ($value) => $value / 100,
-        );
+        return $this->belongsToMany(Genre::class, 'book_genre', 'book_id', 'genre_id');
     }
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        // image per la pagina del veicolo
+        // image per la pagina del libro
         $this->addMediaConversion('large')
             ->fit(Fit::Contain, 800, 800)
             ->background('ffffff')
@@ -126,5 +116,19 @@ class Book extends Model implements HasMedia
             ->background('ffffff')
             ->fit(Fit::Contain, 90, 90)
             ->format('jpg');
+    }
+
+    /**
+     * Get the permalink for the book.
+     *
+     * @return Attribute<string, never>
+     */
+    protected function permalink(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => route('books.show', [
+                'book' => $this->slug,
+            ]),
+        );
     }
 }

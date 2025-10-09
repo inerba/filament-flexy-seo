@@ -18,13 +18,11 @@ return new class extends Migration
 
             $table->string('slug')->unique();
 
-            $table->foreignId('author_id')->constrained('authors');
+            $table->integer('year')->nullable();
 
-            $table->integer('year');
+            $table->integer('pages')->nullable();
 
-            $table->integer('pages');
-
-            $table->string('isbn');
+            $table->string('isbn')->nullable();
 
             // Campo per la sinossi breve
             $table->text('short_description');
@@ -35,8 +33,7 @@ return new class extends Migration
             // Campo per la casa editrice
             $table->string('publisher');
 
-            // Campo per il prezzo in centesimi
-            $table->integer('price');
+            $table->foreignId('product_id')->constrained('products')->nullOnDelete();
 
             $table->json('meta')->nullable();
 
@@ -44,11 +41,15 @@ return new class extends Migration
         });
 
         Schema::create('book_genre', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
             $table->foreignId('genre_id')->constrained('genres')->onDelete('cascade');
-            $table->timestamps();
         });
+
+        Schema::create('book_author', function (Blueprint $table) {
+            $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
+            $table->foreignId('book_author_id')->constrained('book_authors')->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -57,5 +58,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('books');
+        Schema::dropIfExists('book_genre');
+        Schema::dropIfExists('book_author');
     }
 };

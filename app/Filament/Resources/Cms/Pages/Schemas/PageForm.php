@@ -74,7 +74,7 @@ class PageForm
                             Toggle::make('extras.content_settings.dropcap')
                                 ->label('Usa il capitello (drop cap) all\'inizio del contenuto')
                                 ->onColor('success')
-                                ->default(true),
+                                ->default(false),
                         ]),
                     ])->columnSpan(2),
 
