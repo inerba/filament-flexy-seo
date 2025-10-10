@@ -15,6 +15,7 @@
                 <div class="text-balance text-sm line-clamp-1">{{ $book->authors->pluck('name')->implode(', ') }}</div>
                 <h2 class="text-2xl text-balance font-semibold font-display!">
                     {{ $book->title }}
+                    {{ localized($book->meta['subtitle']) ?? '' }}
                 </h2>
                 <div class="border-b-2 w-12 my-4"></div>
                 <p class="text-balance line-clamp-5">{{ $book->short_description }}</p>

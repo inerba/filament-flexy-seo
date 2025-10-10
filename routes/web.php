@@ -25,6 +25,12 @@ Route::group([
         Route::get('/{bookAuthor:slug}', [Controllers\BookAuthorController::class, 'show'])->name('book-authors.show');
     });
 
+    // Rotte degli eventi
+    Route::prefix('eventi')->group(function () {
+        Route::get('/', [Controllers\EventController::class, 'index'])->name('events.index');
+        Route::get('/{event:slug}', [Controllers\EventController::class, 'show'])->name('events.show');
+    });
+
     // Rotte del Cms
     Route::group([
         'middleware' => ['web'],
