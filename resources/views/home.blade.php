@@ -43,11 +43,11 @@
         </section> --}}
     @endpush
 
-    <section>
+    {{-- <section>
         <livewire:store-front />
-    </section>
+    </section> --}}
 
-    <section class="my-12">
+    {{-- <section class="my-12">
         <h2 class="mb-12 border-b-2 pb-1 text-3xl">Ultime uscite</h2>
         <livewire:book-section :genres="['Thriller']" />
         <div class="mt-12 flex items-center">
@@ -62,6 +62,12 @@
         <div class="mt-12 flex items-center">
             <a class="font-display mx-auto inline-block w-auto border border-stone-500 px-4 py-4 uppercase leading-none tracking-wide transition-all hover:bg-stone-50"
                 href="#">Tutte le ultime uscite</a>
+        </div>
+    </section> --}}
+    <section class="mt-12 mb-24">
+        <h2 class="mb-12 border-b-2 pb-1 text-3xl">Il nostro catalogo</h2>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-24">
+            <livewire:book-list lazy />
         </div>
     </section>
 

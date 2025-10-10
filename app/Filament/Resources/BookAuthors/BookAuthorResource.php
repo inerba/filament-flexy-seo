@@ -26,7 +26,9 @@ class BookAuthorResource extends Resource
 
     protected static ?string $modelLabel = 'Autore';
 
-    protected static ?string $pluralModelLabel = 'Autori';
+    protected static ?string $pluralModelLabel = 'Autori libri';
+
+    protected static ?string $navigationLabel = 'Autori libri';
 
     public static function getNavigationGroup(): string
     {

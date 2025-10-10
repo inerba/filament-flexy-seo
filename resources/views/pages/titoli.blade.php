@@ -34,6 +34,10 @@
                 'has-dropcap' => data_get($page, 'extras.content_settings.dropcap', false),
             ]) />
         </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">
+            <livewire:book-list lazy />
+        </div>
     </div>
 </x-layouts.main>
 

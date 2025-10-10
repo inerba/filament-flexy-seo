@@ -25,7 +25,7 @@ class AuthorResource extends Resource
 
     protected static ?string $modelLabel = 'Autore';
 
-    protected static ?string $pluralModelLabel = 'Autori';
+    protected static ?string $pluralModelLabel = 'Autori articoli';
 
     protected static ?int $navigationSort = 4;
 
@@ -40,7 +40,7 @@ class AuthorResource extends Resource
 
         // i super admin vedono sempre la tabella degli autori
         if ($user->isAdmin()) {
-            return 'Autori';
+            return 'Autori articoli';
         }
 
         if ($user->author()->first() === null) {
