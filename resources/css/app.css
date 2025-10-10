@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
@@ -17,7 +18,7 @@
     --font-sans: 'Cabin', sans-serif;
     --font-serif: 'PT Serif', serif;
     --font-body: 'PT Serif', serif;
-    --font-logo: 'Courier New', monospace;
+    --font-logo: 'Courier Prime', monospace;
 
     --color-primary-50: #fef5ee;
     --color-primary-100: #fce9d8;
@@ -59,6 +60,20 @@
 
 @import './utility/dropcap.css';
 
+@layer utilities {
+    .rotate-center {
+        animation: rotate-center 2s ease-in-out infinite reverse;
+    }
+    @keyframes rotate-center {
+        0% {
+            transform: rotate(0);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
 body {
     @apply font-body;
 }
@@ -73,15 +88,15 @@ h6 {
 }
 
 .text-logo {
-    @apply font-logo text-primary-500 font-bold tracking-wider;
+    @apply font-logo font-bold tracking-wider text-primary-500;
 }
 
 /* Menu principale */
 .main-menu a {
-    @apply font-display relative text-base font-medium uppercase;
+    @apply relative font-display text-base font-medium uppercase;
 
     &::after {
-        @apply bg-primary-500 absolute bottom-0 left-0 w-0 transition-all duration-500 ease-in-out content-[''];
+        @apply absolute bottom-0 left-0 w-0 bg-primary-500 transition-all duration-500 ease-in-out content-[''];
     }
 
     &.active,
@@ -125,4 +140,25 @@ h6 {
 /* Margine verticale predefinito */
 .vertical-margin {
     @apply my-6 md:my-12;
+}
+
+/* Stili per il contenuto dello slide */
+.slide-prose {
+    h2,
+    h3,
+    p {
+        @apply drop-shadow-lg;
+    }
+
+    h2 {
+        @apply mb-1.5 font-display! text-3xl font-bold md:mb-4 md:text-5xl;
+    }
+
+    h3 {
+        @apply mb-1 font-display! text-xl font-semibold md:mb-2 md:text-2xl;
+    }
+}
+
+.divide {
+    @apply container mx-auto my-6 border-t-8 border-dotted border-gray-100 md:my-12;
 }

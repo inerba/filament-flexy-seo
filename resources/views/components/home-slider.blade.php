@@ -1,8 +1,5 @@
 @props(['slides', 'title' => 'Cluster-A', 'aspect_class' => 'aspect-square md:aspect-16/9'])
-@php
-    $image_desktop = $slides[0]['image_desktop'] ?? null;
-    $image_mobile = $slides[0]['image_mobile'] ?? null;
-@endphp
+
 <section x-data="{
     init() {
         new Splide(this.$el, {
@@ -22,7 +19,12 @@
         <ul class="splide__list">
 
             @foreach ($slides as $slide)
-                <li class="splide__slide {{ $aspect_class }} flex flex-col items-center justify-center overflow-hidden">
+                @php
+                    $image_desktop = $slide['image_desktop'] ?? null;
+                    $image_mobile = $slide['image_mobile'] ?? null;
+                @endphp
+                <li
+                    class="splide__slide {{ $aspect_class }} flex flex-col items-center justify-center overflow-hidden relative">
                     @if (optional($slide['url']))
                         <a href="{{ $slide['url'] }}">
                     @endif
@@ -30,6 +32,17 @@
                         <source media="(min-width: 768px)" srcset="/storage/{{ $image_desktop }}">
                         <img loading="lazy" class="w-full" src="/storage/{{ $image_mobile }}" alt="{{ $title }}">
                     </picture>
+
+                    @if ($slide['title'])
+                        <div @class([
+                            'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 h-full w-full flex items-end',
+                            'md:py-24 md:px-4 md:items-start',
+                        ])
+                            style="color: {{ $slide['text_color'] ?? '#fff' }}; background-color: color-mix(in oklab, {{ $slide['background_color'] ?? '#000' }} {{ $slide['opacity'] ?? 30 }}%, transparent);">
+                            <div class="slide-prose max-w-7xl mx-auto w-full">{!! $slide['title'] ?? '' !!}</div>
+                        </div>
+                    @endif
+
                     @if (optional($slide['url']))
                         </a>
                     @endif

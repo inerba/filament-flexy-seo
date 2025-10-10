@@ -22,6 +22,7 @@ return [
     // Blog settings
     'articles_blog_settings' => [
         'articles_per_page' => 6,
+        'uncategorized_category_slug' => 'senza-categoria',
     ],
 
     'media' => [

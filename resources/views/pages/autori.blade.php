@@ -4,19 +4,13 @@
 
 @php
     $image = $page->getFirstMedia('featured_images');
-    $show_image = data_get($page, 'extras.show_featured_image', false);
 @endphp
 
 <x-layouts.main>
     <div class="post-content" data-aos="fade-up">
         <!-- ======= Single Post Content ======= -->
         <div class="prose max-w-none lg:prose-xl">
-            <div @class([
-                'mx-auto max-w-5xl text-balance text-center',
-                'py-24' => $image && $show_image,
-                'pt-24 pb-12' => !($image && $show_image),
-            ])>
-                {{-- Titolo --}}
+            <div class="mx-auto pt-24 max-w-5xl text-balance text-center">
                 @if (data_get($page, 'extras.content_settings.show_created_at', false))
                     <div class="text-muted text-sm mb-2 capitalize">
                         <span>{{ Carbon::parse($page->updated_at)->translatedFormat('D, d M Y') }}</span>
@@ -24,19 +18,21 @@
                 @endif
                 <h1 class="mb-5 text-center leading-normal">{{ $page->title }}</h1>
             </div>
-            @if ($image && $show_image)
+            @if ($image && data_get($page, 'extras.show_featured_image', false))
                 <x-cms.featured-image-cover :image_url="$image->getUrl()" :alt="$page->title . ' cover'" />
             @endif
 
             <x-rich-content :model="$page" @class([
-                'prose lg:prose-xl prose-p:mx-auto prose-p:max-w-5xl max-w-none px-4',
+                'prose lg:prose-xl prose-p:mx-auto prose-p:max-w-5xl max-w-none px-4 vertical-margin',
                 'prose-headings:max-w-5xl prose-headings:mx-auto',
                 'has-dropcap' => data_get($page, 'extras.content_settings.dropcap', false),
             ]) />
         </div>
         <!-- End Single Post Content -->
 
-        <hr />
+        <div class="max-w-5xl mx-auto py-12">
+            <livewire:book-authors lazy />
+        </div>
+
     </div>
 </x-layouts.main>
-

@@ -5,7 +5,7 @@
 
 @php
     $locale = app()->getLocale();
-    $itemClasses = 'text-xl w-full px-4 py-2 text-sm text-gray-700 hover:text-black focus:text-black';
+    $itemClasses = 'text-xl w-full px-4 py-2 text-sm text-gray-600 hover:text-black focus:text-black';
     $title = $item['title'][$locale] ?? $item['title'];
     $rel = $item['extras']['rel'][0] ?? null;
     $localizedUrl = localize_url($item['url']);
@@ -31,7 +31,7 @@
     @else
         <a href="{{ $localizedUrl }}" @if ($item['target']) target="{{ $item['target'] }}" @endif
             @if ($rel) rel="{{ $rel }}" @endif
-            {{ $attributes->class([$itemClasses, '' => active_route($localizedUrl)]) }}>
+            {{ $attributes->class([$itemClasses, 'font-semibold text-black' => active_route($localizedUrl)]) }}>
             {{ $title }}
         </a>
     @endif

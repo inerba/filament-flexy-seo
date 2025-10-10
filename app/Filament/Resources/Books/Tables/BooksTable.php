@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Books\Tables;
 
+use App\Filament\Resources\BookAuthors\BookAuthorResource;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -30,30 +31,32 @@ class BooksTable
                     ->searchable(),
                 Tables\Columns\TextColumn::make('genres.name')
                     ->label('Generi')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->wrap()
                     ->badge()
                     ->searchable(),
                 // Stack::make([
-                Tables\Columns\TextColumn::make('author.name')
-                    // ->description(function ($record) {
-                    //     $avatar = $record->author->getFirstMediaUrl('avatars', 'icon');
-                    //     return new HtmlString("<img src='{$avatar}' alt='{$record->author->name}' class='mx-auto rounded-full size-12'>");
-                    // }, 'above')
-                    ->searchable()
-                    ->sortable(),
-                //     SpatieMediaLibraryImageColumn::make('author.avatar')
-                //         ->label('Avatar')
-                //         ->collection('avatars')
-                //         ->height(90)
-                //         ->width('auto')
-                //         ->circular()
-                //         ->conversion('icon'),
-                // ]),
+                Tables\Columns\TextColumn::make('authors.name')
+                    ->label('Autori')
+                    ->toggleable(isToggledHiddenByDefault: false)
+                    ->getStateUsing(function ($record) {
+                        return $record->authors->map(function ($author) {
+                            $link = BookAuthorResource::getUrl('edit', ['record' => $author->slug]);
+
+                            return "<a href='".$link."'>".$author->name.'</a>';
+                        })->implode(', ');
+                    })
+                    ->html()
+                    ->wrap(),
+
                 Tables\Columns\TextColumn::make('year')
                     ->label('Anno')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('pages')
                     ->label('Pagine')
                     ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('isbn')
                     ->label('ISBN')

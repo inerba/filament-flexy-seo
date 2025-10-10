@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Image\Enums\Fit;
@@ -22,7 +23,22 @@ class BookAuthor extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $fillable = ['name', 'bio'];
+    protected $fillable = ['name', 'slug', 'bio'];
+
+    /**
+     * Get the route key name for the model.
+     *
+     * This method overrides the default route key name used by Laravel
+     * for model binding. By default, Laravel uses the primary key (usually 'id')
+     * for route model binding. This method changes it to use the 'slug' attribute
+     * instead.
+     *
+     * @return string The attribute name to be used for route model binding.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function books(): BelongsToMany
     {
@@ -47,5 +63,19 @@ class BookAuthor extends Model implements HasMedia
         $this->addMediaConversion('icon')
             ->fit(Fit::Contain, 90, 90);
         // ->format('jpg');
+    }
+
+    /**
+     * Get the permalink for the bookAuthor.
+     *
+     * @return Attribute<string, never>
+     */
+    protected function permalink(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => route('book-authors.show', [
+                'bookAuthor' => $this->slug,
+            ]),
+        );
     }
 }

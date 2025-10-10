@@ -20,6 +20,11 @@ Route::group([
         Route::get('/{book:slug}', [Controllers\BookController::class, 'show'])->name('books.show');
     });
 
+    // Rotte degli autori
+    Route::prefix('autore')->group(function () {
+        Route::get('/{bookAuthor:slug}', [Controllers\BookAuthorController::class, 'show'])->name('book-authors.show');
+    });
+
     // Rotte del Cms
     Route::group([
         'middleware' => ['web'],

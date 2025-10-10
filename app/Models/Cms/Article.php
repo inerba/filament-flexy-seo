@@ -163,7 +163,7 @@ class Article extends Model implements HasMedia
     {
         return Attribute::make(
             get: fn () => route('cms.articles.page', [
-                'category' => $this->category?->slug,
+                'category' => $this->category?->slug ?? config('cms.articles_blog_settings.uncategorized_category_slug', 'uncategorized'),
                 'article' => $this->slug,
             ]),
         );
