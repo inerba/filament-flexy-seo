@@ -1,4 +1,8 @@
 @props(['slides', 'title' => 'Cluster-A', 'aspect_class' => 'aspect-square md:aspect-16/9'])
+@php
+    $image_desktop = $slides[0]['image_desktop'] ?? null;
+    $image_mobile = $slides[0]['image_mobile'] ?? null;
+@endphp
 <section x-data="{
     init() {
         new Splide(this.$el, {
@@ -23,9 +27,8 @@
                         <a href="{{ $slide['url'] }}">
                     @endif
                     <picture>
-                        <source media="(min-width: 768px)" srcset="/storage/{{ $slide['image_desktop'] }}">
-                        <img loading="lazy" class="w-full" src="/storage/{{ $slide['image_mobile'] }}"
-                            alt="{{ $title }}">
+                        <source media="(min-width: 768px)" srcset="/storage/{{ $image_desktop }}">
+                        <img loading="lazy" class="w-full" src="/storage/{{ $image_mobile }}" alt="{{ $title }}">
                     </picture>
                     @if (optional($slide['url']))
                         </a>
