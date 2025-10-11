@@ -10,7 +10,7 @@
     <div class="post-content" data-aos="fade-up">
         <!-- ======= Single Post Content ======= -->
         <div class="prose max-w-none lg:prose-xl">
-            <div class="mx-auto pt-24 max-w-5xl text-balance text-center">
+            <div class="mx-auto pt-6 lg:pt-24 max-w-5xl text-balance text-center">
                 @if (data_get($page, 'extras.content_settings.show_created_at', false))
                     <div class="text-muted text-sm mb-2 capitalize">
                         <span>{{ Carbon::parse($page->updated_at)->translatedFormat('D, d M Y') }}</span>
@@ -30,7 +30,7 @@
         </div>
         <!-- End Single Post Content -->
 
-        <div class="max-w-5xl mx-auto py-12">
+        <div class="max-w-5xl mx-auto py-6 lg:py-12">
             <livewire:book-authors lazy />
         </div>
 

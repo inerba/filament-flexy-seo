@@ -1,0 +1,6 @@
+#side-menu {
+    @apply flex flex-col space-y-2;
+    .menuitem {
+        @apply block rounded border border-dotted border-gray-400 p-2 text-xl;
+    }
+}

@@ -6,10 +6,10 @@
 @endphp
 
 <x-layouts.main>
-    <div class="post-content mb-24" data-aos="fade-up">
+    <div class="post-content md:mb-24 border-b-2 border-gray-200 md:border-none" data-aos="fade-up">
         <!-- ======= Single Post Content ======= -->
         <div class="prose max-w-none lg:prose-xl">
-            <div class="mx-auto py-24 max-w-5xl text-balance text-center">
+            <div class="mx-auto pt-12 md:py-24 max-w-5xl text-balance text-center">
                 @if (data_get($page, 'extras.content_settings.show_created_at', false))
                     <div class="text-muted text-sm mb-2 capitalize">
                         <span>{{ Carbon::parse($page->updated_at)->translatedFormat('D, d M Y') }}</span>
@@ -21,16 +21,17 @@
                 <x-cms.featured-image-cover :image_url="$image->getUrl()" :alt="$page->title . ' cover'" />
             @endif
 
-            <div class="flex max-w-7xl mx-auto">
-
-                <div id="map" class="aspect-video max-h-[600px] w-2/3 md:order-last"></div>
+            <div class="flex flex-col md:flex-row max-w-7xl mx-auto">
 
                 <x-rich-content :model="$page" @class([
-                    'w-1/3',
+                    'md:w-1/3',
                     'prose lg:prose-xl prose-p:mx-auto prose-p:max-w-5xl max-w-none px-4 vertical-margin',
                     'prose-headings:max-w-5xl prose-headings:mx-auto',
                     'has-dropcap' => data_get($page, 'extras.content_settings.dropcap', false),
                 ]) />
+
+                <div id="map" class="aspect-video max-h-[600px] md:w-2/3"></div>
+
             </div>
         </div>
     </div>
@@ -53,7 +54,7 @@
             //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             // }).addTo(map);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
                 subdomains: 'abcd',
                 maxZoom: 20
             }).addTo(map);

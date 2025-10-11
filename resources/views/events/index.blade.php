@@ -2,7 +2,7 @@
     <article class="px-4">
 
         {{-- Header --}}
-        <x-typo.page-title class="mt-24 mb-24">
+        <x-typo.page-title class="m-12 md:m-24">
             <h1 class="mb-4">Prossimi Eventi</h1>
             <div class="max-w-5xl mx-auto text-lg">
                 Accanto all’attività editoriale, Cluster-A dà vita a eventi, mostre e incontri che ampliano il suo
@@ -17,8 +17,8 @@
             <div class="flex flex-col gap-12">
                 @foreach ($events as $event)
                     <a href="{{ $event->permalink }}"
-                        class="hover:shadow-black/30 hover:shadow-2xl transition-all lg:hover:scale-105 flex w-full rounded-2xl overflow-hidden shadow-xl">
-                        <div class="w-64 flex-shrink-0 bg-primary-400 p-6 text-white">
+                        class="hover:shadow-black/30 hover:shadow-2xl transition-all lg:hover:scale-105 flex flex-col md:flex-row w-full rounded-2xl overflow-hidden shadow-xl">
+                        <div class="lg:w-64 flex-shrink-0 bg-primary-400 p-6 text-white">
                             <div class="text-xl font-bold font-display! text-balance">
                                 {{ $event->date }}
                             </div>
@@ -27,8 +27,8 @@
                             </div>
                         </div>
                         <div class="bg-gray-50 p-6 flex-1">
-                            <h2 class="text-3xl font-semibold font-display! mb-4">{{ $event->title }}</h2>
-                            <p class="text-gray-600">{{ $event->content }}</p>
+                            <h2 class="text-xl md:text-3xl font-semibold font-display! mb-4">{{ $event->title }}</h2>
+                            <p class="text-gray-600 text-sm md:text-base">{{ $event->content }}</p>
                         </div>
                     </a>
                 @endforeach

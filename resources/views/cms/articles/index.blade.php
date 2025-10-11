@@ -3,7 +3,7 @@
 
         {{-- Header --}}
         <x-typo.page-title class="mt-24 mb-24">
-            <h1 class="mb-4">Lorem, ipsum dolor.</h1>
+            <h1 class="mb-4">News</h1>
             <div>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, ipsa!
             </div>

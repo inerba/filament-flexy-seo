@@ -59,6 +59,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @import './utility/dropcap.css';
+@import './utility/menu.css';
 
 @layer utilities {
     .rotate-center {
@@ -160,5 +161,5 @@ h6 {
 }
 
 .divide {
-    @apply container mx-auto my-6 border-t-8 border-dotted border-gray-100 md:my-12;
+    @apply mx-auto my-4 w-[80%] border-t-8 border-dotted border-gray-100 md:my-12 lg:container;
 }

@@ -8,13 +8,13 @@
 @endphp
 
 <x-layouts.main>
-    <div class="post-content mb-24" data-aos="fade-up">
+    <div class="post-content mb-12 lg:mb-24" data-aos="fade-up">
         <!-- ======= Single Post Content ======= -->
         <div class="prose max-w-none lg:prose-xl">
             <div @class([
                 'mx-auto max-w-5xl text-balance text-center',
-                'py-24' => $image && $show_image,
-                'pt-24 pb-12' => !($image && $show_image),
+                'pt-6 lg:pt-24' => $image && $show_image,
+                'pt-6 lg:pt-24 lg:pb-12' => !($image && $show_image),
             ])>
                 {{-- Titolo --}}
                 @if (data_get($page, 'extras.content_settings.show_created_at', false))

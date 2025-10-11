@@ -5,7 +5,7 @@
 @endphp
 <x-layouts.base>
 
-    <div class="mx-auto my-16 flex flex-col md:flex-row max-w-7xl gap-6 lg:gap-12">
+    <div class="mx-auto lg:my-12 flex flex-col md:flex-row max-w-7xl gap-6 lg:gap-12">
 
         @if ($cover)
             <div class="shrink-0 max-w-96 md:max-w-48 lg:max-w-80 xl:max-w-96 flex flex-col items-center mx-auto">
@@ -16,29 +16,24 @@
             </div>
         @endif
 
-        <div @class(['mx-auto' => !$cover, 'flex flex-col gap-12'])>
+        <div @class(['mx-auto' => !$cover, 'flex flex-col gap-6 lg:gap-12'])>
 
             <div>
-                <div class="font-display mb-1 text-xl text-stone-500">
-                    @foreach ($book->authors as $author)
-                        @if (!$loop->first)
-                            ,
-                        @endif
-                        {{ $author->name }}
-                    @endforeach
+                <div class="font-display mb-1 lg:text-xl text-stone-500">
+                    {{ $book->authors->pluck('name')->implode(', ') }}
                 </div>
-                <div class="font-display text-5xl font-bold">
+                <div class="font-display text-3xl lg:text-5xl font-bold">
                     {{ $book->title }}
                 </div>
                 @if ($book->meta['subtitle'])
-                    <div class="font-display text-3xl mt-2">
+                    <div class="font-display text-xl lg:text-3xl lg:mt-2">
                         {{ localized($book->meta['subtitle']) }}
                     </div>
                 @endif
             </div>
 
             <div
-                class="font-display flex flex-col gap-2 border-l-2 bg-gradient-to-r from-stone-50 to-transparent py-4 pl-8 text-sm uppercase text-stone-700">
+                class="font-display flex flex-col gap-1 lg:gap-2 border-l-2 bg-gradient-to-r from-stone-50 to-transparent py-4 pl-4 lg:pl-8 text-xs lg:text-sm uppercase text-stone-700">
                 <div><strong>{{ __('Genres') }}</strong>: {{ $book->genres->pluck('name')->implode(', ') }}</div>
                 @if ($book->year)
                     <div><strong>{{ __('Year') }}</strong>: {{ $book->year }}</div>
