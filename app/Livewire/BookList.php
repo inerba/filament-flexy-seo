@@ -22,6 +22,11 @@ class BookList extends Component
         $this->books = $query->get();
     }
 
+    public function placeholder(array $params = [])
+    {
+        return view('livewire.placeholders.book-list', $params);
+    }
+
     public function render()
     {
         return view('livewire.book-list');

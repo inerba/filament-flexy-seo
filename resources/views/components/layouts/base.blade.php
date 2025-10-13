@@ -37,7 +37,7 @@
 
 </head>
 
-<body class="overflow-x-hidden dark:bg-slate-900">
+<body class="overflow-x-hidden dark:bg-slate-900 flex flex-col min-h-screen" x-data x-cloak>
 
     <x-partials.header />
 
@@ -45,7 +45,7 @@
 
     @stack('mainTop')
 
-    <main class="container mx-auto p-6">
+    <main class="container mx-auto flex-1 p-6">
         {{ $slot }}
     </main>
 
