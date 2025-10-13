@@ -97,4 +97,10 @@ class User extends Authenticatable implements FilamentUser
     {
         return true;
     }
+
+    // Add relationship to Cart
+    public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

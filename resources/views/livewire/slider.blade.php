@@ -173,7 +173,9 @@
                 @foreach ($slides as $slide)
                     <li class="splide__slide relative" data-index="{{ $loop->index }}">
                         @if ($slide['is_video'])
-                            <video @if ($loop->first) autoplay @endif preload="metadata" muted loop playsinline loading="lazy" class="{{ $sliderHeight }} w-full object-cover object-center" aria-label="Video {{ $loop->index + 1 }}">
+                            <video @if ($loop->first) autoplay @endif preload="metadata" muted loop
+                                playsinline loading="lazy" class="{{ $sliderHeight }} w-full object-cover object-center"
+                                aria-label="Video {{ $loop->index + 1 }}">
                                 <source src="/storage/{{ $slide['video_mp4'] }}" type="video/mp4" />
                                 @if ($slide['video_webm'])
                                     <source src="/storage/{{ $slide['video_webm'] }}" type="video/webm" />
@@ -181,12 +183,15 @@
                                 Il tuo browser non supporta il tag video.
                             </video>
                         @else
-                            <img src="/storage/{{ $slide['image'] }}" alt="{{ $slide['alt'] ?? 'Immagine slide ' . ($loop->index + 1) }}" loading="lazy" class="{{ $sliderHeight }} w-full object-cover" />
+                            <img src="/storage/{{ $slide['image'] }}"
+                                alt="{{ $slide['alt'] ?? 'Immagine slide ' . ($loop->index + 1) }}" loading="lazy"
+                                class="{{ $sliderHeight }} w-full object-cover" />
                         @endif
 
                         @if ($slide['title'] || $slide['content'])
                             <div x-data="{ show: true }">
-                                <div x-show="show" x-transition.opacity.duration.500ms class="bg-logo1/35 absolute inset-0"></div>
+                                <div x-show="show" x-transition.opacity.duration.500ms
+                                    class="bg-logo1/35 absolute inset-0"></div>
                                 <div x-show="show" x-transition:enter.delay.500ms @class([
                                     'absolute inset-0 mx-auto flex items-center justify-center p-6 text-white',
                                     match ($slide['width'] ?? null) {
@@ -196,7 +201,8 @@
                                         default => 'max-w-3xl',
                                     },
                                 ])>
-                                    <div class="hover:bg-logo1/30 bg-logo1/10 relative flex flex-1 flex-col items-start gap-2 rounded-3xl p-8 shadow-2xl backdrop-blur-md transition-all duration-700 hover:backdrop-blur-2xl">
+                                    <div
+                                        class="hover:bg-logo1/30 bg-logo1/10 relative flex flex-1 flex-col items-start gap-2 rounded-3xl p-8 shadow-2xl backdrop-blur-md transition-all duration-700 hover:backdrop-blur-2xl">
                                         @if ($slide['title'])
                                             <h2 class="text-xl font-bold lg:text-3xl">{{ $slide['title'] }}</h2>
                                         @endif
@@ -210,20 +216,25 @@
                                         @endif
 
                                         @if ($slide['button_text'] && $slide['button_link'])
-                                            <a href="{{ $slide['button_link'] }}" class="bg-accent hover:bg-accent-600 animate-bounce-loop mt-4 flex w-auto items-center rounded px-4 py-2 text-lg font-bold text-white transition-all">
+                                            <a href="{{ $slide['button_link'] }}"
+                                                class="bg-accent hover:bg-accent-600 animate-bounce-loop mt-4 flex w-auto items-center rounded px-4 py-2 text-lg font-bold text-white transition-all">
                                                 {{ $slide['button_text'] }}
 
                                                 @svg('heroicon-o-arrow-right', 'ml-4 h-5 w-5')
                                             </a>
                                         @endif
 
-                                        <button type="button" class="absolute right-3 top-3 text-white/30 hover:text-white" @click="show=!show">
+                                        <button type="button"
+                                            class="absolute right-3 top-3 text-white/30 hover:text-white"
+                                            @click="show=!show">
                                             @svg('heroicon-o-x-mark', 'size-5')
                                         </button>
                                     </div>
 
                                     <template x-teleport="#commands">
-                                        <button x-show="! show && currentSlide === {{ $loop->index }}" @click="show=true" type="button" class="rounded bg-gray-800/50 p-2 text-xs text-white/70 transition-all hover:bg-gray-800"
+                                        <button x-show="! show && currentSlide === {{ $loop->index }}"
+                                            @click="show=true" type="button"
+                                            class="rounded bg-gray-800/50 p-2 text-xs text-white/70 transition-all hover:bg-gray-800"
                                             aria-label="Mostra informazioni slide {{ $loop->index + 1 }}">
                                             <span class="flex items-center gap-2">
                                                 @svg('heroicon-o-information-circle', ' size-5')
@@ -249,7 +260,9 @@
                     x-text="`${progress}%`"
                     ></div>
                 --}}
-                <button @click="togglePlayPause()" class="z-10 cursor-pointer rounded bg-gray-800/50 px-2 py-2 text-xs text-white/70 transition-all hover:bg-gray-800" type="button" aria-label="Pausa/Riprendi presentazione">
+                <button @click="togglePlayPause()"
+                    class="z-10 cursor-pointer rounded bg-gray-800/50 px-2 py-2 text-xs text-white/70 transition-all hover:bg-gray-800"
+                    type="button" aria-label="Pausa/Riprendi presentazione">
                     <template x-if="!isPaused">
                         <span class="flex items-center gap-2">
                             @svg('heroicon-o-pause', ' size-5')
@@ -277,3 +290,4 @@
 @pushOnce('scripts', 'splide-script')
     @vite(['resources/js/splide.js'])
 @endpushOnce
+
