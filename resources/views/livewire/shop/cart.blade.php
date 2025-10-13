@@ -79,7 +79,7 @@
     @guest
         ti devi registrare o loggare per procedere con l'ordine
     @endguest
-    @auth
+    @auth('customer')
         <button wire:click="checkout" class="btn btn-primary">Checkout</button>
     @endauth
 </div>
