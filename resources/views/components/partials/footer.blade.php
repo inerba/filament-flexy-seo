@@ -16,7 +16,7 @@
                 Cap. Soc. € 46.000,00
             </p>
             <p class="mt-3">
-                info@cluster-a.it
+                info@cluster-a.com
             </p>
         </div>
         <div class="hidden md:block">
