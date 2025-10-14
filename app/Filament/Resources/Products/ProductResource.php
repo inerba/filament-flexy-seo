@@ -30,7 +30,7 @@ class ProductResource extends Resource
 
     public static function getNavigationGroup(): string
     {
-        return 'Prodotti';
+        return 'Shop';
     }
 
     public static function form(Schema $schema): Schema

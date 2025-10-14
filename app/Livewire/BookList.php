@@ -4,31 +4,31 @@ namespace App\Livewire;
 
 use App\Models\Book;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class BookList extends Component
 {
-    public $books;
+    use WithPagination;
+
+    public int $perPage = 6;
 
     public ?int $exclude = null;
 
-    public function mount()
-    {
-        $query = Book::with(['authors', 'genres', 'media']);
-
-        if (! is_null($this->exclude)) {
-            $query->where('id', '!=', $this->exclude);
-        }
-
-        $this->books = $query->get();
-    }
-
     public function placeholder(array $params = [])
     {
+        $params['num'] = $this->perPage;
+
         return view('livewire.placeholders.book-list', $params);
     }
 
     public function render()
     {
-        return view('livewire.book-list');
+        $books = Book::with(['authors', 'genres', 'media'])
+            ->when($this->exclude !== null, fn ($q) => $q->where('id', '!=', $this->exclude))
+            ->simplePaginate($this->perPage);
+
+        return view('livewire.book-list', [
+            'books' => $books,
+        ]);
     }
 }
