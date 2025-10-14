@@ -26,7 +26,7 @@ class CartItem extends Model
     {
         return \Illuminate\Database\Eloquent\Casts\Attribute::make(
             get: function () {
-                return $this->quantity * $this->product->price;
+                return $this->quantity * $this->product?->price;
             }
         );
     }

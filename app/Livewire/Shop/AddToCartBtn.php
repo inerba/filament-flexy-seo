@@ -11,7 +11,7 @@ class AddToCartBtn extends Component
 
     public function addToCart(AddProductToCart $cart)
     {
-        $cart->add($this->product);
+        $cart->add($this->product->id);
 
         $this->dispatch('cartUpdated');
     }

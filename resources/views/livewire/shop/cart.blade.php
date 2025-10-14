@@ -24,22 +24,22 @@
                 @foreach ($this->items as $item)
                     <tr class="">
                         <td>
-                            <a href="{{ $item->product->book->permalink }}"
+                            <a href="{{ $item->product?->book->permalink }}"
                                 class="hover:underline flex items-center gap-4 ">
                                 <div class="h-16 flex-shrink-0 hidden md:block">
-                                    <img src="{{ $item->product->book->getFirstMedia('covers')->getUrl('icon') }}"
-                                        alt="{{ $item->product->name }}" class="h-16 object-cover rounded">
+                                    <img src="{{ $item->product?->book->getFirstMedia('covers')->getUrl('icon') }}"
+                                        alt="{{ $item->product?->name }}" class="h-16 object-cover rounded">
                                 </div>
                                 <div>
-                                    {{ $item->product->name }}
+                                    {{ $item->product?->name }}
                                     <span class="lg:hidden">
-                                        - {{ number_format($item->product->price, 2, ',', '.') }} €
+                                        - {{ number_format($item->product?->price, 2, ',', '.') }} €
                                     </span>
                                 </div>
                             </a>
                         </td>
                         <td class="hidden lg:table-cell">
-                            {{ number_format($item->product->price, 2, ',', '.') }} €
+                            {{ number_format($item->product?->price, 2, ',', '.') }} €
                         </td>
                         <td class="">
                             <div class="flex items-center justify-end md:justify-start gap-2">

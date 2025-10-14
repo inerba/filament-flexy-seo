@@ -17,20 +17,13 @@ class AddProductToCart
      * @param  Product  $product  Il prodotto da aggiungere al carrello.
      * @return void
      */
-    public function add(Product $product)
+    public function add($productId, $quantity = 1, $cart = null)
     {
-        $cart = CartFactory::make();
-
-        $item = $cart->items()->firstOrCreate([
-            'product_id' => $product->id,
+        ($cart ?: CartFactory::make())->items()->firstOrCreate([
+            'product_id' => $productId,
         ], [
-            'quantity' => 1,
-        ]);
-
-        // If the item already existed, aumentiamo la quantità
-        if (! $item->wasRecentlyCreated) {
-            $item->increment('quantity');
-        }
+            'quantity' => 0,
+        ])->increment('quantity', $quantity);
 
     }
 }
