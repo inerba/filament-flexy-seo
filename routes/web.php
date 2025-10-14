@@ -14,6 +14,18 @@ Route::group([
     'middleware' => $middleware,
 ], function () {
 
+    // Rotte dello shop
+    Route::prefix('dashboard')
+        ->middleware(['auth:customer', 'verified'])
+        ->group(function () {
+            Route::get('/', [Controllers\CustomerController::class, 'index'])->name('customer.dashboard');
+        });
+
+    // Rotte dello shop
+    Route::prefix('carrello')->group(function () {
+        Route::get('/', \App\Livewire\Shop\Cart::class)->name('shop.cart');
+    });
+
     // Rotte dei libri
     Route::prefix('titolo')->group(function () {
         // Route::get('/', Controllers\BookController::class)->name('books.index');

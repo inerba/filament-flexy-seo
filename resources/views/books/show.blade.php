@@ -13,6 +13,12 @@
                     <img class="mx-auto bg-red-100 shadow-2xl" src="{{ $cover->getUrl('medium') }}"
                         alt="Copertina del libro: {{ $book->title }}">
                 </a>
+
+                @if ($book->product)
+                    <div class="mt-12">
+                        @livewire('shop.add-to-cart-btn', ['product' => $book->product])
+                    </div>
+                @endif
             </div>
         @endif
 

@@ -41,4 +41,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductVariant::class);
     }
+
+    public function book(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Book::class);
+    }
 }

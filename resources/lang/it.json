@@ -6,5 +6,10 @@
     "Pages": "Pagine",
     "Cover Price": "Prezzo di copertina",
     "ISBN": "ISBN",
-    "Publisher": "Editore"
+    "Publisher": "Editore",
+    "Author": "Autore",
+    "Title": "Titolo",
+    "Description": "Descrizione",
+    "Password": "Password",
+    "Password Confirmation": "Conferma Password"
 }
