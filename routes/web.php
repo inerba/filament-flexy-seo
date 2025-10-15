@@ -1,6 +1,8 @@
 <?php
 
+use App\Actions\Shop\CreateStripeCheckoutSession;
 use App\Http\Controllers;
+use Database\Factories\CartFactory;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -20,6 +22,13 @@ Route::group([
         ->group(function () {
             Route::get('/', [Controllers\CustomerController::class, 'index'])->name('customer.dashboard');
         });
+
+    // // Rotte dello shop
+    // Route::get('/stripe-checkout', function (CreateStripeCheckoutSession $checkoutSession) {
+    //     $cart = CartFactory::make()->loadMissing(['items', 'items.product', 'items.product.book', 'items.product.book.media']);
+
+    //     return $checkoutSession->createFromCart($cart);
+    // });
 
     // Rotte dello shop
     Route::prefix('carrello')->group(function () {
@@ -43,15 +52,15 @@ Route::group([
         Route::get('/{event:slug}', [Controllers\EventController::class, 'show'])->name('events.show');
     });
 
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
+
     // Rotte del Cms
     Route::group([
         'middleware' => ['web'],
         'as' => 'cms.',
     ], function () {
-
-        Route::get('/', function () {
-            return view('home');
-        })->name('home');
 
         // Rotte degli articoli e delle categorie
         Route::prefix(config('cms.articles_route_prefix', 'news'))->group(function () {

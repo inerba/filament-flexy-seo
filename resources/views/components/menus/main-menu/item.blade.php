@@ -29,7 +29,8 @@
             </ul>
         </x-dropdown>
     @else
-        <a href="{{ $localizedUrl }}" @if ($item['target']) target="{{ $item['target'] }}" @endif
+        <a wire:navigate href="{{ $localizedUrl }}"
+            @if ($item['target']) target="{{ $item['target'] }}" @endif
             @if ($rel) rel="{{ $rel }}" @endif
             {{ $attributes->class([$itemClasses, 'font-semibold text-black' => active_route($localizedUrl)]) }}>
             {{ $title }}

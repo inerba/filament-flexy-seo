@@ -19,6 +19,7 @@
 /storage/*.key
 /storage/pail
 /vendor
+stripe.exe
 Homestead.json
 Homestead.yaml
 Thumbs.db

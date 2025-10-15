@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
+use App\Models\Customer;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\View\PanelsIconAlias;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 use Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
 use ToneGabes\Filament\Icons\Enums\Phosphor;
 
@@ -27,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Imposto il modello Customer per Cashier
+        Cashier::useCustomerModel(Customer::class);
+        // Cashier::calculateTaxes();
 
         $this->configureFilamentFormComponents();
         $this->configureFilamentTableComponents();

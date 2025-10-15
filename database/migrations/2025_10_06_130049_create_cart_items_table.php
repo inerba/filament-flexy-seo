@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('cart_id');
-            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('cart_id')->constrained()->onDelete('cascade'); // quando elimino un carrello, elimino anche gli item associati
+            $table->unsignedInteger('product_id')->constrained()->onDelete('cascade');
             $table->unsignedInteger('quantity')->default(1);
             $table->timestamps();
         });

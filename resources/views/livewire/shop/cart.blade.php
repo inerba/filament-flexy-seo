@@ -57,7 +57,7 @@
                         </td>
                         <td class="text-right hidden md:table-cell">
                             <button wire:click="confirmDelete({{ $item->id }})"
-                                class="btn btn-sm btn-error btn-link">
+                                class="btn btn-sm btn-danger btn-link">
                                 @svg('phosphor-trash-duotone', 'size-5')
                             </button>
                         </td>
@@ -76,12 +76,22 @@
             @endif
         </table>
     </div>
-    @guest
-        ti devi registrare o loggare per procedere con l'ordine
-    @endguest
-    @auth('customer')
-        <button wire:click="checkout" class="btn btn-primary">Checkout</button>
-    @endauth
+    @if ($this->items->count() > 0)
+        <div class="text-center my-12">
+            @guest('customer')
+                <div class="alert alert-info text-xl mb-4 max-w-3xl alert-vertical text-white mx-auto">
+                    Ti devi registrare o accedere per procedere con l'ordine
+                    <div class="mt-4 flex justify-center gap-4">
+                        <a href="{{ route('register') }}" class="btn btn-primary">Registrati</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline">Accedi</a>
+                    </div>
+                </div>
+            @endguest
+            @auth('customer')
+                <button wire:click="checkout" class="btn btn-primary btn-xl">Effettua il checkout</button>
+            @endauth
+        </div>
+    @endif
 </div>
 @script
     <script type="text/javascript">
