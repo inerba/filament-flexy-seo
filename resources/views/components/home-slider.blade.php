@@ -33,7 +33,7 @@
                         <img loading="lazy" class="w-full" src="/storage/{{ $image_mobile }}" alt="{{ $title }}">
                     </picture>
 
-                    @if ($slide['title'])
+                    @if (isset($slide['title']) && mb_strlen(strip_tags($slide['title'])) >= 7)
                         <div @class([
                             'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 h-full w-full flex items-end',
                             'md:py-24 md:px-4 md:items-start',

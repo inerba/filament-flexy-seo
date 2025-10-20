@@ -6,14 +6,16 @@ use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
 use App\Filament\Forms\Components\RichContent;
 use BackedEnum;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 use Inerba\DbConfig\AbstractPageSettings;
 use Inerba\Seo\SeoFields;
 use Inerba\Seo\SocialFields;
@@ -100,100 +102,64 @@ class HomePageSettings extends AbstractPageSettings
                             ]),
                         Tabs\Tab::make('Slider')
                             ->schema([
-                                Select::make('slider_settings.height')
-                                    ->label('Altezza slider')
-                                    ->options([
-                                        'small' => 'Piccolo',
-                                        'medium' => 'Medio',
-                                        'large' => 'Grande',
-                                        'full' => 'Intero schermo',
-                                    ])
-                                    ->default('medium')
-                                    ->required(),
                                 Repeater::make('slides')
+                                    ->schema([
+                                        RichEditor::make('title')
+                                            ->label('Titolo')
+                                            ->columnSpanFull(),
+                                        Grid::make()
+                                            ->schema([
+                                                ColorPicker::make('background_color')
+                                                    ->label('Colore di sfondo'),
+                                                TextInput::make('text_color')
+                                                    ->label('Colore del testo (esadecimale)')
+                                                    ->placeholder('#ffffff')
+                                                    ->default('#ffffff'),
+                                                Select::make('opacity')
+                                                    ->label('Opacità dello sfondo (0-100)')
+                                                    ->options([
+                                                        '0' => '0%',
+                                                        '10' => '10%',
+                                                        '20' => '20%',
+                                                        '30' => '30%',
+                                                        '40' => '40%',
+                                                        '50' => '50%',
+                                                        '60' => '60%',
+                                                        '70' => '70%',
+                                                        '80' => '80%',
+                                                        '90' => '90%',
+                                                        '100' => '100%',
+                                                    ])
+                                                    ->default('30'),
+                                            ])
+                                            ->columns(3)
+                                            ->columnSpanFull(),
+
+                                        FileUpload::make('image_desktop')
+                                            ->imageEditor()
+                                            ->image()
+                                            ->hint('Dimensioni consigliate: 2144x860')
+                                            ->label('Immagine desktop')
+                                            ->visibility('public')
+                                            ->disk('public')
+                                            ->directory('home-slider'),
+                                        FileUpload::make('image_mobile')
+                                            ->imageEditor()
+                                            ->image()
+                                            ->hint('Dimensioni consigliate: 600x600')
+                                            ->label('Immagine mobile')
+                                            ->visibility('public')
+                                            ->disk('public')
+                                            ->directory('home-slider'),
+                                        TextInput::make('url')
+                                            ->helperText('Inserisci l\'indirizzo URL della pagina a cui si deve collegare lo slide, lascia vuoto per non collegare')
+                                            ->label('Indirizzo URL')
+                                            ->columnSpanFull(),
+                                    ])
                                     ->collapsible()
                                     ->collapsed()
-                                    ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
-                                    ->schema([
-                                        Tabs::make('Tabs')
-                                            ->contained(false)
-                                            ->tabs([
-                                                Tabs\Tab::make('Testo')
-                                                    ->columns(2)
-                                                    ->schema([
-                                                        TextInput::make('title')
-                                                            ->label('Titolo'),
-
-                                                        TextInput::make('subtitle')
-                                                            ->label('Sottotitolo'),
-
-                                                        RichEditor::make('content')
-                                                            ->label('Contenuto')
-                                                            ->placeholder('Content')
-                                                            ->columnSpanFull(),
-
-                                                        TextInput::make('button_text')
-                                                            ->label('Testo del bottone'),
-
-                                                        TextInput::make('button_link')
-                                                            ->label('Link'),
-
-                                                        Select::make('width')
-                                                            ->label('Larghezza del testo')
-                                                            ->options([
-                                                                'small' => 'Piccolo',
-                                                                'medium' => 'Medio',
-                                                                'large' => 'Grande',
-                                                            ])
-                                                            ->default('medium')
-                                                            ->required(),
-
-                                                    ]),
-                                                Tabs\Tab::make('Elementi multimediali')
-                                                    ->columns(2)
-                                                    ->schema([
-
-                                                        Toggle::make('is_video')
-                                                            ->live()
-                                                            ->label('Video')
-                                                            ->columnSpanFull()
-                                                            ->default(false),
-
-                                                        TextInput::make('duration')
-                                                            ->label('Durata (in secondi)')
-                                                            ->numeric()
-                                                            ->default(5)
-                                                            ->required()
-                                                            ->columnSpanFull(),
-
-                                                        FileUpload::make('video_mp4')
-                                                            ->hidden(fn (callable $get) => $get('is_video') === false)
-                                                            ->label('Video in formato MP4')
-                                                            ->directory('home-page/slider-videos')
-                                                            ->disk('public')
-                                                            ->visibility('public')
-                                                            ->required()
-                                                            ->acceptedFileTypes(['video/mp4']),
-
-                                                        FileUpload::make('video_webm')
-                                                            ->hidden(fn (callable $get) => $get('is_video') === false)
-                                                            ->label('Video in formato WEBM')
-                                                            ->directory('home-page/slider-videos')
-                                                            ->disk('public')
-                                                            ->visibility('public')
-                                                            ->acceptedFileTypes(['video/webm']),
-
-                                                        FileUpload::make('image')
-                                                            ->label(fn (callable $get) => $get('is_video') === true ? 'Immagine di fallback' : 'Immagine di sfondo')
-                                                            ->directory('home-page/slider-images')
-                                                            ->image()
-                                                            ->imageEditor()
-                                                            ->columnSpanFull(),
-
-                                                    ]),
-                                            ]),
-                                    ])
-                                    ->addActionLabel('Nuova slide'),
+                                    ->itemLabel(fn ($state) => $state['title'] ? Str::of($state['title'])->stripTags()->limit(50) : 'Slide')
+                                    ->columns(2),
                             ]),
                         Tabs\Tab::make('SEO')->schema([
                             TranslatableTabs::make('seo_fields')

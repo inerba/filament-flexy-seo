@@ -51,12 +51,12 @@
             </div>
         </div>
     </div>
-    @pushOnce('styles')
+    @pushOnce('styles', 'leaflet-css')
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
             integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     @endPushOnce
 
-    @pushOnce('scripts')
+    @pushOnce('scripts', 'leaflet-js')
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script>
@@ -64,7 +64,7 @@
                 scrollWheelZoom: false
             }).setView(@json($latlng), @json(data_get($page, 'extras.map_zoom', 13) ?: 13));
             var marker = L.marker(@json($latlng)).addTo(map);
-            marker.bindPopup(@json($popup_content));
+            // marker.bindPopup(@json($popup_content));
             // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             //     maxZoom: 19,
             //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
