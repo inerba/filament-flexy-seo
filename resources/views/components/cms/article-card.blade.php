@@ -25,7 +25,7 @@
             di {{ $article->author->name }}
         </div> --}}
         <div class="text-gray-400 text-sm">
-            {{ $article->published_at->format('d F Y') }}
+            {{ $article->published_at->translatedFormat('d F Y') }}
         </div>
     </div>
 </div>
