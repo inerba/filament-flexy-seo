@@ -21,6 +21,7 @@ echo "🚀 Deploying application ..."
 # php artisan db:seed --class=ShieldSeeder --force
 
 # 4. Ottimizzazioni varie
+/usr/bin/php8.3 artisan cache:clear
 /usr/bin/php8.3 artisan optimize
 # se usi traduzioni delle rotte:
 # /usr/bin/php8.3 artisan route:trans:cache
