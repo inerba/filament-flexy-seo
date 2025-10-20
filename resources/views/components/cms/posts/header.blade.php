@@ -8,6 +8,6 @@
     @endif
     <h1>{{ $title }}</h1>
     {{-- <div class="font-bold uppercase">By {{ $author }}</div> --}}
-    <div class="capitalize">{{ $date }}</div>
+    <div class="">{{ $date }}</div>
 </x-typo.page-title>
 
