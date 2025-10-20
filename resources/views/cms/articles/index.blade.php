@@ -2,11 +2,11 @@
     <article class="px-4">
 
         {{-- Header --}}
-        <x-typo.page-title class="mt-24 mb-24">
+        <x-typo.page-title class="mt-24 mb-24 prose lg:prose-xl">
             <h1 class="mb-4">News</h1>
-            <div>
+            {{-- <div>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, ipsa!
-            </div>
+            </div> --}}
         </x-typo.page-title>
 
         {{-- articles --}}
