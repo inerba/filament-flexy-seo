@@ -3,25 +3,22 @@
     $og_image = $article->getFirstMedia('og_image'); // Immagine per Open Graph
 @endphp
 
-@section('title', $article->meta['tag_title'] ?? $article->title)
-@section('description', $article->meta['meta_description'] ?? null)
-@section('og')
-    <x-og>
+<x-layouts.main>
+    <x-seo>
         <x-slot:title>
-            {{ $article->meta['og']['title'] ?? ($article->meta['tag_title'] ?? $article->title) }}
+            {{ $article->meta['tag_title'] ?? $article->title }}
         </x-slot>
         <x-slot:description>
-            {{ $article->meta['og']['description'] ?? ($article->meta['meta_description'] ?? null) }}
+            {{ $article->meta['meta_description'] ?? null }}
         </x-slot>
         <x-slot:image>
             {{ $og_image ? $og_image->getUrl() : ($image ? $image->getUrl() : null) }}
         </x-slot>
         <x-slot:url>{{ request()->url() }}</x-slot>
         <x-slot:type>article</x-slot>
-    </x-og>
-@endsection
-
-<x-layouts.main>
+        <x-slot:published_time>{{ $article->published_at }}</x-slot>
+        <x-slot:modified_time>{{ $article->updated_at }}</x-slot>
+    </x-seo>
     <article class="mb-16">
         {{-- Header --}}
         <x-cms.posts.header :category="$article->category">

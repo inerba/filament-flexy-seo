@@ -56,6 +56,7 @@ class Page extends Model implements HasMedia
         'lead',
         'content',
         'custom_fields',
+        'meta',
     ];
 
     /**

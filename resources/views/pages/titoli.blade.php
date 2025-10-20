@@ -4,10 +4,26 @@
 
 @php
     $image = $page->getFirstMedia('featured_images');
+    $og_image = $page->getFirstMedia('og_image'); // Immagine per Open Graph
     $show_image = data_get($page, 'extras.show_featured_image', false);
 @endphp
 
 <x-layouts.main>
+    <x-seo>
+        <x-slot:title>
+            {{ $page->meta['tag_title'] ?? $page->title }}
+        </x-slot>
+        <x-slot:description>
+            {{ $page->meta['meta_description'] ?? null }}
+        </x-slot>
+        <x-slot:image>
+            {{ $og_image ? $og_image->getUrl() : ($image ? $image->getUrl() : null) }}
+        </x-slot>
+        <x-slot:url>{{ request()->url() }}</x-slot>
+        <x-slot:type>article</x-slot>
+        <x-slot:published_time>{{ $page->published_at }}</x-slot>
+        <x-slot:modified_time>{{ $page->updated_at }}</x-slot>
+    </x-seo>
     <div class="post-content mb-12 lg:mb-24" data-aos="fade-up">
         <!-- ======= Single Post Content ======= -->
         <div class="prose max-w-none lg:prose-xl">

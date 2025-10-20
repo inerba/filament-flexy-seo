@@ -166,9 +166,9 @@ if (! function_exists('localized')) {
      *
      * @phpstan-ignore return.unusedType
      */
-    function localized(array $key): array|string
+    function localized(array $key): array|string|null
     {
-        return $key[locale()] ?? '';
+        return $key[locale()] ?? null;
     }
 }
 

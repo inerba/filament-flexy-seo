@@ -2,7 +2,7 @@
     <article class="px-4">
 
         {{-- Header --}}
-        <x-typo.page-title class="m-12 md:m-24">
+        <x-typo.page-title class="my-12 md:my-24">
             <h1 class="mb-4">Prossimi Eventi</h1>
             <div class="max-w-5xl mx-auto text-lg">
                 Accanto all’attività editoriale, Cluster-A dà vita a eventi, mostre e incontri che ampliano il suo

@@ -3,9 +3,25 @@
     $image = $page->getFirstMedia('featured_images');
     $latlng = [data_get($page, 'extras.lat', 0) ?: 0, data_get($page, 'extras.lng', 0) ?: 0];
     $popup_content = $page->title;
+    $og_image = $page->getFirstMedia('og_image'); // Immagine per Open Graph
 @endphp
 
 <x-layouts.main>
+    <x-seo>
+        <x-slot:title>
+            {{ $page->meta['tag_title'] ?? $page->title }}
+        </x-slot>
+        <x-slot:description>
+            {{ $page->meta['meta_description'] ?? null }}
+        </x-slot>
+        <x-slot:image>
+            {{ $og_image ? $og_image->getUrl() : ($image ? $image->getUrl() : null) }}
+        </x-slot>
+        <x-slot:url>{{ request()->url() }}</x-slot>
+        <x-slot:type>article</x-slot>
+        <x-slot:published_time>{{ $page->published_at }}</x-slot>
+        <x-slot:modified_time>{{ $page->updated_at }}</x-slot>
+    </x-seo>
     <div class="post-content md:mb-24 border-b-2 border-gray-200 md:border-none" data-aos="fade-up">
         <!-- ======= Single Post Content ======= -->
         <div class="prose max-w-none lg:prose-xl">
