@@ -25,7 +25,7 @@
             <x-slot:title>
                 {{ $article->title }}
             </x-slot>
-            <x-slot:date>{{ $article->created_at->translatedFormat('d M Y') }}</x-slot>
+            <x-slot:date>{{ $article->published_at->translatedFormat('d M Y') }}</x-slot>
             {{-- <x-slot:author>{{ $article->author->name }}</x-slot> --}}
         </x-cms.posts.header>
 
