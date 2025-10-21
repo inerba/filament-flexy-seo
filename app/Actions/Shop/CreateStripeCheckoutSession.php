@@ -14,19 +14,49 @@ class CreateStripeCheckoutSession
             ->allowPromotionCodes()
             ->checkout(
                 $this->formatCartItems($cart->items),
-                array_merge(
-                    $this->buildCheckoutOptions($cart),
-                    [
-                        'metadata' => [
-                            'customer_id' => $cart->customer->id,
-                            'cart_id' => $cart->id,
-                        ],
+                [
+                    'shipping_address_collection' => [
+                        'allowed_countries' => ['IT'],
                     ],
-                )
+                    'shipping_options' => $this->formatShippingOptions($cart),
+                    'success_url' => route('shop.checkout-status').'?session_id={CHECKOUT_SESSION_ID}',
+                    'cancel_url' => route('shop.cart'),
+                    'metadata' => [
+                        'customer_id' => $cart->customer->id,
+                        'cart_id' => $cart->id,
+                    ],
+                ],
             );
     }
 
-    private function buildCheckoutOptions(Cart $cart): array
+    private function formatCartItems(Collection $items): array
+    {
+
+        $cartItems = $items->loadMissing(['product', 'product.book', 'product.book.media'])
+            ->map(function (CartItem $item) {
+                return [
+                    'price_data' => [
+                        'currency' => 'EUR',
+                        'unit_amount' => $item->product->price * 100, // in cents
+                        'product_data' => [
+                            'name' => $item->product->name,
+                            'images' => [
+                                $item->product->book?->media?->first()?->getUrl(),
+                            ],
+                            // 'description' => $item->product->description,
+                            'metadata' => [
+                                'product_id' => $item->product->id,
+                            ],
+                        ],
+                    ],
+                    'quantity' => $item->quantity,
+                ];
+            })->toArray();
+
+        return $cartItems;
+    }
+
+    private function formatShippingOptions(Cart $cart): array
     {
         $shipping_options_config = db_config('shop.shipping_costs', []);
 
@@ -88,42 +118,6 @@ class CreateStripeCheckoutSession
 
         }
 
-        return [
-            // 'customer_update' => [
-            //     'shipping' => 'auto',
-            // ],
-            // 'billing_address_collection' => 'required',
-            'shipping_address_collection' => [
-                'allowed_countries' => ['IT'],
-            ],
-            'shipping_options' => $shippingOptions,
-        ];
-    }
-
-    private function formatCartItems(Collection $items): array
-    {
-
-        $cartItems = $items->loadMissing(['product', 'product.book', 'product.book.media'])
-            ->map(function (CartItem $item) {
-                return [
-                    'price_data' => [
-                        'currency' => 'EUR',
-                        'unit_amount' => $item->product->price * 100, // in cents
-                        'product_data' => [
-                            'name' => $item->product->name,
-                            'images' => [
-                                $item->product->book?->media?->first()?->getUrl(),
-                            ],
-                            // 'description' => $item->product->description,
-                            'metadata' => [
-                                'product_id' => $item->product->id,
-                            ],
-                        ],
-                    ],
-                    'quantity' => $item->quantity,
-                ];
-            })->toArray();
-
-        return $cartItems;
+        return $shippingOptions;
     }
 }
