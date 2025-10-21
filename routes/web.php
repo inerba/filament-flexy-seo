@@ -1,8 +1,6 @@
 <?php
 
-use App\Actions\Shop\CreateStripeCheckoutSession;
 use App\Http\Controllers;
-use Database\Factories\CartFactory;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -16,24 +14,27 @@ Route::group([
     'middleware' => $middleware,
 ], function () {
 
-    // Rotte dello shop
     Route::prefix('dashboard')
         ->middleware(['auth:customer', 'verified'])
         ->group(function () {
             Route::get('/', [Controllers\CustomerController::class, 'index'])->name('customer.dashboard');
         });
 
-    // // Rotte dello shop
-    // Route::get('/stripe-checkout', function (CreateStripeCheckoutSession $checkoutSession) {
-    //     $cart = CartFactory::make()->loadMissing(['items', 'items.product', 'items.product.book', 'items.product.book.media']);
+    Route::name('shop.')
+        ->group(function () {
+            Route::get('/carrello', \App\Livewire\Shop\Cart::class)->name('cart');
 
-    //     return $checkoutSession->createFromCart($cart);
-    // });
+            Route::middleware(['auth:customer', 'verified'])->group(function () {
+                Route::get('/checkout-status', \App\Livewire\Shop\CheckoutStatus::class)->name('checkout-status');
+                Route::get('/order/{orderId}', \App\Livewire\Shop\ViewOrder::class)->name('view-order');
+            });
+        });
 
-    // Rotte dello shop
-    Route::prefix('carrello')->group(function () {
-        Route::get('/', \App\Livewire\Shop\Cart::class)->name('shop.cart');
-    });
+    Route::get('/preview', function () {
+        $order = \App\Models\Order::latest()->first();
+
+        return (new \App\Mail\OrderConfirmation($order))->render();
+    })->name('preview');
 
     // Rotte dei libri
     Route::prefix('titolo')->group(function () {
