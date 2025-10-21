@@ -24,4 +24,12 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    protected function amountTotal(): \Illuminate\Database\Eloquent\Casts\Attribute
+    {
+        return new \Illuminate\Database\Eloquent\Casts\Attribute(
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
+        );
+    }
 }
