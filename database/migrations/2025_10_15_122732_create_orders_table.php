@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('amount_total')->default(0);
             $table->json('billing_address');
             $table->json('shipping_address');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

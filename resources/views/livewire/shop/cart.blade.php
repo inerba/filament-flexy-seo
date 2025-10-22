@@ -1,4 +1,5 @@
 <div>
+    <x-seo :title="'Il tuo carrello'" />
     <div class="overflow-x-auto">
         <table class="table table-sm md:table-lg xl:table-xl">
             <!-- head -->

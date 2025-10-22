@@ -2,6 +2,7 @@
 
 namespace App\Actions\Shop;
 
+use App\Enums\Shop\OrderStatus;
 use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\OrderItem;
@@ -46,6 +47,7 @@ class HandleCheckoutSessionCompleted
                     'postal_code' => $session->collected_information->shipping_details->address->postal_code,
                     'state' => $session->collected_information->shipping_details->address->state,
                 ],
+                'status' => OrderStatus::Processing,
             ]);
 
             $lineItems = Cashier::stripe()->checkout->sessions->allLineItems($session->id);
@@ -64,7 +66,6 @@ class HandleCheckoutSessionCompleted
                     'amount_subtotal' => $line->amount_subtotal,
                     'amount_tax' => $line->amount_tax,
                     'amount_total' => $line->amount_total,
-
                 ]);
             });
 

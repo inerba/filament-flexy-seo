@@ -1,9 +1,28 @@
 <div class="post-content" data-aos="fade-up">
-    <!-- ======= Single Post Content ======= -->
+    @php
+        $statusValue =
+            $this->order->status instanceof \BackedEnum ? $this->order->status->value : (string) $this->order->status;
+    @endphp
+    <x-seo :title="'Ordine #' . $this->order->id . ' - ' . $this->order->status->getLabel()" />
+    @dump($this->order->toArray())
     <div class="prose max-w-7xl mx-auto">
         <div class="mx-auto pt-6 lg:pt-16 text-balance text-center flex items-center justify-between">
             <h1 class="leading-normal">Ordine #{{ $this->order->id }}</h1>
-            <div class="badge badge-primary badge-xl font-display uppercase">In lavorazione</div>
+            <div @class([
+                'badge badge-xl font-display uppercase',
+                match ($statusValue) {
+                    'pending' => 'badge-warning',
+                    'on-hold' => 'badge-secondary',
+                    'processing' => 'badge-info',
+                    'completed' => 'badge-success',
+                    'cancelled' => 'badge-error',
+                    'refunded' => 'badge-accent',
+                    'failed' => 'badge-neutral',
+                    default => 'badge-secondary',
+                },
+            ])>
+                {{ $this->order->status->getLabel() }}
+            </div>
         </div>
 
         <div class="overflow-x-auto  mx-auto lg:pb-16">
@@ -50,7 +69,27 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot class="md:text-lg xl:text-2xl text-right">
+                            <tfoot class="md:text-lg xl:text-xl text-right">
+                                @if ($this->order->amount_discount > 0)
+                                    <tr>
+                                        <th class="md:hidden">Sconto</th>
+                                        <th colspan="2" class="hidden md:table-cell lg:hidden font-normal">Sconto
+                                        </th>
+                                        <th colspan="3" class="hidden lg:table-cell font-normal">Sconto</th>
+                                        <th>-{{ number_format($this->order->amount_discount, 2, ',', '.') }} €</th>
+                                    </tr>
+                                @endif
+                                @if ($this->order->amount_shipping > 0)
+                                    <tr>
+                                        <th class="md:hidden">Totale</th>
+                                        <th colspan="2" class="hidden md:table-cell lg:hidden font-normal">Spese di
+                                            spedizione
+                                        </th>
+                                        <th colspan="3" class="hidden lg:table-cell font-normal">Spese di spedizione
+                                        </th>
+                                        <th>{{ number_format($this->order->amount_shipping, 2, ',', '.') }} €</th>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <th class="md:hidden">Totale</th>
                                     <th colspan="2" class="hidden md:table-cell lg:hidden">Totale</th>

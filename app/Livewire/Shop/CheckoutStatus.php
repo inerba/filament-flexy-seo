@@ -22,7 +22,7 @@ class CheckoutStatus extends Component
 
     public function render()
     {
-        return view('livewire.checkout-status', [
+        return view('livewire.shop.checkout-status', [
             'sessionId' => $this->sessionId,
         ]);
     }

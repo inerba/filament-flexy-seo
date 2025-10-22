@@ -1,4 +1,5 @@
 <div class="max-w-3xl mx-auto mt-12">
+    <x-seo :title="'Conferma Ordine'" />
     @if ($this->order)
         <div role="alert" class="alert alert-success alert-dash alert-vertical sm:alert-horizontal text-xl">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -8,7 +9,8 @@
             </svg>
             <span>Il tuo ordine è stato confermato!</span>
             <div>
-                <button class="btn btn-lg btn-primary font-display">Visualizza Ordine</button>
+                <a href="{{ route('shop.view-order', $this->order) }}"
+                    class="btn btn-lg btn-primary font-display">Visualizza Ordine</a>
             </div>
         </div>
     @else

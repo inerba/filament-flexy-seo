@@ -11,5 +11,12 @@
     "Title": "Titolo",
     "Description": "Descrizione",
     "Password": "Password",
-    "Password Confirmation": "Conferma Password"
+    "Password Confirmation": "Conferma Password",
+    "Pending": "In attesa",
+    "On Hold": "In sospeso",
+    "Processing": "Elaborazione",
+    "Completed": "Completato",
+    "Refunded": "Rimborsato",
+    "Failed": "Fallito",
+    "Cancelled": "Annullato"
 }
