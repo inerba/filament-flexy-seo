@@ -198,7 +198,7 @@ h6 {
 }
 
 .divide {
-    @apply mx-auto my-4 w-[80%] border-t-8 border-dotted border-gray-100 md:my-12 lg:container;
+    @apply mx-auto my-4 w-[80%] border-t-8 border-dotted border-stone-200 md:my-12 lg:container;
 }
 
 /* Shimmer */

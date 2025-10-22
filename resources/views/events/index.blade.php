@@ -1,4 +1,17 @@
 <x-layouts.main>
+    <x-seo>
+        <x-slot:title>
+            Eventi - CLUSTER-A
+        </x-slot>
+        <x-slot:description>
+            Accanto all’attività editoriale, Cluster-A dà vita a eventi, mostre e incontri che ampliano il suo
+            universo culturale. Spazi di dialogo tra libri, arte e pensiero, dove la parola scritta incontra
+            l’immagine, l’oggetto e l’esperienza diretta. Occasioni per condividere la passione per la conoscenza,
+            la memoria e la forma.
+        </x-slot>
+        <x-slot:url>{{ request()->url() }}</x-slot>
+        <x-slot:type>article</x-slot>
+    </x-seo>
     <article class="px-4">
 
         {{-- Header --}}

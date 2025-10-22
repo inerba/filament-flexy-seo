@@ -3,6 +3,21 @@
 @endphp
 
 <x-layouts.main>
+    <x-seo>
+        <x-slot:title>
+            {{ $author->name }} - Biografia e Opere
+        </x-slot>
+        <x-slot:description>
+            {{ Str::limit(strip_tags($author->bio), 155) }}
+        </x-slot>
+        @if ($avatar)
+            <x-slot:image>
+                {{ $avatar }}
+            </x-slot>
+        @endif
+        <x-slot:url>{{ request()->url() }}</x-slot>
+        <x-slot:type>article</x-slot>
+    </x-seo>
     <div class="post-content" data-aos="fade-up">
         <!-- ======= Single Post Content ======= -->
         <div class="prose max-w-none lg:prose-xl my-12 prose-h1:mb-2">
