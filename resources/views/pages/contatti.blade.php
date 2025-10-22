@@ -60,20 +60,39 @@
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script>
-            var map = L.map('map', {
-                scrollWheelZoom: false
-            }).setView(@json($latlng), @json(data_get($page, 'extras.map_zoom', 13) ?: 13));
-            var marker = L.marker(@json($latlng)).addTo(map);
-            // marker.bindPopup(@json($popup_content));
-            // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            //     maxZoom: 19,
-            //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            // }).addTo(map);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
-                maxZoom: 20
-            }).addTo(map);
+            (function waitForLeaflet() {
+                // If Leaflet is not loaded yet, retry shortly. This avoids "L is not defined"
+                if (typeof L === 'undefined') {
+                    // Try again after a short delay. Livewire may inject/execute inline scripts
+                    // before the external leaflet.js has finished loading.
+                    return setTimeout(waitForLeaflet, 100);
+                }
+
+                // Defensive: ensure the map container exists
+                var mapEl = document.getElementById('map');
+                if (!mapEl) {
+                    return; // nothing to do
+                }
+
+                // Prevent double initialization when Livewire swaps the DOM multiple times
+                if (mapEl.__leaflet_initialized) {
+                    return;
+                }
+                mapEl.__leaflet_initialized = true;
+
+                var map = L.map('map', {
+                    scrollWheelZoom: false
+                }).setView(@json($latlng), @json(data_get($page, 'extras.map_zoom', 13) ?: 13));
+
+                var marker = L.marker(@json($latlng)).addTo(map);
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                    subdomains: 'abcd',
+                    maxZoom: 20
+                }).addTo(map);
+            })
+            ();
         </script>
     @endPushOnce
 </x-layouts.main>

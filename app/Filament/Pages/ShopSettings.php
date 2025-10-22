@@ -176,14 +176,14 @@ class ShopSettings extends AbstractPageSettings
                                     ->addActionLabel('Aggiungi costo di spedizione')
                                     ->columns(2),
                             ]),
-                        Tab::make('Tab 2')
-                            ->schema([
-                                // ...
-                            ]),
-                        Tab::make('Tab 3')
-                            ->schema([
-                                // ...
-                            ]),
+                        // Tab::make('Tab 2')
+                        //     ->schema([
+                        //         // ...
+                        //     ]),
+                        // Tab::make('Tab 3')
+                        //     ->schema([
+                        //         // ...
+                        //     ]),
                     ]),
             ])
             ->statePath('data');

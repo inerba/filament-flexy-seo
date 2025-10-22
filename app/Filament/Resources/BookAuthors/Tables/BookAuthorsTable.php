@@ -27,6 +27,7 @@ class BookAuthorsTable
                     ->circular()
                     ->conversion('icon'),
                 TextColumn::make('name')
+                    ->label('Nome')
                     ->size('xl')
                     ->wrap()
                     ->description(fn (BookAuthor $author) => Str::limit(strip_tags($author->bio), 350))
@@ -35,10 +36,12 @@ class BookAuthorsTable
                     ->label('Libri')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('Creato il')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Aggiornato il')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -9,7 +9,7 @@
             </svg>
             <span>Il tuo ordine è stato confermato!</span>
             <div>
-                <a href="{{ route('shop.view-order', $this->order) }}"
+                <a wire:navigate href="{{ route('shop.view-order', $this->order) }}"
                     class="btn btn-lg btn-primary font-display">Visualizza Ordine</a>
             </div>
         </div>

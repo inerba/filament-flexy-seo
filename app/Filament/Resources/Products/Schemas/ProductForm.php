@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -13,10 +12,10 @@ class ProductForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nome')
                     ->required(),
-                Textarea::make('description')
-                    ->columnSpanFull(),
                 TextInput::make('price')
+                    ->label('Prezzo')
                     ->required()
                     ->numeric()
                     ->prefix('€'),

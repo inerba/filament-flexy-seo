@@ -15,15 +15,20 @@ class ProductsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nome')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('price')
+                    ->label('Prezzo')
                     ->formatStateUsing(fn ($state): string => \Illuminate\Support\Number::currency($state, 'EUR', 'it_IT'))
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Creato il')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Aggiornato il')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -49,7 +49,7 @@ class OrderForm
                                     ->label('Prezzo Unitario')
                                     ->numeric()
                                     ->required()
-                                    ->suffix('€'),
+                                    ->prefix('€'),
                                 TextInput::make('quantity')
                                     ->label('Quantità')
                                     ->numeric()
@@ -60,7 +60,7 @@ class OrderForm
                                     ->label('Totale')
                                     ->numeric()
                                     ->required()
-                                    ->suffix('€'),
+                                    ->prefix('€'),
                             ]),
                         Section::make('Indirizzo di Spedizione')
                             ->collapsible()
@@ -94,16 +94,16 @@ class OrderForm
                     ->schema([
                         TextInput::make('amount_subtotal')
                             ->label('Subtotale')
-                            ->suffix('€')
+                            ->prefix('€')
                             ->disabled(),
                         TextInput::make('amount_shipping')
                             ->label('Spese di Spedizione')
-                            ->suffix('€')
+                            ->prefix('€')
                             ->disabled(),
                         TextInput::make('amount_total')
                             ->label('Totale')
                             ->columnSpanFull()
-                            ->suffix('€')
+                            ->prefix('€')
                             ->disabled(),
                     ])->columnSpan(1),
             ]);

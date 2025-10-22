@@ -4,7 +4,6 @@
             $this->order->status instanceof \BackedEnum ? $this->order->status->value : (string) $this->order->status;
     @endphp
     <x-seo :title="'Ordine #' . $this->order->id . ' - ' . $this->order->status->getLabel()" />
-    @dump($this->order->toArray())
     <div class="prose max-w-7xl mx-auto">
         <div class="mx-auto pt-6 lg:pt-16 text-balance text-center flex items-center justify-between">
             <h1 class="leading-normal">Ordine #{{ $this->order->id }}</h1>
@@ -43,7 +42,7 @@
                                 @foreach ($this->order->items as $item)
                                     <tr>
                                         <td>
-                                            <a href="{{ $item->product?->book->permalink }}"
+                                            <a wire:navigate href="{{ $item->product?->book->permalink }}"
                                                 class="hover:underline flex items-center gap-4 ">
                                                 <div class="size-16 flex-shrink-0 flex text-center md:block">
                                                     <img src="{{ $item->product?->book->getFirstMedia('covers')->getUrl('icon') }}"

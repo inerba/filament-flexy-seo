@@ -22,6 +22,7 @@ class BookAuthorForm
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
+                            ->label('Nome')
                             ->required()
                             ->live(onBlur: true)
                             ->afterStateUpdated(function (callable $set, callable $get, ?string $state) {

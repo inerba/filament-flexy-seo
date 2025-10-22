@@ -14,7 +14,7 @@
                 $permalink = $author->permalink;
             @endphp
             <div class="flex items-center space-x-4 flex-col relative">
-                <a href="{{ $permalink }}"
+                <a wire:navigate href="{{ $permalink }}"
                     class="hover:scale-3d rounded shadow-2xl overflow-hidden hover:scale-105 hover:z-10 transition-all duration-300 relative group text-center aspect-[3/4] w-full">
                     <div
                         class="group-hover:backdrop-blur-xs group-hover:h-full group-hover:to-transparent bg-gradient-to-b from-0% to-primary-500/40 absolute inset-x-0 bottom-0 h-1/3">
