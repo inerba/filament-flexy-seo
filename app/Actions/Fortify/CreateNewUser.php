@@ -2,7 +2,9 @@
 
 namespace App\Actions\Fortify;
 
+use App\Actions\Shop\MigrateSessionCart;
 use App\Models\Customer;
+use Database\Factories\CartFactory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -31,12 +33,20 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return Customer::create([
+        $customer = Customer::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'phone' => $input['phone'],
             'address' => $input['address'],
             'password' => Hash::make($input['password']),
         ]);
+
+        // Migra il carrello anonimo verso l'utente appena creato
+        (new MigrateSessionCart)->migrate(
+            CartFactory::make(),
+            $customer->cart ?: $customer->cart()->create()
+        );
+
+        return $customer;
     }
 }

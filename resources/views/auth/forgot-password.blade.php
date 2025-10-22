@@ -1,5 +1,5 @@
 <x-layouts.fullpage>
-
+    <x-seo title="Recupera la tua password - CLUSTER-A" />
     <section class="relative pt-6 px-4 lg:px-6 pb-20 md:pb-32 overflow-hidden min-h-screen bg-gray-50">
         <div class="relative max-w-7xl pt-12 sm:pt-28 mx-auto">
             <div class="relative container px-4 mx-auto">
@@ -33,11 +33,10 @@
                                 value="{{ old('email') }}" required autofocus>
                         </div>
 
-                        <button
-                            class="relative cursor-pointer group block w-full mb-6 py-3 px-5 text-center text-sm font-semibold text-orange-50 bg-primary-700 rounded-full overflow-hidden"
+                        <button class="btn w-full btn-primary btn-lg mb-6 relative overflow-hidden group"
                             type="submit">
                             <div
-                                class="absolute top-0 right-full w-full h-full bg-primary-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500">
+                                class="absolute top-0 right-full w-full h-full bg-primary-700 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500">
                             </div>
                             <span class="relative text-xl">Invia link di reset</span>
                         </button>
@@ -47,7 +46,7 @@
                         @csrf
 
                         <button
-                            class="relative cursor-pointer group block w-full mb-6 py-3 px-5 text-center text-sm font-semibold text-orange-50 bg-gray-800 rounded-full overflow-hidden"
+                            class="relative cursor-pointer group block w-full mb-6 py-3 px-5 text-primary-700 hover:text-primary-500 text-center text-sm font-semibold rounded-full overflow-hidden"
                             type="submit">
                             <div
                                 class="absolute top-0 right-full w-full h-full bg-gray-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500">

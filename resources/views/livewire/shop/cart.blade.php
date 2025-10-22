@@ -83,13 +83,29 @@
                 <div class="alert alert-info text-xl mb-4 max-w-3xl alert-vertical text-white mx-auto">
                     Ti devi registrare o accedere per procedere con l'ordine
                     <div class="mt-4 flex justify-center gap-4">
-                        <a href="{{ route('register') }}" class="btn btn-primary">Registrati</a>
-                        <a href="{{ route('login') }}" class="btn btn-outline">Accedi</a>
+                        <a href="{{ route('register', ['redirect' => url()->current()]) }}"
+                            class="btn btn-primary">Registrati</a>
+                        <a href="{{ route('login', ['redirect' => url()->current()]) }}" class="btn btn-outline">Accedi</a>
                     </div>
                 </div>
             @endguest
             @auth('customer')
-                <button wire:click="checkout" class="btn btn-primary btn-xl">Effettua il checkout</button>
+                <div wire:poll.5s class="max-w-3xl mx-auto">
+                    @if (!auth('customer')->user()->hasVerifiedEmail())
+                        <div role="alert"
+                            class="alert alert-warning alert-dash alert-vertical sm:alert-horizontal text-xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                class="stroke-warning size-12 shrink-0">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z">
+                                </path>
+                            </svg>
+                            <span>Controlla la tua email e verifica il tuo indirizzo per procedere con l'ordine.</span>
+                        </div>
+                    @else
+                        <button wire:click="checkout" class="btn btn-primary btn-xl">Effettua il checkout</button>
+                    @endif
+                </div>
             @endauth
         </div>
     @endif

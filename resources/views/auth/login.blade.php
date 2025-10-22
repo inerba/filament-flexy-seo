@@ -1,5 +1,5 @@
 <x-layouts.fullpage>
-
+    <x-seo title="Accedi al tuo account - CLUSTER-A" />
     <section class="relative pt-6 px-4 lg:px-6 pb-20 md:pb-32 overflow-hidden min-h-screen bg-gray-50">
         <div class="relative max-w-7xl pt-12 sm:pt-28 mx-auto">
             <div class="relative container px-4 mx-auto">
@@ -47,15 +47,15 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="flex mb-6 items-center">
+                        {{-- <div class="flex mb-6 items-center">
                             <input type="checkbox" value="" id="">
                             <label class="ml-2 text-gray-800" for="">Ricordami per 30 giorni</label>
-                        </div>
-                        <button
-                            class="relative cursor-pointer group block w-full mb-6 py-3 px-5 text-center text-sm font-semibold text-orange-50 bg-primary-700 rounded-full overflow-hidden"
+                        </div> --}}
+
+                        <button class="btn btn-primary w-full btn-lg mb-6 relative overflow-hidden group"
                             type="submit">
                             <div
-                                class="absolute top-0 right-full w-full h-full bg-primary-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500">
+                                class="absolute top-0 right-full w-full h-full bg-primary-700 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500">
                             </div>
                             <span class="relative text-xl">Accedi</span>
                         </button>

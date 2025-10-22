@@ -1,5 +1,5 @@
 <x-layouts.fullpage>
-
+    <x-seo title="Registrati - CLUSTER-A" />
     <section class="relative pt-6 px-4 lg:px-6 pb-20 md:pb-32 overflow-hidden min-h-screen bg-gray-50">
         <div class="relative container px-4 mx-auto">
             <div class="max-w-3xl py-14 px-6 xs:px-12 lg:px-16 mx-auto bg-white rounded-4xl shadow-lg">
@@ -56,9 +56,9 @@
                         </div> --}}
                     <button class="btn btn-primary btn-lg mt-4 mb-6 relative overflow-hidden group" type="submit">
                         <div
-                            class="absolute top-0 right-full w-full h-full bg-primary-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500">
+                            class="absolute top-0 right-full w-full h-full bg-primary-700 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500">
                         </div>
-                        <span class="relative text-xl">Accedi</span>
+                        <span class="relative text-xl">Registrati</span>
                     </button>
                     {{-- <a class="inline-flex w-full mb-20 py-3 px-4 items-center justify-center rounded-full border border-gray-200 hover:border-gray-400 transition duration-100"
                             href="#">

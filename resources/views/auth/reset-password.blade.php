@@ -1,5 +1,5 @@
 <x-layouts.fullpage>
-
+    <x-seo title="Resetta la tua password - CLUSTER-A" />
     <section class="relative pt-6 px-4 lg:px-6 pb-20 md:pb-32 overflow-hidden min-h-screen bg-gray-50">
         <div class="relative max-w-7xl pt-12 sm:pt-28 mx-auto">
             <div class="relative container px-4 mx-auto">
