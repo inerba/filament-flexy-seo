@@ -29,7 +29,7 @@
         <div class="max-w-5xl mx-auto relative mb-6">
             <div class="flex flex-col gap-12">
                 @foreach ($events as $event)
-                    <a href="{{ $event->permalink }}"
+                    <a wire:navigate.hover href="{{ $event->permalink }}"
                         class="hover:shadow-black/30 hover:shadow-2xl transition-all lg:hover:scale-105 flex flex-col md:flex-row w-full rounded-2xl overflow-hidden shadow-xl">
                         <div class="lg:w-64 flex-shrink-0 bg-primary-400 p-6 text-white">
                             <div class="text-xl font-bold font-display! text-balance">

@@ -13,7 +13,8 @@
                 $title = $item['title'][$locale] ?? $item['title'];
                 $localizedUrl = LaravelLocalization::localizeURL($item['url']);
             @endphp
-            <li><a href="{{ $localizedUrl }}" @if ($item['target']) target="{{ $item['target'] }}" @endif
+            <li><a wire:navigate.hover href="{{ $localizedUrl }}"
+                    @if ($item['target']) target="{{ $item['target'] }}" @endif
                     class="hover:underline">{{ $title }}</a>
             </li>
         @endforeach

@@ -47,7 +47,8 @@
                         <ul class="list-disc list-inside mt-2">
                             @foreach ($author->books as $book)
                                 <li>
-                                    <a href="{{ $book->permalink }}" class="text-primary-600 hover:underline">
+                                    <a wire:navigate.hover href="{{ $book->permalink }}"
+                                        class="text-primary-600 hover:underline">
                                         {{ $book->title }}
                                     </a>
                                 </li>

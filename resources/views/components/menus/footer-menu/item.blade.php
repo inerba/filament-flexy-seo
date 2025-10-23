@@ -1,7 +1,8 @@
 @props([
     'item' => null,
     'active' => false,
-    'class' => 'flex items-center leading-none gap-8 text-lg border-b-2 border-transparent font-medium tracking-tight transition duration-200 text-black hover:border-black',
+    'class' =>
+        'flex items-center leading-none gap-8 text-lg border-b-2 border-transparent font-medium tracking-tight transition duration-200 text-black hover:border-black',
 ])
 
 @php
@@ -21,7 +22,8 @@
                 $childTitle = $child['title'][$locale] ?? $child['title'];
             @endphp
 
-            <a href="{{ $childLocalizedUrl }}" @if (isset($child['target'])) target="{{ $child['target'] }}" @endif
+            <a wire:navigate.hover href="{{ $childLocalizedUrl }}"
+                @if (isset($child['target'])) target="{{ $child['target'] }}" @endif
                 class="flex w-full items-center rounded-sm px-2 pb-1 pt-2 text-left leading-none text-white/70 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-50">
                 {{ $childTitle }}
             </a>
@@ -29,7 +31,8 @@
     </x-menus.dropdown>
 @else
     @if (isset($localizedUrl))
-        <a href="{{ $localizedUrl }}" @if (isset($item['target'])) target="{{ $item['target'] }}" @endif @class([$class, 'border-black!' => active_route($localizedUrl)])>
+        <a wire:navigate.hover href="{{ $localizedUrl }}"
+            @if (isset($item['target'])) target="{{ $item['target'] }}" @endif @class([$class, 'border-black!' => active_route($localizedUrl)])>
             {{ $title }}
         </a>
     @else
@@ -38,3 +41,4 @@
         </span>
     @endif
 @endif
+
