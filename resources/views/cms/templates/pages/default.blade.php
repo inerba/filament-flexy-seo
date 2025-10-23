@@ -44,7 +44,7 @@
         @endif
 
         <x-rich-content :model="$page" @class([
-            'prose lg:prose-xl prose-p:mx-auto prose-p:max-w-5xl max-w-none px-4',
+            'prose lg:prose-xl prose-p:mx-auto prose-p:max-w-5xl max-w-none px-4 prose-ul:max-w-5xl prose-ul:mx-auto prose-ol:max-w-5xl prose-ol:mx-auto prose-table:max-w-7xl prose-table:mx-auto',
             'prose-headings:max-w-5xl prose-headings:mx-auto',
             'has-dropcap' => data_get($page, 'extras.content_settings.dropcap', false),
         ]) />

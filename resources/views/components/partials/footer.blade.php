@@ -29,7 +29,9 @@
         </div>
     </div>
     <div class="bg-stone-200 text-center text-xs md:text-sm py-4">
-        @db_config('website.footer_copyright.' . app()->getLocale())
+        @db_config('website.footer_copyright.' . app()->getLocale()) &middot; <a wire:navigate.hover href="/privacy-policy"
+            class="underline hover:text-stone-600">Privacy Policy</a>
+        &middot; <a wire:navigate.hover href="/cookie-policy" class="underline hover:text-stone-600">Cookie Policy</a>
     </div>
 </div>
 
