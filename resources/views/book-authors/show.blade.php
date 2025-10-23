@@ -26,7 +26,7 @@
             </div> --}}
 
             <div class="flex flex-col md:flex-row max-w-5xl mx-auto gap-12 items-start px-4">
-                <div class="shrink-0 w-64 flex mx-auto">
+                {{-- <div class="shrink-0 w-64 flex mx-auto">
                     @if ($avatar)
                         <img class="not-prose rounded-lg w-full" src="{{ $avatar }}" alt="{{ $author->name }}">
                     @else
@@ -36,7 +36,7 @@
                                 class="text-[10rem] leading-0 font-bold">{{ strtoupper(substr($author->name, 0, 1)) }}</span>
                         </div>
                     @endif
-                </div>
+                </div> --}}
                 <div>
                     <h1 class="mb-5 leading-normal">{{ $author->name }}</h1>
                     <div>
