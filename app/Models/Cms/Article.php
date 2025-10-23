@@ -170,6 +170,16 @@ class Article extends Model implements HasMedia
     }
 
     /**
+     * Get the view name for the current article.
+     *
+     * @return string View name
+     */
+    public function getViewName(): string
+    {
+        return 'cms.templates.articles.'.($this->extras['template'] ?? 'default');
+    }
+
+    /**
      * Get the visit tracker for the article.
      *
      * @return mixed

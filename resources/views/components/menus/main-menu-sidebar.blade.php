@@ -9,7 +9,7 @@
                     $rel = $item['extras']['rel'][0] ?? null;
                     $localizedUrl = localize_url($item['url']);
                 @endphp
-                <a wire:navigate class="menuitem" href="{{ $localizedUrl }}"
+                <a wire:navigate.hover class="menuitem" href="{{ $localizedUrl }}"
                     @if ($item['target']) target="{{ $item['target'] }}" @endif
                     @if ($rel) rel="{{ $rel }}" @endif
                     class="@if (active_route($localizedUrl)) text-black @endif underline">

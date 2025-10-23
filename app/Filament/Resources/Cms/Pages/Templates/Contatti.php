@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Cms\Pages\CustomPages;
+namespace App\Filament\Resources\Cms\Pages\Templates;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;

@@ -42,7 +42,7 @@
                                 @foreach ($this->order->items as $item)
                                     <tr>
                                         <td>
-                                            <a wire:navigate href="{{ $item->product?->book->permalink }}"
+                                            <a wire:navigate.hover href="{{ $item->product?->book->permalink }}"
                                                 class="hover:underline flex items-center gap-4 ">
                                                 <div class="size-16 flex-shrink-0 flex text-center md:block">
                                                     <img src="{{ $item->product?->book->getFirstMedia('covers')->getUrl('icon') }}"

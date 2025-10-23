@@ -1,52 +1,49 @@
 <?php
 
-namespace App\Http\Controllers\Cms;
+namespace App\Livewire\Cms;
 
-use App\Http\Controllers\Controller;
-use App\Models\Cms\Page;
+use App\Models\Cms\Page as PageModel;
+use Livewire\Component;
 
-class PageController extends Controller
+class Page extends Component
 {
-    /**
-     * Mostra la pagina corrispondente allo slug fornito.
-     *
-     * @param  string  $slug  Lo slug della pagina da visualizzare.
-     * @return \Illuminate\View\View|null La vista della pagina trovata, o null se non esiste.
-     */
-    public function __invoke($slug): ?\Illuminate\View\View
+    public $page;
+
+    public function mount($slug)
     {
         $slugs = explode('/', $slug);
 
-        $page = $this->findPage($slugs);
+        $this->page = $this->findPage($slugs);
+    }
 
-        $viewName = $page->getViewName();
-
+    public function render()
+    {
         // Registra la visita alla pagina https://github.com/awssat/laravel-visits/blob/master/docs/6_retrieve-visits-and-stats.md
-        $page->vzt()->increment();
+        $this->page->vzt()->increment();
 
         // Restituisci la vista con la pagina trovata
-        return view($viewName, ['page' => $page]);
+        return view($this->page->getViewName(), ['page' => $this->page]);
     }
 
     /**
      * Trova la pagina corrispondente agli slug forniti.
      *
      * @param  string[]  $slugs  Un array di slug (stringhe) che rappresentano la gerarchia della pagina.
-     * @param  Page|null  $parentPage  La pagina padre, se esiste.
-     * @return Page|null La pagina trovata o null se non esiste.
+     * @param  PageModel|null  $parentPage  La pagina padre, se esiste.
+     * @return PageModel|null La pagina trovata o null se non esiste.
      */
-    private function findPage(array $slugs, ?Page $parentPage = null): ?Page
+    private function findPage(array $slugs, ?PageModel $parentPage = null): ?PageModel
     {
         // Prendi il primo slug dall'array
         $slug = array_shift($slugs);
 
         // Se abbiamo una pagina padre, cerchiamo una sottopagina
         if ($parentPage) {
-            /** @var Page $page */
+            /** @var PageModel $page */
             $page = $parentPage->children()->where('slug', $slug)->firstOrFail();
         } else {
             // Altrimenti, cerchiamo una pagina padre
-            $page = Page::where('slug', $slug)->whereNull('parent_id')->firstOrFail();
+            $page = PageModel::where('slug', $slug)->whereNull('parent_id')->firstOrFail();
         }
 
         // Se ci sono ancora slug nell'array, cerchiamo la sottopagina corrispondente

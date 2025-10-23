@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Cms\Articles\Pages;
 
 use App\Filament\Resources\Cms\Articles\ArticleResource;
+use App\Models\Cms\Article;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Pboivin\FilamentPeek\Pages\Actions\PreviewAction;
@@ -39,7 +40,10 @@ class CreateArticle extends CreateRecord
 
     protected function getPreviewModalView(): ?string
     {
-        return 'cms.articles.page';
+        $tempArticle = (new Article);
+        $tempArticle->extras = $this->data['extras'];
+
+        return $tempArticle->getViewName().'_preview';
     }
 
     protected function getPreviewModalDataRecordKey(): ?string

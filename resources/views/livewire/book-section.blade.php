@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 gap-8 my-6 md:grid-cols-2 lg:grid-cols-3">
     @foreach ($books as $book)
-        <a wire:navigate class="flex items-start gap-4 transition-all group" href="{{ $book->link }}">
+        <a wire:navigate.hover class="flex items-start gap-4 transition-all group" href="{{ $book->link }}">
             <div class="w-1/3 xl:w-2/5">
                 <img class="transition-all group-hover:-translate-x-2 group-hover:scale-110"
                     src="{{ $book->getFirstMedia('mockups')->getUrl('medium') }}" alt="">

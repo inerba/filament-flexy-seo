@@ -1,7 +1,7 @@
 <div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 lg:gap-x-24">
         @foreach ($books as $book)
-            <a wire:navigate href="{{ $book->permalink }}"
+            <a wire:navigate.hover href="{{ $book->permalink }}"
                 class="flex gap-6 group md:hover:scale-110 transition-transform">
                 <div class="shrink-0">
                     @if ($book->getFirstMediaUrl('covers', 'medium'))

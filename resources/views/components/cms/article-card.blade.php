@@ -1,5 +1,5 @@
 <div>
-    <a href="{{ $article->permalink }}"
+    <a wire:navigate.hover href="{{ $article->permalink }}"
         class="block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4">
         {{-- Immagine in evidenza --}}
         <div class="aspect-square bg-red-200 ">
@@ -13,7 +13,7 @@
     </a>
     <div class="flex flex-col gap-2">
         {{-- Titolo --}}
-        <a href="{{ $article->permalink }}" class="block hover:underline">
+        <a wire:navigate.hover href="{{ $article->permalink }}" class="block hover:underline">
             <h2 class="uppercase font-bold text-2xl font-display!">{{ $article->title }}</h2>
         </a>
 

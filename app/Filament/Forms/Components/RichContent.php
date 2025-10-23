@@ -20,10 +20,11 @@ class RichContent extends RichEditor
             ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
             ['table', 'attachFiles'],
             ['undo', 'redo', 'clearFormatting'],
-            ['customBlocks', 'mergeTags', 'textColor', 'grid', 'fullscreen'],
+            ['customBlocks', 'grid', 'mergeTags', 'textColor', 'fullscreen'],
         ])
             ->live(true)
             ->fileAttachmentsDisk('public')
+            ->fileAttachmentsDirectory('attachments')
             ->fileAttachmentsVisibility('public')
             // ->afterLabel([
             //     CleanHtmlAction::make(),

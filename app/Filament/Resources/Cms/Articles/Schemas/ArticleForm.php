@@ -25,6 +25,8 @@ use Inerba\Seo\SocialFields;
 
 class ArticleForm
 {
+    use \App\Filament\Resources\Cms\HasTemplateTrait;
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -67,6 +69,10 @@ class ArticleForm
                                             ->required(),
                                     ]),
                             ]),
+
+                        Tabs\Tab::make('Campi del tema')
+                            ->visible(fn (callable $get) => ! empty(self::getCustomTemplateFields($get('extras.template'), 'articles')))
+                            ->schema(fn (callable $get) => self::getCustomTemplateFields($get('extras.template'), 'articles')),
 
                         Tabs\Tab::make(__('pages.resources.page.form.tab_seo'))->schema([
                             TranslatableTabs::make('seo_fields')
@@ -200,6 +206,14 @@ class ArticleForm
                                     ])
                                     ->default(now()),
                                 // ->visible($user->can('publish_post')),
+
+                                Select::make('extras.template')
+                                    ->hidden(fn () => count(self::getTemplateFields('articles')) <= 1)
+                                    ->live()
+                                    ->label('Tema dell\'articolo')
+                                    ->options(self::getTemplateFields('articles'))
+                                    ->default('default')
+                                    ->required(),
 
                             ]),
 

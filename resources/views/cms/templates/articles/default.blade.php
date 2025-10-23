@@ -3,7 +3,7 @@
     $og_image = $article->getFirstMedia('og_image'); // Immagine per Open Graph
 @endphp
 
-<x-layouts.main>
+<div>
     <x-seo>
         <x-slot:title>
             {{ $article->meta['tag_title'] ?? $article->title }}
@@ -46,5 +46,5 @@
         ]) />
 
     </article>
-</x-layouts.main>
+</div>
 

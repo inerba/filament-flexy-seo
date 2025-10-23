@@ -34,7 +34,7 @@ class EditArticle extends EditRecord
 
     protected function getPreviewModalView(): ?string
     {
-        return 'cms.articles.page';
+        return $this->record->getViewName().'_preview';
     }
 
     protected function getPreviewModalDataRecordKey(): ?string

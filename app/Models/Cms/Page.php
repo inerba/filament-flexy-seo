@@ -132,26 +132,7 @@ class Page extends Model implements HasMedia
      */
     public function getViewName(): string
     {
-        if ($this->hasCustomView()) {
-            return $this->customView();
-        }
-
-        return $this->defaultView();
-    }
-
-    public function hasCustomView(): bool
-    {
-        return view()->exists($this->customView());
-    }
-
-    protected function customView(): string
-    {
-        return 'pages.'.$this->slug;
-    }
-
-    protected function defaultView(): string
-    {
-        return 'cms.pages.page';
+        return 'cms.templates.pages.'.($this->extras['template'] ?? 'default');
     }
 
     /**

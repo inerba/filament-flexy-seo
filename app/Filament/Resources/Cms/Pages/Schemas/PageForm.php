@@ -23,6 +23,8 @@ use Inerba\Seo\SeoFields;
 
 class PageForm
 {
+    use \App\Filament\Resources\Cms\HasTemplateTrait;
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -43,9 +45,9 @@ class PageForm
                                     ->contained(false)
                                     ->columnSpan(2),
                             ]),
-                        Tabs\Tab::make('Campi extra')
-                            ->visible(fn ($record) => $record && ! empty(self::getCustomFields($record)))
-                            ->schema(fn ($record) => self::getCustomFields($record)),
+                        Tabs\Tab::make('Campi del tema')
+                            ->visible(fn (callable $get) => ! empty(self::getCustomTemplateFields($get('extras.template'), 'pages')))
+                            ->schema(fn (callable $get) => self::getCustomTemplateFields($get('extras.template'), 'pages')),
 
                         Tabs\Tab::make(__('pages.resources.page.form.tab_seo'))->schema([
                             TranslatableTabs::make('seo_fields')
@@ -73,6 +75,10 @@ class PageForm
                                 ->nullable(),
                             Toggle::make('extras.content_settings.dropcap')
                                 ->label('Usa il capitello (drop cap) all\'inizio del contenuto')
+                                ->onColor('success')
+                                ->default(false),
+                            Toggle::make('extras.content_settings.show_last_updated')
+                                ->label('Mostra la data di ultima modifica della pagina')
                                 ->onColor('success')
                                 ->default(false),
                         ]),
@@ -108,14 +114,6 @@ class PageForm
                                 TextInput::make('slug')
                                     ->label(__('pages.resources.page.form.slug'))
                                     ->live(false, debounce: 500)
-                                    // ->helperText(new \Illuminate\Support\HtmlString(
-                                    //     '<strong>Lo slug è un identificativo unico che appare nell\'URL del post.</strong>
-                                    // <ul class="list-disc pl-4">
-                                    //     <li>È importante per la SEO: scegli parole chiave rilevanti per il contenuto.</li>
-                                    //     <li>Usa solo lettere minuscole, numeri e trattini (-), evita termini troppo generici.</li>
-                                    //     <li>Meglio se breve e descrittivo.</li>
-                                    // </ul>'
-                                    // ))
                                     ->disabled(fn (callable $get) => $get('lock_slug'))
                                     ->prefix(fn ($record) => $record?->parent ? $record?->parent?->slug.'/' : null)
                                     ->hintActions(
@@ -148,6 +146,14 @@ class PageForm
                                     ->translatableTabs()
                                     ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs'])
                                     ->columnSpanFull(),
+
+                                Select::make('extras.template')
+                                    ->hidden(fn () => count(self::getTemplateFields('pages')) <= 1)
+                                    ->live()
+                                    ->label('Tema della pagina')
+                                    ->options(self::getTemplateFields('pages'))
+                                    ->default('default')
+                                    ->required(),
                             ]),
 
                         Section::make(__('pages.resources.page.form.featured_images'))
@@ -181,20 +187,5 @@ class PageForm
                             ]),
                     ])->columnSpan(1),
             ]);
-    }
-
-    protected static function getCustomFields($record): array
-    {
-        if (! $record) {
-            return [];
-        }
-
-        $class = 'App\\Filament\\Resources\\Cms\\Pages\\CustomPages\\'.Str::studly(str_replace(['-', '_'], ' ', $record->slug));
-
-        if (class_exists($class) && method_exists($class, 'fields')) {
-            return $class::fields();
-        }
-
-        return [];
     }
 }

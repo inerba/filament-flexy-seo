@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers;
+use App\Livewire\Cms;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -65,14 +66,12 @@ Route::group([
 
         // Rotte degli articoli e delle categorie
         Route::prefix(config('cms.articles_route_prefix', 'news'))->group(function () {
-            Route::get('/', Controllers\Cms\ArticleListController::class)->name('articles.list');
-            Route::get('/{category:slug}', Controllers\Cms\CategoryController::class)->name('articles.category');
-            Route::get('/{category:slug}/{article:slug}', Controllers\Cms\ArticleController::class)->name('articles.page');
+            Route::get('/', Cms\ArticleList::class)->name('articles.list');
+            Route::get('/{category:slug}', Cms\Category::class)->name('articles.category');
+            Route::get('/{category:slug}/{article:slug}', Cms\Article::class)->name('articles.page');
         });
 
         // Rotte delle pagine Cms sempre per ultime
-        Route::get('/{slug}', Controllers\Cms\PageController::class)
-            ->where('slug', '(.*)')
-            ->name('page');
+        Route::get('/{slug}', Cms\Page::class)->where('slug', '(.*)')->name('page');
     })->scopeBindings();
 });

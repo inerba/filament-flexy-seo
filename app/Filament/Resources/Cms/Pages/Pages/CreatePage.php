@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Cms\Pages\Pages;
 
 use App\Filament\Resources\Cms\Pages\PageResource;
+use App\Models\Cms\Page;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Pboivin\FilamentPeek\Pages\Actions\PreviewAction;
@@ -23,6 +24,7 @@ class CreatePage extends CreateRecord
     {
         return [
             PreviewAction::make()
+                ->hidden(fn () => ! view()->exists($this->getPreviewModalView()))
                 ->label('Anteprima')
                 ->icon(Phosphor::EyeDuotone),
             Action::make('salva')
@@ -36,7 +38,10 @@ class CreatePage extends CreateRecord
 
     protected function getPreviewModalView(): ?string
     {
-        return 'cms.pages.page';
+        $tempPage = (new Page);
+        $tempPage->extras = $this->data['extras'];
+
+        return $tempPage->getViewName().'_preview';
     }
 
     protected function getPreviewModalDataRecordKey(): ?string

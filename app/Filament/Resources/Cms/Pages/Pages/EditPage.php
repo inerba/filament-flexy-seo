@@ -20,6 +20,7 @@ class EditPage extends EditRecord
     {
         return [
             PreviewAction::make()
+                ->hidden(fn () => ! view()->exists($this->getPreviewModalView()))
                 ->label('Anteprima')
                 ->icon(Phosphor::EyeDuotone),
             Action::make('salva')
@@ -34,7 +35,7 @@ class EditPage extends EditRecord
 
     protected function getPreviewModalView(): ?string
     {
-        return 'cms.pages.page';
+        return $this->record->getViewName().'_preview';
     }
 
     protected function getPreviewModalDataRecordKey(): ?string

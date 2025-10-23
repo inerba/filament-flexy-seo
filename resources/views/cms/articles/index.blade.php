@@ -1,4 +1,3 @@
-<x-layouts.main>
     <article class="px-4">
 
         {{-- Header --}}
@@ -24,4 +23,3 @@
         </div>
 
     </article>
-</x-layouts.main>

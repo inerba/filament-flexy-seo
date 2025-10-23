@@ -24,7 +24,7 @@ class PagesTable
                 TextColumn::make('title')
                     ->label(__('pages.resources.page.table.title'))
                     ->size('xl')
-                    ->description(fn (Page $record): mixed => $record->hasCustomView() ? __('pages.resources.page.table.has_custom_view') : false)
+                    // ->description(fn (Page $record): mixed => $record->hasCustomView() ? __('pages.resources.page.table.has_custom_view') : false)
                     ->searchable()
                     ->sortable(),
 
