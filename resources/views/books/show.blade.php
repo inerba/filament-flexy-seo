@@ -10,7 +10,7 @@
         @if ($cover)
             <div class="shrink-0 max-w-96 md:max-w-48 lg:max-w-80 xl:max-w-96 flex flex-col items-center mx-auto">
                 <a href="{{ $cover->getUrl('large') }}" class="glightbox cursor-zoom-in flex items-center mx-auto ">
-                    <img class="mx-auto bg-red-100 shadow-2xl" src="{{ $cover->getUrl('medium') }}"
+                    <img class="mx-auto" src="{{ $cover->getUrl('medium') }}"
                         alt="Copertina del libro: {{ $book->title }}">
                 </a>
 

@@ -1,4 +1,4 @@
-<div>
+<div class="max-w-7xl mx-auto px-4 lg:px-8 py-12 lg:py-24">
     <x-seo :title="'Il tuo carrello'" />
     <div class="overflow-x-auto">
         <table class="table table-sm md:table-lg xl:table-xl">
