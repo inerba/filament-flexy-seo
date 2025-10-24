@@ -4,10 +4,10 @@
             <img src="/images/logo.png" alt="Logo Cluster-A"
                 class="w-full md:w-52 hover:animate-[spin_1500ms_ease-in-out_1_reverse]">
             <h3 class="mt-4 font-display!">Seguici su</h3>
-            <div class="mt-2 flex flex-wrap gap-2.5 justify-between w-full">
+            <div class="mt-2 flex flex-wrap gap-1.5 justify-between w-full">
                 @foreach (db_config('website.social_profiles') as $social)
                     <a href="{{ $social['url'] }}" target="_blank" rel="noopener noreferrer"
-                        class="flex size-6 items-center gap-2 text-stone-400 transition-colors duration-300 hover:text-stone-500 lg:size-8">
+                        class="flex size-6 items-center text-stone-400 transition-colors duration-300 hover:text-stone-500 lg:size-8">
                         {!! $social['svg'] !!}
                         <span class="sr-only">{{ $social['title'] }}</span>
                     </a>
