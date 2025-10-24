@@ -14,7 +14,7 @@
                         alt="Copertina del libro: {{ $book->title }}">
                 </a>
 
-                @if ($book->product)
+                @if ($book->product && db_config('shop.enable_cart', false))
                     <div class="mt-12">
                         @livewire('shop.add-to-cart-btn', ['product' => $book->product])
                     </div>

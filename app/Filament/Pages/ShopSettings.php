@@ -51,6 +51,7 @@ class ShopSettings extends AbstractPageSettings
     public function getDefaultData(): array
     {
         return [
+            'enable_cart' => true,
             'enable_shipping' => true,
             'enable_free_shipping' => true,
             'free_shipping_threshold' => 50,
@@ -82,6 +83,11 @@ class ShopSettings extends AbstractPageSettings
                         Tab::make('Spedizioni')
                             ->icon(Phosphor::PackageDuotone)
                             ->schema([
+                                Toggle::make('enable_cart')
+                                    ->live()
+                                    ->label('Abilita carrello')
+                                    ->helperText('Abilita o disabilita la funzionalità del carrello nello shop.')
+                                    ->default(true),
                                 Toggle::make('enable_shipping')
                                     ->live()
                                     ->label('Abilita spedizioni')
