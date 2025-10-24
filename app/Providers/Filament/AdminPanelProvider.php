@@ -42,6 +42,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
+            ->profile()
             ->maxContentWidth('7xl')
             ->brandLogo(fn () => view('filament.admin.logo'))
             // ->brandLogo(asset('images/logo.svg'));
