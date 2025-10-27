@@ -79,6 +79,14 @@ class BookForm
                                     ->relationship(name: 'book_series', titleAttribute: 'name')
                                     ->createOptionForm(BookSeriesForm::configure(Schema::make())->getComponents()),
                                 Forms\Components\RichEditor::make('description')
+                                    ->toolbarButtons([
+                                        ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],
+                                        ['h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd', 'alignJustify'],
+                                        ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
+                                        ['table', 'attachFiles'],
+                                        ['undo', 'redo', 'clearFormatting'],
+                                        ['customBlocks', 'grid', 'mergeTags', 'textColor', 'fullscreen'],
+                                    ])
                                     ->label('Descrizione')
                                     ->required()
                                     ->translatableTabs()

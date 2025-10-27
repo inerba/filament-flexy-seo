@@ -58,7 +58,7 @@
                 @endif
             </div>
 
-            <div class="prose lg:prose-xl dark:prose-invert prose-orange max-w-3xl">
+            <div class="prose lg:prose-xl dark:prose-invert prose-orange max-w-3xl fi-prose">
                 {!! str($book->description)->sanitizeHtml() !!}
             </div>
 
