@@ -152,8 +152,7 @@ class BookForm
                             ->label('Anno')
                             ->numeric(),
                         Forms\Components\TextInput::make('pages')
-                            ->label('Pagine')
-                            ->numeric(),
+                            ->label('Pagine'),
                         // Forms\Components\TextInput::make('price')
                         //     ->label('Prezzo')
                         //     ->required()
