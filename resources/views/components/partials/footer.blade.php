@@ -26,7 +26,7 @@
                 @db_config('website.footer_col_3.' . app()->getLocale())
             </div>
         </div>
-        <div class="col-span-1 hidden md:block bg-red-100">
+        <div class="col-span-1 hidden md:block">
             <h3 class="mb-4 text-xl font-semibold text-black uppercase font-display!">Sitemap</h3>
             <livewire:cms.menu slug="footer-menu" />
         </div>
