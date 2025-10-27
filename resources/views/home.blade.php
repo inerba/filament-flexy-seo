@@ -16,8 +16,7 @@
                     class="text-logo !text-primary-500 mb-12 text-center text-4xl sm:text-7xl lg:text-[6rem] 2xl:text-[8rem]">
                     @db_config('home-page.section_1.title.' . locale())
                 </h1>
-                <x-rich-content
-                    class="gap-16 prose max-w-none text-justify dark:prose-invert lg:prose-xl dark:text-white md:columns-2"
+                <x-rich-content class="gap-16 prose max-w-none dark:prose-invert lg:prose-xl dark:text-white md:columns-2"
                     :content="db_config('home-page.section_1.content.' . locale())" />
             </div>
         </section>

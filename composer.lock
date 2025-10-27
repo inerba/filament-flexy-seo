@@ -3089,16 +3089,16 @@
         },
         {
             "name": "inerba/filament-db-config",
-            "version": "v1.1.7",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inerba/filament-db-config.git",
-                "reference": "ffdb9a23ec3a0abc206876233e0caeb0ca7ed300"
+                "reference": "cc30fe46cc9342f54a536c4cdb35f84f84b67fef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inerba/filament-db-config/zipball/ffdb9a23ec3a0abc206876233e0caeb0ca7ed300",
-                "reference": "ffdb9a23ec3a0abc206876233e0caeb0ca7ed300",
+                "url": "https://api.github.com/repos/inerba/filament-db-config/zipball/cc30fe46cc9342f54a536c4cdb35f84f84b67fef",
+                "reference": "cc30fe46cc9342f54a536c4cdb35f84f84b67fef",
                 "shasum": ""
             },
             "require": {
@@ -3154,7 +3154,7 @@
                 "issues": "https://github.com/inerba/filament-db-config/issues",
                 "source": "https://github.com/inerba/filament-db-config"
             },
-            "time": "2025-09-08T11:05:25+00:00"
+            "time": "2025-10-26T10:16:05+00:00"
         },
         {
             "name": "inerba/filament-flexy-seo",
@@ -3311,16 +3311,16 @@
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
-            "version": "4.2.8",
+            "version": "4.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kirschbaum-development/eloquent-power-joins.git",
-                "reference": "d67c7e2efa886d2ef8bb29e86c3ddb9438ac6390"
+                "reference": "32ec75ffee5f8f66e2c95e4030fa0b2454e51048"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kirschbaum-development/eloquent-power-joins/zipball/d67c7e2efa886d2ef8bb29e86c3ddb9438ac6390",
-                "reference": "d67c7e2efa886d2ef8bb29e86c3ddb9438ac6390",
+                "url": "https://api.github.com/repos/kirschbaum-development/eloquent-power-joins/zipball/32ec75ffee5f8f66e2c95e4030fa0b2454e51048",
+                "reference": "32ec75ffee5f8f66e2c95e4030fa0b2454e51048",
                 "shasum": ""
             },
             "require": {
@@ -3368,9 +3368,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kirschbaum-development/eloquent-power-joins/issues",
-                "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/4.2.8"
+                "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/4.2.9"
             },
-            "time": "2025-08-14T18:43:05+00:00"
+            "time": "2025-10-25T11:39:00+00:00"
         },
         {
             "name": "lab404/laravel-impersonate",
@@ -4191,16 +4191,16 @@
         },
         {
             "name": "league/csv",
-            "version": "9.27.0",
+            "version": "9.27.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/csv.git",
-                "reference": "cb491b1ba3c42ff2bcd0113814f4256b42bae845"
+                "reference": "26de738b8fccf785397d05ee2fc07b6cd8749797"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/csv/zipball/cb491b1ba3c42ff2bcd0113814f4256b42bae845",
-                "reference": "cb491b1ba3c42ff2bcd0113814f4256b42bae845",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/26de738b8fccf785397d05ee2fc07b6cd8749797",
+                "reference": "26de738b8fccf785397d05ee2fc07b6cd8749797",
                 "shasum": ""
             },
             "require": {
@@ -4278,7 +4278,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-16T08:22:09+00:00"
+            "time": "2025-10-25T08:35:20+00:00"
         },
         {
             "name": "league/flysystem",
@@ -12717,16 +12717,16 @@
         },
         {
             "name": "laravel/boost",
-            "version": "v1.5.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/boost.git",
-                "reference": "20486fad67ee3e20f491e855aa6b9844b8140981"
+                "reference": "f100f43c1191a0b229a81cfb3d0cbcdf3053c381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/boost/zipball/20486fad67ee3e20f491e855aa6b9844b8140981",
-                "reference": "20486fad67ee3e20f491e855aa6b9844b8140981",
+                "url": "https://api.github.com/repos/laravel/boost/zipball/f100f43c1191a0b229a81cfb3d0cbcdf3053c381",
+                "reference": "f100f43c1191a0b229a81cfb3d0cbcdf3053c381",
                 "shasum": ""
             },
             "require": {
@@ -12737,7 +12737,7 @@
                 "illuminate/support": "^10.49.0|^11.45.3|^12.28.1",
                 "laravel/mcp": "^0.2.0|^0.3.0",
                 "laravel/prompts": "0.1.25|^0.3.6",
-                "laravel/roster": "^0.2.8",
+                "laravel/roster": "^0.2.9",
                 "php": "^8.1"
             },
             "require-dev": {
@@ -12779,7 +12779,7 @@
                 "issues": "https://github.com/laravel/boost/issues",
                 "source": "https://github.com/laravel/boost"
             },
-            "time": "2025-10-24T06:22:38+00:00"
+            "time": "2025-10-25T02:38:57+00:00"
         },
         {
             "name": "laravel/mcp",
