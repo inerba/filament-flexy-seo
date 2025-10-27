@@ -334,6 +334,12 @@ class WebsiteSettings extends AbstractPageSettings
                                             ->hintIconTooltip('website.footer_col_2')
                                             ->translatableTabs()
                                             ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs']),
+                                        RichEditor::make('footer_col_3')
+                                            ->label('Footer Column 3')
+                                            ->hintIcon('heroicon-o-tag')
+                                            ->hintIconTooltip('website.footer_col_3')
+                                            ->translatableTabs()
+                                            ->extraAttributes(fn () => is_multilingual() ? [] : ['class' => 'hide-tabs']),
                                     ])
                                     ->columns(2),
 
