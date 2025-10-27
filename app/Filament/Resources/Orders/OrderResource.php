@@ -20,7 +20,7 @@ class OrderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Phosphor::PackageDuotone;
 
-    protected static ?string $recordTitleAttribute = 'title';
+    // protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $modelLabel = 'Ordine';
 

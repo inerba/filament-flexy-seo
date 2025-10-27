@@ -20,7 +20,7 @@ class EventResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Phosphor::CalendarDuotone;
 
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $modelLabel = 'Evento';
 
