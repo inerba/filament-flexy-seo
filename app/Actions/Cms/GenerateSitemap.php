@@ -34,8 +34,13 @@ class GenerateSitemap
             ->writeToFile(public_path('sitemap.xml'));
     }
 
-    protected static function build_index(Model|Collection $model, $filename): Url
+    protected static function build_index(Model|Collection $model, $filename): Url|string
     {
+        // se è vuoto ritorna null
+        if ($model->isEmpty()) {
+            return '';
+        }
+
         // genera il file sitemap per il modello passato
         Sitemap::create()->add($model)->writeToFile(public_path($filename));
 
