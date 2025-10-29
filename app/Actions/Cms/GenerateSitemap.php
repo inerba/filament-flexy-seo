@@ -6,6 +6,8 @@ use App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\SitemapIndex;
+use Spatie\Sitemap\Tags\Sitemap as SitemapTag;
 use Spatie\Sitemap\Tags\Url;
 
 class GenerateSitemap
@@ -15,6 +17,11 @@ class GenerateSitemap
         Sitemap::create()
             // homepage
             ->add(Url::create('/')->setPriority(1)->setChangeFrequency(Url::CHANGE_FREQUENCY_ALWAYS))
+            ->writeToFile(public_path('static_pages.xml'));
+
+        SitemapIndex::create()
+            // Pagine statiche, per ora solo home
+            ->add('/static_pages.xml')
 
             // pagine cms
             ->add(self::build_index(Models\Cms\Page::all(), 'sitemap_pages.xml'))
@@ -34,20 +41,18 @@ class GenerateSitemap
             ->writeToFile(public_path('sitemap.xml'));
     }
 
-    protected static function build_index(Model|Collection $model, $filename): Url|string
+    protected static function build_index(Model|Collection $model, $filename): SitemapTag|string
     {
         // se è vuoto ritorna null
         if ($model->isEmpty()) {
-            return '';
+            return 'cacca';
         }
 
         // genera il file sitemap per il modello passato
         Sitemap::create()->add($model)->writeToFile(public_path($filename));
 
         // ritorna il tag per l'index
-        return Url::create('/'.$filename)
-            ->setLastModificationDate(now())
-            ->setChangeFrequency(Url::CHANGE_FREQUENCY_ALWAYS)
-            ->setPriority(0.5);
+        return SitemapTag::create('/'.$filename)->setLastModificationDate(now());
+
     }
 }
