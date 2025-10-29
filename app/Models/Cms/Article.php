@@ -38,6 +38,7 @@ class Article extends Model implements HasMedia, Sitemapable
         'category_id',
         'extras',
         'meta',
+        'sitemap_exclude',
     ];
 
     protected $casts = [
@@ -45,6 +46,7 @@ class Article extends Model implements HasMedia, Sitemapable
         'extras' => 'array',
         'meta' => 'array',
         'published_at' => 'datetime',
+        'sitemap_exclude' => 'boolean',
     ];
 
     protected $with = [
@@ -190,6 +192,15 @@ class Article extends Model implements HasMedia, Sitemapable
     public function vzt()
     {
         return visits($this);
+    }
+
+    /**
+     * Scope a query to get only pages not excluded from sitemap.
+     */
+    #[Scope]
+    protected function sitemapIncluded(Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->where('sitemap_exclude', false);
     }
 
     public function toSitemapTag(): Url|string|array

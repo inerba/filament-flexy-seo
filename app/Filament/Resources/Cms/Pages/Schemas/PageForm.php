@@ -154,6 +154,12 @@ class PageForm
                                     ->options(self::getTemplateFields('pages'))
                                     ->default('default')
                                     ->required(),
+
+                                Toggle::make('sitemap_exclude')
+                                    ->label('Escludi dalla sitemap XML')
+                                    ->onColor('danger')
+                                    ->offColor('success')
+                                    ->default(false),
                             ]),
 
                         Section::make(__('pages.resources.page.form.featured_images'))

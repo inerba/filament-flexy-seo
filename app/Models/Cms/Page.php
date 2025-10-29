@@ -7,6 +7,8 @@ use App\Traits\DefaultMediaConversions;
 use App\Traits\HasUniqueSlug;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -45,6 +47,7 @@ class Page extends Model implements HasMedia, Sitemapable
         'extras',
         'sort_order',
         'parent_id',
+        'sitemap_exclude',
     ];
 
     protected $casts = [
@@ -52,6 +55,7 @@ class Page extends Model implements HasMedia, Sitemapable
         'extras' => 'array',
         'content' => 'array',
         'meta' => 'array',
+        'sitemap_exclude' => 'boolean',
     ];
 
     /**
@@ -167,6 +171,15 @@ class Page extends Model implements HasMedia, Sitemapable
     public function vzt()
     {
         return visits($this);
+    }
+
+    /**
+     * Scope a query to get only pages not excluded from sitemap.
+     */
+    #[Scope]
+    protected function sitemapIncluded(Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->where('sitemap_exclude', false);
     }
 
     public function toSitemapTag(): Url|string|array

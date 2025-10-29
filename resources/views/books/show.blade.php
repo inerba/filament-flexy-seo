@@ -26,7 +26,8 @@
 
             <div>
                 <div class="font-display mb-1 lg:text-xl text-stone-500">
-                    {{ $book->authors->pluck('name')->implode(', ') }}
+                    {{-- {{ $book->authors->pluck('name')->implode(', ') }} --}}
+                    {{ $book->extras['authors'] }}
                 </div>
                 <div class="font-display text-3xl lg:text-5xl font-bold">
                     {{ $book->title }}

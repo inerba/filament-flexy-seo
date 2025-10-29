@@ -14,7 +14,9 @@
                     @endif
                 </div>
                 <div class="leading-tight">
-                    <div class="text-balance text-sm line-clamp-1">{{ $book->authors->pluck('name')->implode(', ') }}
+                    <div class="text-balance text-sm line-clamp-1">
+                        {{-- {{ $book->authors->pluck('name')->implode(', ') }} --}}
+                        {{ $book->extras['authors'] ?? $book->authors->pluck('name')->implode(', ') }}
                     </div>
                     <h2 class="text-2xl text-balance font-semibold font-display!">
                         {{ $book->title }}

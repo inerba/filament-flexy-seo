@@ -57,8 +57,11 @@ class BookForm
                                     ->dehydrated(false)
                                     ->afterStateHydrated(fn (callable $set, $context) => $set('lock_slug', $context === 'edit')),
 
+                                Forms\Components\TextInput::make('extras.authors')
+                                    ->label('Rigo Autori'),
+
                                 Forms\Components\Select::make('authors')
-                                    ->label('Autore')
+                                    ->label('Autori collegati')
                                     ->searchable()
                                     ->preload()
                                     ->required()

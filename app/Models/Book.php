@@ -42,12 +42,14 @@ class Book extends Model implements HasMedia, Sitemapable
         'description',
         'publisher',
         'meta',
+        'extras',
         'product_id',
     ];
 
     /** @var array<string, string> */
     protected $casts = [
         'meta' => 'array',
+        'extras' => 'array',
     ];
 
     /** @var array<string> */

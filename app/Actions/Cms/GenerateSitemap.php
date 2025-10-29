@@ -14,20 +14,22 @@ class GenerateSitemap
 {
     public static function execute(): void
     {
+        // genera la sitemap delle pagine statiche
         Sitemap::create()
             // homepage
             ->add(Url::create('/')->setPriority(1)->setChangeFrequency(Url::CHANGE_FREQUENCY_ALWAYS))
             ->writeToFile(public_path('static_pages.xml'));
 
+        // genera l'index delle sitemap
         SitemapIndex::create()
             // Pagine statiche, per ora solo home
             ->add('/static_pages.xml')
 
             // pagine cms
-            ->add(self::build_index(Models\Cms\Page::all(), 'sitemap_pages.xml'))
+            ->add(self::build_index(Models\Cms\Page::sitemapIncluded()->get(), 'sitemap_pages.xml'))
 
             // articoli cms
-            ->add(self::build_index(Models\Cms\Article::published()->get(), 'sitemap_articles.xml'))
+            ->add(self::build_index(Models\Cms\Article::published()->sitemapIncluded()->get(), 'sitemap_articles.xml'))
 
             // eventi
             ->add(self::build_index(Models\Event::published()->get(), 'sitemap_events.xml'))
@@ -45,7 +47,7 @@ class GenerateSitemap
     {
         // se è vuoto ritorna null
         if ($model->isEmpty()) {
-            return 'cacca';
+            return '';
         }
 
         // genera il file sitemap per il modello passato
