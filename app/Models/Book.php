@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Traits\HasUniqueSlug;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,8 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -25,7 +28,7 @@ use Spatie\Translatable\HasTranslations;
  * @property int|float $price
  * @property array<string, mixed>|null $meta
  */
-class Book extends Model implements HasMedia
+class Book extends Model implements HasMedia, Sitemapable
 {
     use HasTranslations, HasUniqueSlug, InteractsWithMedia;
 
@@ -130,5 +133,15 @@ class Book extends Model implements HasMedia
                 'book' => $this->slug,
             ]),
         );
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('books.show', [
+            'book' => $this->slug,
+        ]))
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+            ->setPriority(0.5);
     }
 }

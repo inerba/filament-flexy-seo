@@ -2,8 +2,11 @@
 
 namespace App\Models\Cms;
 
+use App\Observers\Cms\PageObserver;
 use App\Traits\DefaultMediaConversions;
 use App\Traits\HasUniqueSlug;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -20,7 +25,8 @@ use Spatie\Translatable\HasTranslations;
  * @property-read string $permalink
  * @property-read Page|null $parent
  */
-class Page extends Model implements HasMedia
+#[ObservedBy([PageObserver::class])]
+class Page extends Model implements HasMedia, Sitemapable
 {
     use DefaultMediaConversions;
     use HasTranslations;
@@ -161,5 +167,15 @@ class Page extends Model implements HasMedia
     public function vzt()
     {
         return visits($this);
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('cms.page', [
+            'slug' => $this->slug,
+        ]))
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+            ->setPriority(0.5);
     }
 }

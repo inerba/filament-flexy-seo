@@ -4,6 +4,7 @@ namespace App\Models\Cms;
 
 use App\Models\Cms\Scopes\OwnedByUser;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,10 +17,12 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\Translatable\HasTranslations;
 
 #[ScopedBy([OwnedByUser::class])]
-class Article extends Model implements HasMedia
+class Article extends Model implements HasMedia, Sitemapable
 {
     use HasFactory;
     use HasTranslations;
@@ -187,5 +190,16 @@ class Article extends Model implements HasMedia
     public function vzt()
     {
         return visits($this);
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('cms.articles.page', [
+            'category' => $this->category?->slug ?? config('cms.articles_blog_settings.uncategorized_category_slug', 'uncategorized'),
+            'article' => $this->slug,
+        ]))
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+            ->setPriority(0.5);
     }
 }

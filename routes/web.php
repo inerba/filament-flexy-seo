@@ -58,6 +58,12 @@ Route::group([
         return view('home');
     })->name('home');
 
+    Route::get('/sitemap', function () {
+        \App\Actions\Cms\GenerateSitemap::execute();
+
+        return response()->file(public_path('sitemap.xml'));
+    })->name('sitemap');
+
     // Rotte del Cms
     Route::group([
         'middleware' => ['web'],

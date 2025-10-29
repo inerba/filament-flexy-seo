@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,9 +12,11 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\Translatable\HasTranslations;
 
-class Event extends Model implements HasMedia
+class Event extends Model implements HasMedia, Sitemapable
 {
     use HasFactory;
     use HasTranslations;
@@ -135,5 +138,13 @@ class Event extends Model implements HasMedia
     public function vzt()
     {
         return visits($this);
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create($this->permalink)
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+            ->setPriority(0.5);
     }
 }
