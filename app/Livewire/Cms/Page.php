@@ -19,7 +19,7 @@ class Page extends Component
     public function render()
     {
         // Registra la visita alla pagina https://github.com/awssat/laravel-visits/blob/master/docs/6_retrieve-visits-and-stats.md
-        $this->page->vzt()->increment();
+        // $this->page->vzt()->increment();
 
         // Restituisci la vista con la pagina trovata
         return view($this->page->getViewName(), ['page' => $this->page]);

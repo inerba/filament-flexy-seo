@@ -127,7 +127,7 @@ class Page extends Model implements HasMedia, Sitemapable
     /**
      * Ottiene le pagine figlie della pagina corrente.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Cms\Page, \App\Models\Cms\Page>
+     * @return HasMany<Page, Page>
      */
     public function children(): HasMany
     {
@@ -177,7 +177,7 @@ class Page extends Model implements HasMedia, Sitemapable
      * Scope a query to get only pages not excluded from sitemap.
      */
     #[Scope]
-    protected function sitemapIncluded(Builder $query): \Illuminate\Database\Eloquent\Builder
+    protected function sitemapIncluded(Builder $query): Builder
     {
         return $query->where('sitemap_exclude', false);
     }
