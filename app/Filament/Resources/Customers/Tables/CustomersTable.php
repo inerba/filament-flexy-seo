@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Customers\Tables;
 
+use App\Filament\Actions\VerifyCustomerEmailAction;
+use App\Models\Customer;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -23,7 +25,13 @@ class CustomersTable
                     ->searchable(),
                 TextColumn::make('email_verified_at')
                     ->label('Verificato il')
-                    ->dateTime()
+                    ->badge(fn (Customer $record): bool => ! $record->hasVerifiedEmail())
+                    ->color(fn (Customer $record): string => $record->hasVerifiedEmail() ? 'gray' : 'success')
+                    ->state(fn (Customer $record): string => $record->hasVerifiedEmail()
+                        ? ($record->email_verified_at?->format('d/m/Y H:i') ?? '-')
+                        : 'Segna come verificato')
+                    ->disabledClick(fn (Customer $record): bool => $record->hasVerifiedEmail())
+                    ->action(VerifyCustomerEmailAction::make())
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Creato il')

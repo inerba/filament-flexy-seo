@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Customers\Schemas;
 
 use App\Filament\Actions\GeneratePasswordAction;
+use App\Filament\Actions\VerifyCustomerEmailAction;
 use App\Filament\Resources\Customers\Pages\CreateCustomer;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -27,11 +27,13 @@ class CustomerForm
                         TextInput::make('email')
                             ->label('Email')
                             ->email()
+                            ->suffixActions([
+                                VerifyCustomerEmailAction::make(),
+                            ])
                             ->required(),
                         TextInput::make('phone')
                             ->label('Telefono')
                             ->required(),
-                        // DateTimePicker::make('email_verified_at'),
                         TextInput::make('password')
                             ->label(__('Password'))
                             ->hintIcon('phosphor-info')
