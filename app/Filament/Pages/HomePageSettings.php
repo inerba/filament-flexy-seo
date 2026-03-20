@@ -13,9 +13,9 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
 use Inerba\DbConfig\AbstractPageSettings;
 use Inerba\Seo\SeoFields;
 use Inerba\Seo\SocialFields;
@@ -96,44 +96,51 @@ class HomePageSettings extends AbstractPageSettings
                                             ->label('Titolo sezione')
                                             ->columnSpanFull(),
                                         RichContent::make('section_1.content')
-                                            ->label(null)
+                                            ->hiddenLabel()
                                             ->columnSpanFull(),
                                     ]),
                             ]),
                         Tabs\Tab::make('Slider')
                             ->schema([
                                 Repeater::make('slides')
+                                    ->hiddenLabel()
+                                    ->columns(2)
                                     ->schema([
-                                        RichEditor::make('title')
-                                            ->label('Titolo')
-                                            ->columnSpanFull(),
                                         Grid::make()
                                             ->schema([
-                                                ColorPicker::make('background_color')
-                                                    ->label('Colore di sfondo'),
-                                                TextInput::make('text_color')
-                                                    ->label('Colore del testo (esadecimale)')
-                                                    ->placeholder('#ffffff')
-                                                    ->default('#ffffff'),
-                                                Select::make('opacity')
-                                                    ->label('Opacità dello sfondo (0-100)')
-                                                    ->options([
-                                                        '0' => '0%',
-                                                        '10' => '10%',
-                                                        '20' => '20%',
-                                                        '30' => '30%',
-                                                        '40' => '40%',
-                                                        '50' => '50%',
-                                                        '60' => '60%',
-                                                        '70' => '70%',
-                                                        '80' => '80%',
-                                                        '90' => '90%',
-                                                        '100' => '100%',
+                                                RichEditor::make('title')
+                                                    ->label('Titolo'),
+                                                Section::make('Colori')
+                                                    ->compact()
+                                                    ->secondary()
+                                                    ->schema([
+                                                        ColorPicker::make('background_color')
+                                                            ->label('Sfondo'),
+                                                        TextInput::make('text_color')
+                                                            ->label('Testo (esadecimale)')
+                                                            ->placeholder('#ffffff')
+                                                            ->default('#ffffff'),
+                                                        Select::make('opacity')
+                                                            ->label('Trasparenza sfondo')
+                                                            ->options([
+                                                                '0' => '0%',
+                                                                '10' => '10%',
+                                                                '20' => '20%',
+                                                                '30' => '30%',
+                                                                '40' => '40%',
+                                                                '50' => '50%',
+                                                                '60' => '60%',
+                                                                '70' => '70%',
+                                                                '80' => '80%',
+                                                                '90' => '90%',
+                                                                '100' => '100%',
+                                                            ])
+                                                            ->default('30'),
                                                     ])
-                                                    ->default('30'),
+                                                    ->columns(3)
+                                                    ->columnSpanFull(),
                                             ])
-                                            ->columns(3)
-                                            ->columnSpanFull(),
+                                            ->columns(1),
 
                                         FileUpload::make('image_desktop')
                                             ->imageEditor()
@@ -158,7 +165,8 @@ class HomePageSettings extends AbstractPageSettings
                                     ])
                                     ->collapsible()
                                     ->collapsed()
-                                    ->itemLabel(fn ($state) => $state['title'] ? Str::of($state['title'])->stripTags()->limit(50) : 'Slide')
+                                    ->itemLabel('Slide')
+                                    ->itemNumbers()
                                     ->columns(2),
                             ]),
                         Tabs\Tab::make('SEO')->schema([
