@@ -3,6 +3,8 @@
 namespace Inerba\Seo;
 
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
@@ -24,12 +26,12 @@ class SeoFields
      * editing SEO-related metadata. When enabled via configuration, an extra
      * Section with guidance content is appended.
      *
-     * @return array<int, \Filament\Forms\Components\TextInput|\Filament\Forms\Components\Select|\Filament\Schemas\Components\Section> Indexed array of Filament form and schema components.
+     * @return array<int, TextInput|Select|Section> Indexed array of Filament form and schema components.
      */
     public static function make($prefix): array
     {
         $fields = [
-            Forms\Components\TextInput::make($prefix . '.tag_title')
+            TextInput::make($prefix . '.tag_title')
                 ->hint(fn ($state): HtmlString => FieldsHelper::remainingText($state, config('flexy-seo.tag-title-max-length', 60)))
                 ->live(false, 500)
                 ->label(__('flexy-seo::flexy-seo.seo.tag-title'))
@@ -41,7 +43,7 @@ class SeoFields
                 ->label(__('flexy-seo::flexy-seo.seo.meta-description'))
                 ->helperText(__('flexy-seo::flexy-seo.seo.meta-description-helper'))
                 ->columnSpanFull(),
-            Forms\Components\Select::make($prefix . '.robots')
+            Select::make($prefix . '.robots')
                 ->label(__('flexy-seo::flexy-seo.seo.robots'))
                 ->searchable()
                 ->options([

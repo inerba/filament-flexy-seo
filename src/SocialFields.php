@@ -25,7 +25,7 @@ class SocialFields
      * Flex block with title, description and image upload fields. If enabled via
      * configuration, includes an additional Section with suggestions.
      *
-     * @return array<int, \Filament\Schemas\Components\Flex|\Filament\Schemas\Components\Section> Indexed array of Filament schema components.
+     * @return array<int, Flex|Section> Indexed array of Filament schema components.
      */
     public static function make($prefix, $directory = 'og-images', bool $useMediaLibrary = false): array
     {

@@ -26,7 +26,7 @@ class Meta
      * @param  bool  $contained  Whether the tabs should be contained within a box. Default is false.
      * @param  bool  $vertical  Whether the tabs should be displayed vertically. Default is false.
      * @param  bool  $show_icons  Whether to show icons on the tabs. Default is true.
-     * @return array<int, \Filament\Schemas\Components\Tabs> Array containing the configured Tabs instance.
+     * @return array<int, Tabs> Array containing the configured Tabs instance.
      */
     public static function make($prefix = 'meta', $contained = false, $vertical = false, $show_icons = true): array
     {

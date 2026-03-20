@@ -1,5 +1,8 @@
 <?php
 
+use Filament\Forms\Components\RichEditor\RichContentRenderer;
+use Illuminate\Support\Str;
+
 if (! function_exists('rich_content_excerpt')) {
     /**
      * Extracts a plain text excerpt from rich content.
@@ -12,9 +15,9 @@ if (! function_exists('rich_content_excerpt')) {
      */
     function rich_content_excerpt(array | string $content, $limit = 300, ?string $end = '...', bool $preserveWords = false): string
     {
-        $contentText = \Filament\Forms\Components\RichEditor\RichContentRenderer::make($content)->toText();
+        $contentText = RichContentRenderer::make($content)->toText();
 
-        return \Illuminate\Support\Str::of($contentText)
+        return Str::of($contentText)
             ->squish()
             ->limit(
                 limit: $limit,
@@ -59,7 +62,7 @@ if (! function_exists('fs_tag')) {
         }
 
         // Otherwise cast scalar values to string and return
-        if (is_scalar($value) || $value instanceof \Stringable) {
+        if (is_scalar($value) || $value instanceof Stringable) {
             return (string) $value;
         }
 
