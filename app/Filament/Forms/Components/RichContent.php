@@ -20,7 +20,7 @@ class RichContent extends RichEditor
             ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
             ['table', 'attachFiles'],
             ['undo', 'redo', 'clearFormatting'],
-            ['customBlocks', 'grid', 'mergeTags', 'textColor', 'fullscreen'],
+            ['grid', 'textColor', 'fullscreen'],
         ])
             ->live(true)
             ->fileAttachmentsDisk('public')
