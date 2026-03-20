@@ -19,6 +19,7 @@ class FieldsHelper
      */
     public static function remainingText(?string $state, int $maxCharacters = 60): HtmlString
     {
+        $state = $state ?? '';
         $charactersCount = function_exists('mb_strlen') ? mb_strlen($state) : strlen($state);
         $leftCharacters = $maxCharacters - $charactersCount;
         $color = $leftCharacters < 0 ? 'red' : ($leftCharacters <= 10 ? 'green' : 'gray');
