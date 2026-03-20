@@ -1,9 +1,24 @@
 {
     "agents": [
+        "claude_code",
+        "codex",
         "copilot"
     ],
-    "editors": [
-        "vscode"
+    "guidelines": true,
+    "herd_mcp": false,
+    "mcp": true,
+    "packages": [
+        "filament/filament",
+        "laravel/fortify",
+        "inerba/filament-db-config"
     ],
-    "guidelines": []
+    "sail": false,
+    "skills": [
+        "cashier-stripe-development",
+        "livewire-development",
+        "pest-testing",
+        "tailwindcss-development",
+        "filament-db-config",
+        "fortify-development"
+    ]
 }
